@@ -1,0 +1,52 @@
+General Structure: Input Events are built and parsed into Database Events;
+                   Database Events go to Database, can throw errors that must be handeled
+                   Database Events cause the GUI to update
+                   Database needs search. Sort?
+                   GUI can request information from the Database, query event with notify?
+                   GUI can search, display map, display items, ect
+                   Input handled by...? -TODO: Figure this out, can be managed later.
+                   Figure out specifics of items
+
+
+Todo list:
+Dugan : Build the event builder to send things to the Database, start thinking of errors to handle.
+Jeremy: Database?
+Jon   : UI
+James :
+
+Databases:
+Super: Database
+         ItemDB                (Has search functionality, overridden event parsing, 
+                                check-in/out that can throw ItemNotFound)
+           Super: Item         (Have things shared among all items, has search function, can throw ItemNotInStock errors
+             Book              ()
+             Movie             (Movies                  )
+             Periodiocal       (Magazine, newspaper, ect)
+             Audio             (
+             Reference Material(Cannot be checked out, but viewed in lib) { ReferenceCheckout error }
+         UserDB                (Has overridden event parsing, can throw UserNotFound error)
+           User (ID, booksCheckedOut, pastEvents {Circular array of 5 events with index of firstEvent}) { UserMaxCheckout error }
+
+InputParser: Gets input, builds InputEvents by keyPress and Time() -> <InputEvent>Vector
+EventParser: Gets <InputEvent>Vector, builds Events from inputs to send to database. If incomplete event, aka too much time has
+             passed, it throws out current input and starts again. Int to define number of ms of tolerance.
+
+
+Event Types:
+Super: LibEvent
+         DatabaseEvent (Check-in / Checkout    ) <Not split into two events, as the event builder doesn't know anything about the database. Can Error, thats a good thing.
+         ErrorEvent    (General Error with text)
+         InputEvent    (Input data with time   )
+
+
+Error Types:
+Super: LibError
+         ItemNotFound       (Book not found, self explanitory)
+         UserNotFound       (User not found, self explanitory)
+         ItemNotInStock     (When a user tries to check out a book not in stock)
+         UserMaxCheckout    (When a user has max number of books checked out)
+         ReferenceCheckout  (When a user attempts to check out reference material)
+         InvalidInputStream (When no event is built by the parser, throws out all input to that point)
+
+
+GUI: ???? Dugan hates GUI. Dugan really hates GUI.
