@@ -24,7 +24,7 @@ public class EventBuilder implements Runnable{
     private InputBuilder build_inp;
     
     public EventBuilder(){
-        parse_queue = new ArrayBlockingQueue<ParseEvent>(5);
+        parse_queue = new ArrayBlockingQueue<ParseEvent>(20);
         event_vector = new Vector<LibEvent>(5); 
         input_stream = new char[MAX_INPUT_SIZE];
         inputSize = 0;
@@ -44,7 +44,7 @@ public class EventBuilder implements Runnable{
             destroyStream();
             
         }
-        InputEvent next;
+        InputEvent next = new InputEvent("Empty");
         try {
             next = build_inp.getNext();
         } catch (InterruptedException ex) {
@@ -66,6 +66,7 @@ public class EventBuilder implements Runnable{
     
     private boolean checkFormat(){
         //return if current stream is proper format
+        return false;
     }
     
     private void addVecEvent(DBEvent db_next){
@@ -86,5 +87,14 @@ public class EventBuilder implements Runnable{
         }
         lastTime = System.currentTimeMillis();
         inputSize = 0;
+    }
+    
+    public ParseEvent getNext() throws InterruptedException{
+        if(parse_queue.peek()!= null){
+            return parse_queue.take();
+        }
+        else{
+            return new ParseEvent("Empty");
+        }
     }
 }
