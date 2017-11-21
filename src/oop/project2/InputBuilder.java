@@ -32,16 +32,13 @@ public class InputBuilder implements Runnable{
             return imp_queue.take();
         }
         else{
-            return InputEvent("Empty");
+            return new InputEvent("Empty");
         }
     }
     
+    @SuppressWarnings("empty-statement")
     public void PutEvent(char a){
-        while(! imp_queue.offer(new InputEvent(a, System.nanoTime())));
-    }
-
-    private InputEvent InputEvent(String empty) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        while(! imp_queue.offer(new InputEvent(a, System.currentTimeMillis())));
     }
     
 }

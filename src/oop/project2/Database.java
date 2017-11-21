@@ -5,7 +5,7 @@ package uberstock;
  * @author ddobbs
  */
 public abstract class Database {
-	protected static String File_Location = "./src/uberstock/";
+    protected static String File_Location = "./src/uberstock/";
     /**
      * @var1 Int to hold the size. Useful by Database's children classes
      */
