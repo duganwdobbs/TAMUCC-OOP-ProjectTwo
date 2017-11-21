@@ -21,13 +21,15 @@ public class SessonDriver extends JFrame{
         //Setup References...
         
         //InputEvent Queue -> EventBuilder
-        
-        //ParseEvent Queue -> Database
-        
+        build_evt.setInputBuilder(build_inp);
         //DBEvent    Queue -> EventBuilder
-        
+        build_evt.setDBThread(sys_db);
+        //ParseEvent Queue -> Database
+        sys_db.setEventBuilder(build_evt);
+        //sys_db.setGUI(gui);
         //ResultVec  Vect  -> GUI
-        
+        //gui.setDBThread(sys_db);
+        //gui.setEventBuilder(build_evt);
         //GUI <-> Database; Searching
     }
 }

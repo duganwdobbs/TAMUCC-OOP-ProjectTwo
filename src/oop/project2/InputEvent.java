@@ -27,4 +27,12 @@ public class InputEvent extends LibEvent implements LibParsable {
     public String getData(){
         return this.data;
     }
+
+    String getString() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    char getChar() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
