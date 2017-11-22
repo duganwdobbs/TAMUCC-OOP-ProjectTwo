@@ -4,35 +4,24 @@ package oop.project2;
  *
  * @author ddobbs
  */
-public class InputEvent extends LibEvent implements LibParsable {
-    private String data;
-    
-    public InputEvent(String data){
-        super(0);
-        this.setData(data);
-    }
+class ParseEvent extends LibEvent implements LibParsable{
 
-    InputEvent(char a, long nanoTime) {
+    ParseEvent(char[] input_stream, int inputSize) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    private InputEvent InputEvent(String empty) {
+    ParseEvent(char[] input_stream, int inputSize) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    private void setData(String data){
-        this.data = data;
-    }
-    
-    public String getData(){
-        return this.data;
+
+    ParseEvent(String empty) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     String getString() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    char getChar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
+    
+    
 }
