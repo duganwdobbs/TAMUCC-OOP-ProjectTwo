@@ -6,7 +6,7 @@ import java.lang.IllegalArgumentException;
  *
  * @author ddobbs
  */
-public abstract class LibEvent {
+public abstract class LibEvent implements LibParsable{
     private int type;
     final private String statusText[] = {"Input",
                                          "Error",
