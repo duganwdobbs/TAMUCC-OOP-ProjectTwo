@@ -4,28 +4,58 @@ package oop.project2;
  *
  * @author ddobbs
  */
-public class InputEvent extends LibEvent implements LibParsable {
-    private String data;
+public class InputEvent extends LibEvent{
+    private char data;
+    private long nanoTime;
     
-    public InputEvent(String data){
-        super(0);
+    public InputEvent(char data){
+        super(0,"Input Event.");
         this.setData(data);
     }
 
-    InputEvent(char a, long nanoTime) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    /**
+     *
+     * @param a
+     * @param nanoTime
+     */
+    public InputEvent(char a, long nanoTime) {
+        super(0,"Input Event");
+        this.setData(a);
+        this.setTime(nanoTime);
     }
 
-    private InputEvent InputEvent(String empty) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    /**
+     *
+     * @param a
+     */
+    public InputEvent(char a) {
+        super(0,"Input Event");
+        this.setData(a);
+        this.setTime();
+    }
+
+    /**
+     *
+     * @param a
+     */
+    public InputEvent(String data) {
+        super(-1,data);
     }
     
-    private void setData(String data){
+    private void setData(char data){
         this.data = data;
     }
     
-    public String getData(){
+    public char getData(){
         return this.data;
+    }
+    
+    private void setTime(){
+        this.nanoTime = System.nanoTime();
+    }
+    
+    private void setTime(long nanoTime){
+        this.nanoTime = nanoTime;
     }
 
     String getString() {
@@ -33,6 +63,11 @@ public class InputEvent extends LibEvent implements LibParsable {
     }
 
     char getChar() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getSummary() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
