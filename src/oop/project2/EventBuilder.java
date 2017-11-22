@@ -54,8 +54,8 @@ public class EventBuilder implements Runnable{
             addEvent(next);
         }
         
-        DBEvent db_next = db_thread.getNext();
-        if(db_next.getString() != "Empty"){
+        ResultEvent db_next = db_thread.getNext();
+        if(db_next.getInfo() != "Empty"){
             addVecEvent(db_next);
         }
         
@@ -69,7 +69,7 @@ public class EventBuilder implements Runnable{
         return false;
     }
     
-    private void addVecEvent(DBEvent db_next){
+    private void addVecEvent(ResultEvent db_next){
         for(int x=0;x<4;x++){
             event_vector.set(x+1,event_vector.get(x));
         }

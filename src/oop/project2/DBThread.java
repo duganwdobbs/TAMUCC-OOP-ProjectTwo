@@ -12,13 +12,13 @@ public class DBThread implements Runnable{
     private ItemDB items;
     private UserDB users;
     
-    private ArrayBlockingQueue<DBEvent> db_queue;
+    private ArrayBlockingQueue<ResultEvent> db_queue;
     private EventBuilder build_evt;
     
     public DBThread(){
         items = new ItemDB();
         users = new UserDB();
-        db_queue = new ArrayBlockingQueue<DBEvent>(20);
+        db_queue = new ArrayBlockingQueue<ResultEvent>(20);
     }
     
     @Override
@@ -29,10 +29,8 @@ public class DBThread implements Runnable{
         } catch (InterruptedException ex) {
             Logger.getLogger(DBThread.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if(!"Empty".equals(next.getString())){
-            try {
-                //
-            }
+        if(!"Empty".equals(next.getInfo())){
+            // Something Here.
         }
     }
 
@@ -40,7 +38,7 @@ public class DBThread implements Runnable{
         this.build_evt = build_evt;
     }
 
-    public DBEvent getNext() {
+    public ResultEvent getNext() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

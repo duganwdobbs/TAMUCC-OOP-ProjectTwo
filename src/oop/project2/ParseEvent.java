@@ -4,24 +4,46 @@ package oop.project2;
  *
  * @author ddobbs
  */
-class ParseEvent extends LibEvent implements LibParsable{
-
-    ParseEvent(char[] input_stream, int inputSize) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    ParseEvent(char[] input_stream, int inputSize) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+public class ParseEvent extends LibEvent {
+    private String userID;
+    private String itemID;
+    
+    public ParseEvent(String userID, String itemID){
+        super(3,"Parse Event.");
+        this.setUser(userID);
+        this.setItem(itemID);
     }
 
     ParseEvent(String empty) {
+        super(-1,"Empty");
+    }
+
+    ParseEvent(char[] input_stream, int inputSize) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    private void setUser(String userID){
+        this.userID = userID;
+    }
+    
+    private void setItem(String itemID){
+        this.itemID = itemID;
+    }
+    
+    public String getUser(){
+        return this.userID;
+    }
+    
+    public String getItem(){
+        return this.itemID;
+    }
+
+    @Override
+    public String getSummary() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    String getString() {
+    Object getString() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
-    
 }
