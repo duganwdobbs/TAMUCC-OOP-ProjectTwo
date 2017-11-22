@@ -25,7 +25,7 @@ public class LendingLibraryGUI extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textField;
+	private JTextField searchBox;
 	private String[] authors;
 	/**
 	 * Create the frame.
@@ -39,92 +39,100 @@ public class LendingLibraryGUI extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
-		this.requestFocus();
-		
+		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		this.setVisible(true);
+		this.setResizable(false);
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		contentPane.add(tabbedPane, BorderLayout.NORTH);
 		
-		JPanel panel = new JPanel();
-		tabbedPane.addTab("Scanned Event", null/*insert icon here*/, panel, null/*insert tooltip here*/);
-		panel.setLayout(null);
+		JPanel tab1 = new JPanel();
+		tabbedPane.addTab("Scanned Event", null/*insert icon here*/, tab1, null/*insert tooltip here*/);
+		tab1.setLayout(null);
 		
-		JTextPane txtpnNoItemsHave = new JTextPane();
-		txtpnNoItemsHave.setText("No items have been checked yet!");
-		txtpnNoItemsHave.setEditable(false);
-		txtpnNoItemsHave.setSize(400, 200);
-		panel.add(txtpnNoItemsHave);
-		txtpnNoItemsHave.setLocation(32, 33);
+		JTextPane itemDescriptBox = new JTextPane();
+		itemDescriptBox.setText("No items have been checked yet!");
+		itemDescriptBox.setEditable(false);
+		itemDescriptBox.setSize(400, 200);
+		tab1.add(itemDescriptBox);
+		itemDescriptBox.setLocation(32, 33);
 		
-		JLabel lblNewLabel = new JLabel("Checked Item Description:");
-		lblNewLabel.setBounds(32, 4, 158, 16);
-		panel.add(lblNewLabel);
+		JLabel checkedItemlbl = new JLabel("Checked Item Description:");
+		checkedItemlbl.setBounds(32, 4, 158, 16);
+		tab1.add(checkedItemlbl);
 		
-		JTextPane textPane = new JTextPane();
-		textPane.setEditable(false);
-		textPane.setBounds(32, 290, 400, 68);
-		panel.add(textPane);
+		JTextPane eventStatusBox = new JTextPane();
+		eventStatusBox.setEditable(false);
+		eventStatusBox.setBounds(32, 290, 400, 68);
+		tab1.add(eventStatusBox);
 		
 		JLabel lblEventStatus = new JLabel("Event Status:");
 		lblEventStatus.setBounds(32, 261, 87, 16);
-		panel.add(lblEventStatus);
+		tab1.add(lblEventStatus);
 		
-		JLabel lblClickHereTo_1 = new JLabel("CLICK HERE TO EXIT SESSION");
-		lblClickHereTo_1.addMouseListener(new MouseAdapter() { //All this does is reset to the default GUI
+		JLabel exitSessionLabel = new JLabel("CLICK HERE TO EXIT SESSION");
+		exitSessionLabel.addMouseListener(new MouseAdapter() { //All this does is reset to the default GUI
 			@Override
 			public void mouseClicked(MouseEvent e) {
 			}
 		});
-		lblClickHereTo_1.setBounds(32, 382, 184, 16);
-		panel.add(lblClickHereTo_1);
+		exitSessionLabel.setBounds(32, 382, 184, 16);
+		tab1.add(exitSessionLabel);
 		
 		JPanel inventoryTextPane = new JPanel(); //<-- change this to a JPanel instead to use BoxLayout
 		inventoryTextPane.setLayout(new BoxLayout(inventoryTextPane, BoxLayout.PAGE_AXIS)); //this stacks the components
-		JPanel panel_1 = new JPanel();
-		tabbedPane.addTab("Inventory", null, panel_1, null);
-		panel_1.setLayout(null);
+		JPanel tab2 = new JPanel();
+		tabbedPane.addTab("Inventory", null, tab2, null);
+		tab2.setLayout(null);
 		JScrollPane scrollPane_1 = new JScrollPane(inventoryTextPane);
 		scrollPane_1.setVerticalScrollBarPolicy (ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS );
 		scrollPane_1.setBounds(12, 81, 443, 316);
-		panel_1.add(scrollPane_1);
+		tab2.add(scrollPane_1);
 		
-		JComboBox<String> comboBox = new JComboBox<String>();
-		comboBox.addItem("Everything");
-		comboBox.addItem("Books");
-		comboBox.addItem("Movies");
-		comboBox.addItem("Periodicals");
-		comboBox.addItem("Audio");
-		comboBox.addItem("Reference Materials");
-		comboBox.setBounds(54, 14, 99, 22);
-		panel_1.add(comboBox);
+		JComboBox<String> filterBox = new JComboBox<String>();
+		filterBox.addItem("Everything");
+		filterBox.addItem("Books");
+		filterBox.addItem("Movies");
+		filterBox.addItem("Periodicals");
+		filterBox.addItem("Audio");
+		filterBox.addItem("Reference Materials");
+		filterBox.setBounds(54, 14, 99, 22);
+		tab2.add(filterBox);
 		
 		/*
 		 * This item listener should filter the components based on their category. Components(JLabels) should
 		 * be created based on the items. The strategy might be to remove the JLabels from the panel, then readd the
 		 * filtered JLabels based on the item's category. 
 		 */
-		comboBox.addItemListener(new ItemListener (){
+		filterBox.addItemListener(new ItemListener (){
 			public void itemStateChanged(ItemEvent e){
 				if(e.getStateChange() == 1){ //this if statement is to get the selected item
-					System.out.println(comboBox.getSelectedItem()); //<-- prints the selected item
+					System.out.println(filterBox.getSelectedItem()); //<-- prints the selected item to prove it works
 				}
 			}
 		});
 		JLabel lblFilter = new JLabel("Filter:");
 		lblFilter.setBounds(12, 16, 56, 16);
-		panel_1.add(lblFilter);
+		tab2.add(lblFilter);
 		
-		textField = new JTextField();
-		textField.setBounds(339, 14, 116, 22);
-		panel_1.add(textField);
-		textField.setColumns(10);
+		searchBox = new JTextField();
+		//get the text as it is being typed so we can remove labels that do not contain the substring
+		searchBox.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				System.out.println(searchBox.getText());
+			}
+		});
+		searchBox.setBounds(339, 14, 116, 22);
+		tab2.add(searchBox);
+		searchBox.setColumns(10);
 		
 		JLabel lblSearch = new JLabel("Search:");
 		lblSearch.setBounds(287, 17, 56, 16);
-		panel_1.add(lblSearch);
+		tab2.add(lblSearch);
 		
 		JLabel lblItemsAvailable = new JLabel("Items Available:");
 		lblItemsAvailable.setBounds(12, 52, 99, 16);
-		panel_1.add(lblItemsAvailable);
+		tab2.add(lblItemsAvailable);
 		//This loop creates and adds the labels to the inventory window pane
 		//we will add all of the item labels in this loop
 		for(String author: authors){
@@ -146,46 +154,45 @@ public class LendingLibraryGUI extends JFrame {
 			});
 		}
 		
-		JPanel panel_2 = new JPanel();
-		tabbedPane.addTab("Item Details", null, panel_2, null);
-	//	panel_2.setPreferredSize(new Dimension(300, 415));
-		panel_2.setLayout(null);
+		JPanel tab3 = new JPanel();
+		tabbedPane.addTab("Item Details", null, tab3, null);
+		tab3.setLayout(null);
 		
 		JLabel lblTitle = new JLabel("Title:");
 		lblTitle.setBounds(12, 60, 56, 16);
-		panel_2.add(lblTitle);
+		tab3.add(lblTitle);
 		
 		JLabel lblAuthor = new JLabel("Author:");
 		lblAuthor.setBounds(12, 115, 56, 16);
-		panel_2.add(lblAuthor);
+		tab3.add(lblAuthor);
 		
 		JLabel lblDescription = new JLabel("Description:");
 		lblDescription.setBounds(12, 172, 75, 16);
-		panel_2.add(lblDescription);
+		tab3.add(lblDescription);
 		
 		JTextArea textArea_1 = new JTextArea();
 		textArea_1.setEditable(false);
 		textArea_1.setBounds(116, 169, 231, 86);
-		panel_2.add(textArea_1);
+		tab3.add(textArea_1);
 		
 		JLabel lblInStock = new JLabel("In Stock:");
 		lblInStock.setBounds(12, 295, 56, 16);
-		panel_2.add(lblInStock);
+		tab3.add(lblInStock);
 		
 		JTextArea textArea = new JTextArea();
 		textArea.setEditable(false);
 		textArea.setBounds(116, 57, 231, 22);
-		panel_2.add(textArea);
+		tab3.add(textArea);
 		
 		JTextArea textArea_2 = new JTextArea();
 		textArea_2.setEditable(false);
 		textArea_2.setBounds(116, 112, 231, 22);
-		panel_2.add(textArea_2);
+		tab3.add(textArea_2);
 		
 		JTextArea stockTextArea = new JTextArea();
 		stockTextArea.setEditable(false);
 		stockTextArea.setBounds(116, 292, 56, 22);
-		panel_2.add(stockTextArea);
+		tab3.add(stockTextArea);
 		
 		JLabel lblClickHereTo = new JLabel("CLICK HERE TO VIEW MAP LOCATION");
 		//This listener will switch the tab to the map, and send the item name or id to the DB
@@ -197,14 +204,14 @@ public class LendingLibraryGUI extends JFrame {
 			}
 		});
 		lblClickHereTo.setBounds(12, 377, 221, 16);
-		panel_2.add(lblClickHereTo);
+		tab3.add(lblClickHereTo);
 		
-		JPanel panel_3 = new JPanel();
-		tabbedPane.addTab("Map", null, panel_3, null);
+		JPanel tab4 = new JPanel();
+		tabbedPane.addTab("Map", null, tab4, null);
 		try {
-			DisplayImage(panel_3, "mapa.png");
-			panel_3.add(new JLabel("                                                "));
-			DisplayImage(panel_3, "mapb.png");
+			DisplayImage(tab4, "mapa.png");
+			tab4.add(new JLabel("                                                "));
+			DisplayImage(tab4, "mapb.png");
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -212,25 +219,33 @@ public class LendingLibraryGUI extends JFrame {
 			// TODO Auto-generated catch block
 			System.out.println(e1.getCause());
 		}
-		JPanel panel_4 = new JPanel();
-		tabbedPane.addTab("Policies", null, panel_4, null);
-		panel_4.setPreferredSize(new Dimension(300, 415));	
+		JPanel tab5 = new JPanel();
+		tabbedPane.addTab("Policies", null, tab5, null);	
 		
 		contentPane.addKeyListener(new KeyAdapter(){ //trying to use this for scanner input
 			@Override
 			public void keyPressed(KeyEvent e){
-				System.out.println("here");
 				if(e.getKeyCode() == KeyEvent.VK_ENTER){
 					tabbedPane.setSelectedIndex(0); //switches the tab to scanned event
-					System.out.println("here");
 				}
 			}
 		});
+//		this.autoResizeComponents(panel);
+//		this.autoResizeComponents(panel_1);
+//		this.autoResizeComponents(panel_2);
+//		this.autoResizeComponents(panel_3);
+//		this.autoResizeComponents(panel_4);
+	}
+	private void autoResizeComponents(JPanel panel) { //need to figure out a clever way to do this
+		for(Component components: panel.getComponents()){
+			if(!(components instanceof JLabel) && !(components instanceof JComboBox)){
+				components.setSize(components.getWidth() * 2, components.getHeight() * 2);
+			}
+		}
 		
 	}
 	private void DisplayImage(JPanel jp, String url) throws IOException, Exception {
         try {
-        	System.out.println(this.getClass().getResource(url));
             Image image=ImageIO.read(this.getClass().getResource(url));
             ImageIcon imageicon=new ImageIcon(image);
             JLabel label=new JLabel(imageicon);
