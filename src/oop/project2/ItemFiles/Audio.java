@@ -1,10 +1,10 @@
-package uberstock;
+package oop.project2;
 
 /**
  * @since 10/20/2017
  * @author jeremy
  */
-public class Audio extends Item throws ItemNotInStockError{
+public class Book extends Item throws ItemNotInStockError{
 
     /**
      * @var1 Static int to hold the number of variables this class has
@@ -16,32 +16,28 @@ public class Audio extends Item throws ItemNotInStockError{
      * @var7 Private string to hold the category
      */
 
+    private String narrator;
+    private int rating;
+
 
     /**
      * To CSV format
      * @return This item in string CSV format
      */
     public String toCSVFormat(){
-        return  this.getName().replace(",","")        + "," +
-                this.getDescription().replace(",","") + "," +
-                this.getQuantity()    + "," +
-                this.getId()          + "," +
-                this.getPrice()       + "," +
-                this.getCategory().replace(",","");
+        return super.toCSVFormat() + "," +
+               this.getNarrator + "," +
+               this.getRating();
     }
 
     /**
      * Dugan's array constructor
      * @param newItem String array of values from the time.
      */
-    public Item(String[] newItem){
-        this.setName(newItem[0]);
-        this.setDescription(newItem[1]);
-        this.setQuantity(Integer.parseInt(newItem[2]));
-        this.setId(Integer.parseInt(newItem[3]));
-        this.setPrice(Float.parseFloat(newItem[4]));
-        //This should work Dugan *THANKS!*
-        this.setCategory(newItem[5]);
+    public Book(String[] newItem){
+        super(newItem);
+        this.setNarrator(newItem[7]);
+        this.setRating(Integer.parseInt(newItem[8]));
     }
 
     /**
@@ -52,32 +48,19 @@ public class Audio extends Item throws ItemNotInStockError{
      * @param id
      * @param category
      */
-    public Item(int numVars, String category, String name, String description, int quantity, int id, int x, int y){
+    public Book(String category, String name, String description, int quantity, int id, int x, int y, String narrator, int rating){
 
-        this.setNumVars(numVars);
-
-        this.setCategory(category);
-
-        this.setName(name);
-        this.setDescription(description);
-        this.setQuantity(quantity);
-        this.setId(id);
-        this.setX(x);
-        this.setY(y);
+        super(category, name, description, quantity, id, x, y);
+        this.setNarrator(narrator);
+        this.setRating(rating);
     }
 
     /**
      * Debugging and output function update
      */
-    public void display(){
-        System.out.println(
-                            this.getCategory().replace(",","") + "," +
-                            this.getName().replace(",","") + "," +
-                            this.getDescription().replace(",","") + "," +
-                            this.getQuantity() + "," +
-                            this.getId() + "," +
-                            this.getX() + "," +
-                            this.getY() + ","
-        );
+    public void toString(){
+        return super.toString() + "," +
+               this.getAuthor() + "," +
+               this.getRating();
     }
 }
