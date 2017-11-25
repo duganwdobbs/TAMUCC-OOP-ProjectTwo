@@ -8,7 +8,7 @@ import java.util.logging.Logger;
  *
  * @author ddobbs
  */
-public class InputBuilder implements Runnable{
+public class InputBuilder implements LibRunnable{
     private ArrayBlockingQueue<InputEvent> imp_queue;
     
     public InputBuilder(){
@@ -39,6 +39,11 @@ public class InputBuilder implements Runnable{
     @SuppressWarnings("empty-statement")
     public void PutEvent(char a){
         while(! imp_queue.offer(new InputEvent(a, System.currentTimeMillis())));
+    }
+
+    @Override
+    public void associate(LendingLibraryGUI GUI, DBThread DBs, InputBuilder Inp, EventBuilder Evt) {
+        
     }
     
 }

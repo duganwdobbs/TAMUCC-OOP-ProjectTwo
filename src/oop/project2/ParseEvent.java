@@ -17,10 +17,6 @@ public class ParseEvent extends LibEvent {
     ParseEvent(String empty) {
         super(-1,"Empty");
     }
-
-    ParseEvent(char[] input_stream, int inputSize) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
     private void setUser(String userID){
         this.userID = userID;
@@ -43,7 +39,11 @@ public class ParseEvent extends LibEvent {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    Object getString() {
+    public Object getString() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    static boolean patternCheck(){
+        return false;
     }
 }

@@ -11,6 +11,7 @@ public class InputEvent extends LibEvent{
     public InputEvent(char data){
         super(0,"Input Event.");
         this.setData(data);
+        this.setTime();
     }
 
     /**
@@ -22,16 +23,6 @@ public class InputEvent extends LibEvent{
         super(0,"Input Event");
         this.setData(a);
         this.setTime(nanoTime);
-    }
-
-    /**
-     *
-     * @param a
-     */
-    public InputEvent(char a) {
-        super(0,"Input Event");
-        this.setData(a);
-        this.setTime();
     }
 
     /**
@@ -59,15 +50,15 @@ public class InputEvent extends LibEvent{
     }
 
     String getString() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return String.format("INPUT EVENT: %c, TIME: %d",this.data,this.nanoTime);
     }
 
     char getChar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.data;
     }
 
     @Override
     public String getSummary() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return String.format("INPUT EVENT: %c, TIME: %d",this.data,this.nanoTime);
     }
 }

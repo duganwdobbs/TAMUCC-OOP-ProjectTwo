@@ -8,12 +8,13 @@ import java.util.logging.Logger;
  *
  * @author ddobbs
  */
-public class DBThread implements Runnable{
+public class DBThread implements LibRunnable{
     private ItemDB items;
     private UserDB users;
     
     private ArrayBlockingQueue<ResultEvent> db_queue;
-    private EventBuilder build_evt;
+    private EventBuilder Evt;
+    private LendingLibraryGUI GUI;
     
     public DBThread(){
         items = new ItemDB();
@@ -24,22 +25,27 @@ public class DBThread implements Runnable{
     @Override
     public void run() {
         ParseEvent next = new ParseEvent("Empty");
-        try {
-            next = build_evt.getNext();
-        } catch (InterruptedException ex) {
-            Logger.getLogger(DBThread.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        run_thread();
         if(!"Empty".equals(next.getInfo())){
             // Something Here.
         }
     }
 
-    public void setEventBuilder(EventBuilder build_evt) {
-        this.build_evt = build_evt;
-    }
-
     public ResultEvent getNext() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public void run_thread(){
+       //Todo: Change true to should stop condition
+        while(true){
+            //Check
+        }
+    }
+
+    @Override
+    public void associate(LendingLibraryGUI GUI, DBThread DBs, InputBuilder Inp, EventBuilder Evt) {
+        this.GUI = GUI;
+        this.Evt = Evt;
     }
     
 }

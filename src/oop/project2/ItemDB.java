@@ -1,4 +1,4 @@
-package uberstock;
+package oop.project2;
 
 import java.io.FileReader;
 import java.io.BufferedReader;

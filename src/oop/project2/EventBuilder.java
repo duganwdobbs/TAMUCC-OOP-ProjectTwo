@@ -20,22 +20,14 @@ public class EventBuilder implements Runnable{
     private long lastTime;
     
     //References:
-    private DBThread db_thread;
-    private InputBuilder build_inp;
+    private DBThread DBs;
+    private InputBuilder Inp;
     
     public EventBuilder(){
         parse_queue = new ArrayBlockingQueue<ParseEvent>(20);
         event_vector = new Vector<LibEvent>(5); 
         input_stream = new char[MAX_INPUT_SIZE];
         inputSize = 0;
-    }
-    
-    public void setDBThread(DBThread db_thread){
-        this.db_thread = db_thread;
-    }
-    
-    public void setInputBuilder(InputBuilder build_inp){
-        this.build_inp = build_inp;
     }
 
     @Override
@@ -46,7 +38,7 @@ public class EventBuilder implements Runnable{
         }
         InputEvent next = new InputEvent("Empty");
         try {
-            next = build_inp.getNext();
+            next = Inp.getNext();
         } catch (InterruptedException ex) {
             Logger.getLogger(EventBuilder.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -54,14 +46,19 @@ public class EventBuilder implements Runnable{
             addEvent(next);
         }
         
-        ResultEvent db_next = db_thread.getNext();
-        if(db_next.getInfo() != "Empty"){
+        ResultEvent db_next = DBs.getNext();
+        if(!"Empty".equals(db_next.getInfo())){
             addVecEvent(db_next);
         }
         
         if(checkFormat()){
-            parse_queue.add(new ParseEvent(input_stream,inputSize));
+            parse_queue.add(new ParseEvent(parseEvent(),inputSize));
         }
+    }
+    
+    private String parseEvent(){
+        // TODO: Implement Pattern Formatting.
+        return "";
     }
     
     private boolean checkFormat(){
@@ -96,5 +93,10 @@ public class EventBuilder implements Runnable{
         else{
             return new ParseEvent("Empty");
         }
+    }
+
+    void associate(LendingLibraryGUI GUI, DBThread DBs, InputBuilder Inp, EventBuilder Evt) {
+        this.DBs = DBs;
+        this.Inp = Inp;
     }
 }

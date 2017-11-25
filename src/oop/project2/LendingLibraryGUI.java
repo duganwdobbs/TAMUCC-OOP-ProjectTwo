@@ -1,4 +1,4 @@
-package gui;
+package oop.project2;
 
 import java.awt.*;
 import java.awt.event.ItemEvent;
@@ -14,7 +14,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 
-public class LendingLibraryGUI extends JFrame {
+public class LendingLibraryGUI extends JFrame implements LibRunnable{
 
 	/**
 	 * Everyone, if you have any comments on UI design or where 
@@ -27,6 +27,11 @@ public class LendingLibraryGUI extends JFrame {
 	private JPanel contentPane;
 	private JTextField searchBox;
 	private String[] authors;
+        
+        //Associatiave Objects
+        
+        private EventBuilder Evt;
+        private DBThread DBs;
 	/**
 	 * Create the frame.
 	 */
@@ -255,5 +260,23 @@ public class LendingLibraryGUI extends JFrame {
         } catch (Exception ex) {
             throw new Exception();
         }
+    }
+
+    @Override
+    public void run() {
+        try {
+                //LendingLibraryImpl frame = new LendingLibraryImpl();
+                //frame.setVisible(true);
+                LendingLibraryGUI testFrame = new LendingLibraryGUI();
+                testFrame.setVisible(true);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+    }
+
+    @Override
+    public void associate(LendingLibraryGUI GUI, DBThread DBs, InputBuilder Inp, EventBuilder Evt) {
+        this.Evt = Evt;
+        this.DBs = DBs;
     }
 }
