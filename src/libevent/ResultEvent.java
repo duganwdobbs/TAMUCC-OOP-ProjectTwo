@@ -1,10 +1,10 @@
-package oop.project2;
+package libevent;
 
 /**
  *
  * @author ddobbs
  */
-class ResultEvent extends LibEvent{
+public class ResultEvent extends LibEvent{
 
     public ResultEvent(String status) {
         super(3, status);

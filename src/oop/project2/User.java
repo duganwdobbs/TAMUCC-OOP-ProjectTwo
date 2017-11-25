@@ -14,8 +14,6 @@ public class User {
         
         
     public String toCSVFormat(){
-        return "" + 
-            this.getName() + "," +
-            this.getId();
+        return "";
     }
 }

@@ -1,9 +1,9 @@
-package oop.project2;
+package libevent;
 
 /**
  *
  * @author ddobbs
  */
-interface LibParsable {
+public interface LibParsable {
     public abstract String getSummary();
 }

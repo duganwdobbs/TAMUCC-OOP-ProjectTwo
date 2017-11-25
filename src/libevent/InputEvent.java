@@ -1,4 +1,4 @@
-package oop.project2;
+package libevent;
 
 /**
  *
@@ -49,11 +49,11 @@ public class InputEvent extends LibEvent{
         this.nanoTime = nanoTime;
     }
 
-    String getString() {
+    public String getString() {
         return String.format("INPUT EVENT: %c, TIME: %d",this.data,this.nanoTime);
     }
 
-    char getChar() {
+    public char getChar() {
         return this.data;
     }
 

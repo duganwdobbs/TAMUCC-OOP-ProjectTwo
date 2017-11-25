@@ -1,4 +1,4 @@
-package oop.project2;
+package libevent;
 
 /**
  *
@@ -20,8 +20,8 @@ public class ErrorEvent extends LibEvent{
     final private int numStatus = 5;
     
 
-    public ErrorEvent(int errorType){
-        super(1);
+    public ErrorEvent(LibError err){
+        super(1,err.getSummary());
         this.setErrorType(errorType);
     }
     
@@ -35,5 +35,10 @@ public class ErrorEvent extends LibEvent{
     
     public String getErrorText(){
         return this.errorText[this.errorType];
+    }
+
+    @Override
+    public String getSummary() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

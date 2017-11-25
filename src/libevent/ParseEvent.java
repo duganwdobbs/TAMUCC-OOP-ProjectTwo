@@ -1,4 +1,4 @@
-package oop.project2;
+package libevent;
 
 /**
  *
@@ -14,7 +14,7 @@ public class ParseEvent extends LibEvent {
         this.setItem(itemID);
     }
 
-    ParseEvent(String empty) {
+    public ParseEvent(String empty) {
         super(-1,"Empty");
     }
     

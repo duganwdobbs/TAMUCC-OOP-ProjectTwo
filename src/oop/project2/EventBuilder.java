@@ -1,4 +1,5 @@
 package oop.project2;
+import libevent.*;
 
 import java.util.Vector;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -6,7 +7,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * 
  * @author ddobbs
  */
 public class EventBuilder implements Runnable{
