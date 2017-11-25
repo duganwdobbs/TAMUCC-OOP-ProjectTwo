@@ -18,10 +18,12 @@ public class InputBuilder implements LibRunnable{
 
     @Override
     public void run() {
-        while(true){
+        while(false){
             try {
-                //Check Input Queue
-                Thread.sleep(10);
+                // In a custom scenario, this would need to interface with special
+                // drivers ect. In our particular scenario, this is not needed,
+                // so this thread can instanly close, or wait indefinetly.
+                // Thread.sleep(0);
             } catch (InterruptedException ex) {
                 Logger.getLogger(InputBuilder.class.getName()).log(Level.SEVERE, null, ex);
             }

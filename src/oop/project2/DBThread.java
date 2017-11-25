@@ -23,11 +23,7 @@ public class DBThread implements LibRunnable{
     
     @Override
     public void run() {
-        ParseEvent next = new ParseEvent("Empty");
         run_thread();
-        if(!"Empty".equals(next.getInfo())){
-            // Something Here.
-        }
     }
 
     public ResultEvent getNext() {
@@ -37,7 +33,17 @@ public class DBThread implements LibRunnable{
     public void run_thread(){
        //Todo: Change true to should stop condition
         while(true){
-            //Check
+            //Check EventQ
+            //
+            //Do things with EventQ
+            //
+            //Parse result into ResultQ
+            //
+            //Check SearchQ
+            //
+            //Preform Search
+            //
+            //Parse result into SearchResultQ?
         }
     }
 
