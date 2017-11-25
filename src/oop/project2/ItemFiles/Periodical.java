@@ -1,83 +1,71 @@
-package uberstock;
+package oop.project2;
 
 /**
  * @since 10/20/2017
  * @author jeremy
  */
-public class Periodical extends Item throws ItemNotInStockError{
+public class Periodical extends Item{
 
-    /**
-     * @var1 Static int to hold the number of variables this class has
-     * @var2 Private string name
-     * @var3 Private string description
-     * @var4 Private int quantity to hold the number of items in stock, or in order
-     * @var5 Private int The ID of the item
-     * @var6 Private double The price of the item
-     * @var7 Private string to hold the category
+	public static int numVars = 8;
+	
+	private String subject;
+	
+	/**
+     * By value constructor
+     * @param attributes for initialization
      */
+    public Periodical(String category,
+    				  String name,
+    				  String description,
+    				  int quantity,
+    				  int id,
+    				  int x,
+    				  int y,
+    				  String subject){
 
-
+        super(category, name, description, quantity, id, x, y);
+        this.setSubject(subject);
+    }
+    
+    /**
+     * Dugan's array constructor
+     * @param newItem String array of values from the time.
+     */
+    public Periodical(String[] newItem){
+    	super(newItem);
+        this.setSubject(newItem[7]);
+    }
+    
     /**
      * To CSV format
      * @return This item in string CSV format
      */
     public String toCSVFormat(){
-        return  this.getName().replace(",","")        + "," +
-                this.getDescription().replace(",","") + "," +
-                this.getQuantity()    + "," +
-                this.getId()          + "," +
-                this.getPrice()       + "," +
-                this.getCategory().replace(",","");
+    	return super.toCSVFormat() + "," +
+                this.getSubject();
     }
-
+    
     /**
-     * Dugan's array constructor
-     * @param newItem String array of values from the time.
+     * Debugging and showing info
      */
-    public Item(String[] newItem){
-        this.setName(newItem[0]);
-        this.setDescription(newItem[1]);
-        this.setQuantity(Integer.parseInt(newItem[2]));
-        this.setId(Integer.parseInt(newItem[3]));
-        this.setPrice(Float.parseFloat(newItem[4]));
-        //This should work Dugan *THANKS!*
-        this.setCategory(newItem[5]);
+    public String toString(){
+        return super.toString() + "," +
+               this.getSubject();
     }
+    
+    // Getters and Setters ***************************************************
 
-    /**
-     * By value constructor
-     * @param name
-     * @param description
-     * @param quantity
-     * @param id
-     * @param category
-     */
-    public Item(int numVars, String category, String name, String description, int quantity, int id, int x, int y){
+	/**
+	 * @return the subject
+	 */
+	public String getSubject() {
+		return subject;
+	}
 
-        this.setNumVars(numVars);
-
-        this.setCategory(category);
-
-        this.setName(name);
-        this.setDescription(description);
-        this.setQuantity(quantity);
-        this.setId(id);
-        this.setX(x);
-        this.setY(y);
-    }
-
-    /**
-     * Debugging and output function update
-     */
-    public void display(){
-        System.out.println(
-                            this.getCategory().replace(",","") + "," +
-                            this.getName().replace(",","") + "," +
-                            this.getDescription().replace(",","") + "," +
-                            this.getQuantity() + "," +
-                            this.getId() + "," +
-                            this.getX() + "," +
-                            this.getY() + ","
-        );
-    }
+	/**
+	 * @param subject the subject to set
+	 */
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
 }

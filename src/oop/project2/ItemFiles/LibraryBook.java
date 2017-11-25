@@ -4,29 +4,29 @@ package oop.project2;
  * @since 10/20/2017
  * @author jeremy
  */
-public class Movie extends Item{
-
+public class LibraryBook extends Item{
+	
 	public static int numVars = 9;
 	
-	private String genre;
+    private String author;
     private int rating;
 
     /**
      * By value constructor
      * @param attributes for initialization
      */
-    public Movie(String category,
-	    		String name,
-	    		String description,
-	    		int quantity,
-	    		int id,
-	    		int x,
-	    		int y,
-	    		String genre,
-	    		int rating){
+    public LibraryBook(String category,
+    				   String name,
+    				   String description,
+    				   int quantity,
+    				   int id,
+    				   int x,
+    				   int y,
+    				   String author,
+    				   int rating){
 
-    	super(category, name, description, quantity, id, x, y);
-        this.setGenre(genre);
+        super(category, name, description, quantity, id, x, y);
+        this.setAuthor(author);
         this.setRating(rating);
     }
     
@@ -34,9 +34,9 @@ public class Movie extends Item{
      * Dugan's array constructor
      * @param newItem String array of values from the time.
      */
-    public Movie(String[] newItem){
+    public LibraryBook(String[] newItem){
         super(newItem);
-        this.setGenre(newItem[7]);
+        this.setAuthor(newItem[7]);
         this.setRating(Integer.parseInt(newItem[8]));
     }
     
@@ -46,7 +46,7 @@ public class Movie extends Item{
      */
     public String toCSVFormat(){
         return super.toCSVFormat() + "," +
-               this.getGenre() + "," +
+               this.getAuthor() + "," +
                this.getRating();
     }
 
@@ -55,24 +55,24 @@ public class Movie extends Item{
      */
     public String toString(){
         return super.toString() + "," +
-               this.getGenre() + "," +
+               this.getAuthor() + "," +
                this.getRating();
     }
-
+    
     // Getters and Setters ***************************************************
 
 	/**
-	 * @return the genre
+	 * @return the author
 	 */
-	public String getGenre() {
-		return genre;
+	public String getAuthor() {
+		return author;
 	}
 
 	/**
-	 * @param genre the genre to set
+	 * @param author the author to set
 	 */
-	public void setGenre(String genre) {
-		this.genre = genre;
+	public void setAuthor(String author) {
+		this.author = author;
 	}
 
 	/**
