@@ -1,32 +1,32 @@
-package oop.project2;
+package oop.project2.DataObjects;
 
 /**
  * @since 10/20/2017
  * @author jeremy
  */
-public class Audio extends Item{
-
+public class LibraryBook extends Item{
+	
 	public static int numVars = 9;
 	
-	private String narrator;
+    private String author;
     private int rating;
 
     /**
      * By value constructor
      * @param attributes for initialization
      */
-    public Audio(String category,
-    		     String name,
-    		     String description,
-    		     int quantity,
-    		     int id,
-    		     int x,
-    		     int y,
-    		     String narrator,
-    		     int rating){
+    public LibraryBook(String category,
+    				   String name,
+    				   String description,
+    				   int quantity,
+    				   int id,
+    				   int x,
+    				   int y,
+    				   String author,
+    				   int rating){
 
         super(category, name, description, quantity, id, x, y);
-        this.setNarrator(narrator);
+        this.setAuthor(author);
         this.setRating(rating);
     }
     
@@ -34,9 +34,9 @@ public class Audio extends Item{
      * Dugan's array constructor
      * @param newItem String array of values from the time.
      */
-    public Audio(String[] newItem){
+    public LibraryBook(String[] newItem){
         super(newItem);
-        this.setNarrator(newItem[7]);
+        this.setAuthor(newItem[7]);
         this.setRating(Integer.parseInt(newItem[8]));
     }
     
@@ -46,33 +46,33 @@ public class Audio extends Item{
      */
     public String toCSVFormat(){
         return super.toCSVFormat() + "," +
-               this.getNarrator() + "," +
+               this.getAuthor() + "," +
                this.getRating();
     }
-    
+
     /**
-     * Debugging and and showing info
+     * For Debugging and showing info
      */
     public String toString(){
         return super.toString() + "," +
-               this.getNarrator() + "," +
+               this.getAuthor() + "," +
                this.getRating();
     }
-
+    
     // Getters and Setters ***************************************************
 
 	/**
-	 * @return the narrator
+	 * @return the author
 	 */
-	public String getNarrator() {
-		return narrator;
+	public String getAuthor() {
+		return author;
 	}
 
 	/**
-	 * @param narrator the narrator to set
+	 * @param author the author to set
 	 */
-	public void setNarrator(String narrator) {
-		this.narrator = narrator;
+	public void setAuthor(String author) {
+		this.author = author;
 	}
 
 	/**

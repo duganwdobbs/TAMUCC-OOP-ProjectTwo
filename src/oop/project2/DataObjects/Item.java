@@ -1,4 +1,4 @@
-package oop.project2;
+package oop.project2.DataObjects;
 
 //TODO: implement ItemNotInStockError
 
@@ -212,4 +212,8 @@ public class Item{
 	public void setY(int y) {
 		this.y = y;
 	}
+
+    void display() {
+        //Nothing here.
+    }
 }

@@ -1,4 +1,4 @@
-package libevent;
+package oop.project2.libevent;
 
 /**
  *
@@ -16,6 +16,13 @@ public class ParseEvent extends LibEvent {
 
     public ParseEvent(String empty) {
         super(-1,"Empty");
+    }
+
+    public ParseEvent(String parseEvent, int size) {
+        super(3,"Parse Event.");
+        String[] split = parseEvent.split(",");
+        this.setUser(split[0]);
+        this.setItem(split[1]);
     }
     
     private void setUser(String userID){

@@ -1,5 +1,5 @@
 package oop.project2;
-import libevent.*;
+import oop.project2.libevent.*;
 
 import java.util.Vector;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -53,12 +53,14 @@ public class EventBuilder implements Runnable{
         }
         
         if(checkFormat()){
-            parse_queue.add(new ParseEvent(parseEvent(),inputSize));
+            parse_queue.add(new ParseEvent(parseStream()));
         }
     }
     
-    private String parseEvent(){
-        // TODO: Implement Pattern Formatting.
+    private String parseStream(){
+        // TODO: Implement Pattern Formatting?
+        // TODO: Construct String from current stream
+        // TODO: Put ',' after length of user ID
         return "";
     }
     

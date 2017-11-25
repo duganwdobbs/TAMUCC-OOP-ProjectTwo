@@ -1,4 +1,4 @@
-package oop.project2;
+package oop.project2.DataObjects;
 
 /**
  * @since 10/20/2017

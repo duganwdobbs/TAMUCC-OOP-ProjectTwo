@@ -1,5 +1,5 @@
 package oop.project2;
-import libevent.*;
+import oop.project2.libevent.*;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.logging.Level;
@@ -18,12 +18,14 @@ public class InputBuilder implements LibRunnable{
 
     @Override
     public void run() {
-        while(false){
+        while(true){
             try {
                 // In a custom scenario, this would need to interface with special
                 // drivers ect. In our particular scenario, this is not needed,
                 // so this thread can instanly close, or wait indefinetly.
-                // Thread.sleep(0);
+                // Here, we chose to close it with a simple break statement.
+                 Thread.sleep(10);
+                break;
             } catch (InterruptedException ex) {
                 Logger.getLogger(InputBuilder.class.getName()).log(Level.SEVERE, null, ex);
             }

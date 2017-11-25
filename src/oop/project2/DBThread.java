@@ -1,5 +1,5 @@
 package oop.project2;
-import libevent.*;
+import oop.project2.libevent.ResultEvent;
 
 import java.util.concurrent.ArrayBlockingQueue;
 

@@ -1,4 +1,4 @@
-package oop.project2;
+package oop.project2.DataObjects;
 
 //TODO: implement ReferenceCheckoutError
 

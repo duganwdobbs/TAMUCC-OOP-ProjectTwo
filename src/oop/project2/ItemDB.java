@@ -1,5 +1,5 @@
 package oop.project2;
-import libevent.*;
+import oop.project2.DataObjects.Item;
 
 import java.io.FileReader;
 import java.io.BufferedReader;
@@ -9,7 +9,7 @@ import java.util.LinkedList;
 
 /**
  * ItemDB class is for reading/saving/managing ItemDB.dat 
- * @since 10/20/2017
+ * @since 10/20/2017 
  * @author ddobbs
  */
 public class ItemDB extends Database {
@@ -70,7 +70,7 @@ public class ItemDB extends Database {
     
     public void display(){
         for(int x=0;x<size;x++){
-            data[x].display();
+//            data[x].display();
         }
     }
     
