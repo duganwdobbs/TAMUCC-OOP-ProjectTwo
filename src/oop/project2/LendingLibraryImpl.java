@@ -11,7 +11,7 @@ public class LendingLibraryImpl {
 	/**
 	 * Launch the application.
 	 */ 
-	public static void main() {
+	public static void main(String[] args) { 
             LendingLibraryImpl session = new LendingLibraryImpl();
             session.init();
             session.start();
