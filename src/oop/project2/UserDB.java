@@ -4,6 +4,7 @@ import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.FileWriter;
+import oop.project2.DataObjects.User;
 
 /**
  * This is our User Database.
@@ -32,13 +33,8 @@ public class UserDB extends Database{
             data = new User[super.size];
             
             for (int currIndex = 0; currIndex < super.size && (str = in.readLine())!= null; currIndex++) {
-                String[] newItem=str.split(",");
-                if(Boolean.parseBoolean(newItem[3])){
-//                    data[currIndex] = new Admin(newItem);
-                }
-                else{
-//                    data[currIndex] = new Customer(newItem);
-                }
+                String[] newUser=str.split(",");
+                data[currIndex] = new User(newUser);
                 
             }
             
@@ -49,6 +45,12 @@ public class UserDB extends Database{
         }
 
     }
+    
+    private void display(){
+        for(User usr: data){
+            usr.display();
+        }
+    }
         
     /**
      * Overridden toFile function from Database
@@ -58,9 +60,9 @@ public class UserDB extends Database{
         try {
             FileWriter out = new FileWriter(File_Location);
             out.write(Integer.toString(super.size));
+            out.write("\n");
             for(int x=0;x<super.size;x++)
             {
-                out.write("\n");
                 out.write(data[x].toCSVFormat());
             }
             out.close();
@@ -68,6 +70,12 @@ public class UserDB extends Database{
         catch (IOException e) {
             System.out.println("User File Write Error");
         }
+    }
+    
+    public static void main(String argsp[]){
+        UserDB newdb = new UserDB();
+        newdb.display();
+        newdb.toFile();
     }
      
 }

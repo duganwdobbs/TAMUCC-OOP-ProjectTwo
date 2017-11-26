@@ -5,7 +5,7 @@ package oop.project2;
  * @author ddobbs
  */
 public abstract class Database {
-    protected static String File_Location = "./src/uberstock/";
+    protected static String File_Location = "./src/";
     /**
      * @var1 Int to hold the size. Useful by Database's children classes
      */

@@ -10,11 +10,11 @@ import java.util.logging.Logger;
  * 
  * @author ddobbs
  */
-public class EventBuilder implements Runnable{
+public class EventBuilder implements LibRunnable{
     private ArrayBlockingQueue<ParseEvent> parse_queue;
     private Vector<LibEvent> event_vector;
     private char[] input_stream;
-    private int inputSize;
+    private int input_size;
     
     private final int MAX_INPUT_SIZE = 50;
     
@@ -28,14 +28,20 @@ public class EventBuilder implements Runnable{
         parse_queue = new ArrayBlockingQueue<ParseEvent>(20);
         event_vector = new Vector<LibEvent>(5); 
         input_stream = new char[MAX_INPUT_SIZE];
-        inputSize = 0;
+        input_size = 0;
     }
 
     @Override
     public void run() {
+        while(true){
+            step();
+        }
+    }
+    
+    private void step(){
+        //Threshold for stream timeout.
         if(System.currentTimeMillis() - lastTime > 5000){
             destroyStream();
-            
         }
         InputEvent next = new InputEvent("Empty");
         try {
@@ -43,6 +49,7 @@ public class EventBuilder implements Runnable{
         } catch (InterruptedException ex) {
             Logger.getLogger(EventBuilder.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         if(!"Empty".equals(next.getString())){
             addEvent(next);
         }
@@ -58,15 +65,24 @@ public class EventBuilder implements Runnable{
     }
     
     private String parseStream(){
-        // TODO: Implement Pattern Formatting?
-        // TODO: Construct String from current stream
-        // TODO: Put ',' after length of user ID
-        return "";
+        String return_value = "";
+        if(checkFormat()){
+            for(char a : input_stream){
+                return_value = return_value + a;
+            }
+            StringBuilder mod_str = new StringBuilder(return_value);
+            // Replace 12 with length of either book or user ID.
+            // TODO: Pattern match Book and User
+            mod_str.insert(12,',');
+            return_value = mod_str.toString();
+            destroyStream();
+        }
+        return return_value;
     }
     
     private boolean checkFormat(){
         //return if current stream is proper format
-        return false;
+        return this.input_size == 26;
     }
     
     private void addVecEvent(ResultEvent db_next){
@@ -77,8 +93,8 @@ public class EventBuilder implements Runnable{
     }
     
     private void addEvent(InputEvent next){
-        input_stream[inputSize] = next.getChar();
-        inputSize++;
+        input_stream[input_size] = next.getChar();
+        input_size++;
     }
     
     private void destroyStream(){
@@ -86,7 +102,7 @@ public class EventBuilder implements Runnable{
             e = ' ';
         }
         lastTime = System.currentTimeMillis();
-        inputSize = 0;
+        input_size = 0;
     }
     
     public ParseEvent getNext() throws InterruptedException{
@@ -98,7 +114,7 @@ public class EventBuilder implements Runnable{
         }
     }
 
-    void associate(LendingLibraryGUI GUI, DBThread DBs, InputBuilder Inp, EventBuilder Evt) {
+    public void associate(LendingLibraryGUI GUI, DBThread DBs, InputBuilder Inp, EventBuilder Evt) {
         this.DBs = DBs;
         this.Inp = Inp;
     }
