@@ -230,4 +230,8 @@ public class Item{
             throw new ReferenceCheckoutError(this.getID());
         }
     }
+    
+    public void checkOut(){
+        this.quantity--;
+    }
 }

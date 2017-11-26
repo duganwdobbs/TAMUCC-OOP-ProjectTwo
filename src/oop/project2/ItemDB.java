@@ -117,4 +117,12 @@ public class ItemDB extends Database {
             throw new ItemNotFoundError(id);
         }
     }
+    
+    public void checkOut(String userID, String itemID){
+        for(Item itm : data){
+            if(itm.getID().equals(itemID)){
+                itm.checkOut();
+            }
+        }
+    }
 }

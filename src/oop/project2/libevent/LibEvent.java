@@ -41,4 +41,7 @@ public abstract class LibEvent implements LibParsable{
         return this.type;
     }
     
+    public String getString(){
+        return this.info;
+    }
 }

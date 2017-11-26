@@ -40,17 +40,13 @@ public class ParseEvent extends LibEvent {
     public String getItem(){
         return this.itemID;
     }
-
-    @Override
-    public String getSummary() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public Object getString() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
     static boolean patternCheck(){
         return false;
+    }
+
+    @Override
+    public String getSummary() {
+        return super.getInfo();
     }
 }
