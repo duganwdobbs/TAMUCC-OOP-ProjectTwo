@@ -68,4 +68,9 @@ public class Periodical extends Item{
 	public void setSubject(String subject) {
 		this.subject = subject;
 	}
+	
+	@Override
+	public String getMaker() {
+		return this.getName();
+	}
 }

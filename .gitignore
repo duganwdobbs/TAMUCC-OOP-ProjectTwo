@@ -11,3 +11,6 @@ UML.xml
 
 UML.xml
 /build/
+/bin/
+
+*.classpath

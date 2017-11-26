@@ -81,6 +81,7 @@ public class ItemsInitializer {
 								10,
 				                10,
 				                "Drama",
+				                "Steven Spielberg",
 				                4);
         
         // Newspaper s *******************************************************

@@ -88,4 +88,9 @@ public class Audio extends Item{
 	public void setRating(int rating) {
 		this.rating = rating;
 	}
+	
+	@Override
+	public String getMaker() {
+		return this.getNarrator();
+	}
 }

@@ -11,7 +11,8 @@ import oop.project2.libevent.ReferenceCheckoutError;
  */
 public class Reference extends Item{
 
-	public static int numVars = 7;
+	public static int numVars = 8;
+	private String publisher;
 	
 	/**
      * By value constructor
@@ -23,9 +24,11 @@ public class Reference extends Item{
     				 int quantity,
     				 String id,
     				 int x,
-    				 int y){
+    				 int y,
+    				 String publisher){
 
     	super(category, name, description, quantity, id, x, y);
+    	this.setPublisher(publisher);
     }
     
     /**
@@ -34,6 +37,7 @@ public class Reference extends Item{
      */
     public Reference(String[] newItem){
         super(newItem);
+        publisher = newItem[7];
     }
     
     /**
@@ -51,11 +55,24 @@ public class Reference extends Item{
         return super.toString();
     }
     
+    public void setPublisher(String publisher) {
+    	this.publisher = publisher;
+    }
+    
+    public String getPublisher() {
+    	return this.publisher;
+    }
+    
     // Getters and Setters ***************************************************
     // none
     
     @Override
     public void tryCheckOut() throws ReferenceCheckoutError{
         throw new ReferenceCheckoutError(this.getID());
+    }
+    
+    @Override
+    public String getMaker() {
+    	return this.getPublisher();
     }
 }

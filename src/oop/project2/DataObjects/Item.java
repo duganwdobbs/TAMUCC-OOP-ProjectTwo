@@ -234,4 +234,8 @@ public class Item{
     public void checkOut(){
         this.quantity--;
     }
+    
+    public String getMaker() {
+    	return "";
+    }
 }

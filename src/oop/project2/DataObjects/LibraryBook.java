@@ -88,4 +88,9 @@ public class LibraryBook extends Item{
 	public void setRating(int rating) {
 		this.rating = rating;
 	}
+	
+	@Override
+	public String getMaker() {
+		return this.getAuthor();
+	}
 }

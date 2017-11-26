@@ -6,9 +6,10 @@ package oop.project2.DataObjects;
  */
 public class Movie extends Item{
 
-	public static int numVars = 9;
+	public static int numVars = 10;
 	
 	private String genre;
+	private String director;
     private int rating;
 
     /**
@@ -23,10 +24,12 @@ public class Movie extends Item{
 	    		int x,
 	    		int y,
 	    		String genre,
+	    		String director,
 	    		int rating){
 
     	super(category, name, description, quantity, id, x, y);
         this.setGenre(genre);
+        this.setDirector(director);
         this.setRating(rating);
     }
     
@@ -46,7 +49,8 @@ public class Movie extends Item{
      */
     public String toCSVFormat(){
         return super.toCSVFormat() + "," +
-               this.getGenre() + "," +
+                this.getGenre() + "," +
+                this.getDirector() + "," +
                this.getRating();
     }
 
@@ -56,6 +60,7 @@ public class Movie extends Item{
     public String toString(){
         return super.toString() + "," +
                this.getGenre() + "," +
+               this.getDirector() + "," +
                this.getRating();
     }
 
@@ -67,13 +72,21 @@ public class Movie extends Item{
 	public String getGenre() {
 		return genre;
 	}
-
 	/**
 	 * @param genre the genre to set
 	 */
 	public void setGenre(String genre) {
 		this.genre = genre;
 	}
+	
+	public String getDirector() {
+		return this.director;
+	}
+	
+	public void setDirector(String director) {
+		this.director = director;
+	}
+
 
 	/**
 	 * @return the rating
@@ -87,5 +100,10 @@ public class Movie extends Item{
 	 */
 	public void setRating(int rating) {
 		this.rating = rating;
+	}
+	
+	@Override
+	public String getMaker() {
+		return this.getDirector();
 	}
 }

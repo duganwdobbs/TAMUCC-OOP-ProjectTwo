@@ -69,4 +69,9 @@ public class Magazine extends Periodical{
 	public void setIssue(int issue) {
 		this.issue = issue;
 	}
+	
+	@Override
+	public String getMaker() {
+		return this.getName();
+	}
 }

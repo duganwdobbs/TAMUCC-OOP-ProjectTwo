@@ -69,4 +69,8 @@ public class Newspaper extends Periodical{
 	public void setLeaning(String leaning) {
 		this.leaning = leaning;
 	}
+	
+	public String getMaker() {
+		return this.getName();
+	}
 }
