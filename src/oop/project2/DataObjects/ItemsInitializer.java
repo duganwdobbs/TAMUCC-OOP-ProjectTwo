@@ -1,5 +1,8 @@
 package oop.project2.DataObjects;
 
+import java.io.FileWriter;
+import java.io.IOException;
+
 /**
  * @since 10/20/2017
  * @author Jeremy
@@ -22,9 +25,10 @@ package oop.project2.DataObjects;
  * └───Reference Material(...)
  */
 public class ItemsInitializer {
+    public static Item[] inventory;
 
     public static void main(String[] args){
-        Item[] inventory = new Item[30];
+        inventory = new Item[30];
         
         // LibraryBook s *****************************************************
         inventory[0] = new LibraryBook("Book",
@@ -57,7 +61,7 @@ public class ItemsInitializer {
         
         // Audio s ***********************************************************
         
-        inventory[5] = new Audio("Audio",
+        inventory[3] = new Audio("Audio",
                                 "Hitchhiker's Guide to the Galaxy",
         						"Don't leave earth without this story of the end of the world and the happy-go-lucky days that follow. Written by Douglas Adams.",
         						2,
@@ -69,7 +73,7 @@ public class ItemsInitializer {
 
         // Movie s ***********************************************************
         
-        inventory[10] = new Movie("Movie",
+        inventory[4] = new Movie("Movie",
 				                "Lincoln",
 								"An inspiring drama that focuses on Abraham Lincoln's final four months",
 								2,
@@ -82,7 +86,7 @@ public class ItemsInitializer {
         // Newspaper s *******************************************************
         //https://www.allsides.com/unbiased-balanced-news
         
-        inventory[15] = new Newspaper("Newspaper",
+        inventory[5] = new Newspaper("Newspaper",
 					                "The Wall Street Journal",
 									"The Wall Street Journal is an American business-focused, English-language international daily newspaper based in New York City.",
 									57,
@@ -94,7 +98,7 @@ public class ItemsInitializer {
         
         // Magazine s ********************************************************
         
-        inventory[20] = new Magazine("Magazine",
+        inventory[6] = new Magazine("Magazine",
 					                "Scientific American",
 									"American popular science magazine. Many famous scientists, including Albert Einstein, have contributed articles in the past 170 years. It is the oldest continuously published monthly magazine in the United States",
 									1,
@@ -109,8 +113,27 @@ public class ItemsInitializer {
         
         
         System.out.printf(inventory[0].toCSVFormat());
+        
+        toFile();
      
 
+    }
+    
+    public static void toFile(){
+        try {
+            FileWriter out = new FileWriter("./src/ItemDB.dat");
+            out.write(Integer.toString(30));
+            out.write("\n");
+            for(int x=0;x<6;x++)
+            {
+                out.write(inventory[x].toCSVFormat());
+                out.write("\n");
+            }
+            out.close();
+        }
+        catch (IOException e) {
+            System.out.println("Item File Write Error");
+        }
     }
 
 }

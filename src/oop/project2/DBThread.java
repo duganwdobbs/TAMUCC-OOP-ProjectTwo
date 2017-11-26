@@ -62,11 +62,11 @@ public class DBThread implements LibRunnable{
     
     private void checkout(ParseEvent next_event){
         try{
-            //Tests a checkout on the user.
-            users.exists(next_event.getUser());
-
-            //Tests a checkout on the item.
-            items.exists(next_event.getItem());
+            //Tests if we're going to check out, and if we can check out.
+            if(users.exists(next_event.getUser(),next_event.getItem())){
+                //Tests a checkout on the item.
+                items.exists(next_event.getItem());
+            }
             
             //Checkout
             db_queue.offer(checkout(next_event.getUser(),next_event.getItem()));
