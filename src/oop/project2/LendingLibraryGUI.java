@@ -139,12 +139,6 @@ public class LendingLibraryGUI extends JFrame{
 		this.initializeInventory();
 		searchBox = new JTextField();
 		//get the text as it is being typed so we can remove labels that do not contain the substring
-		searchBox.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyReleased(KeyEvent arg0) {
-				System.out.println(searchBox.getText());
-			}
-		});
 		searchBox.setBounds(339, 14, 116, 22);
 		tab2.add(searchBox);
 		searchBox.setColumns(10);
@@ -165,40 +159,41 @@ public class LendingLibraryGUI extends JFrame{
 		tabbedPane.addTab("Item Details", null, tab3, null);
 		tab3.setLayout(null);
 		
-		lblTitle = new JLabel("Title:");
-		lblTitle.setBounds(12, 60, 56, 16);
-		tab3.add(lblTitle);
-		
-		lblAuthor = new JLabel("Author:");
-		lblAuthor.setBounds(12, 115, 56, 16);
-		tab3.add(lblAuthor);
-		
 		lblDescription = new JLabel("Description:");
 		lblDescription.setBounds(12, 172, 75, 16);
 		tab3.add(lblDescription);
 		
 		descriptionText = new JTextArea();
 		descriptionText.setEditable(false);
-		descriptionText.setBounds(116, 169, 231, 86);
+		descriptionText.setBounds(116, 169, 350, 175);
+		descriptionText.setLineWrap(true);
 		tab3.add(descriptionText);
 		
-		lblInStock = new JLabel("In Stock:");
-		lblInStock.setBounds(12, 295, 56, 16);
-		tab3.add(lblInStock);
+		lblTitle = new JLabel("Title:");
+		lblTitle.setBounds(12, 60, 56, 16);
+		tab3.add(lblTitle);
 		
 		titleText = new JTextArea();
 		titleText.setEditable(false);
 		titleText.setBounds(116, 57, 231, 22);
 		tab3.add(titleText);
 		
+		lblAuthor = new JLabel("Author:");
+		lblAuthor.setBounds(12, 115, 56, 16);
+		tab3.add(lblAuthor);
+		
 		authorText = new JTextArea();
 		authorText.setEditable(false);
 		authorText.setBounds(116, 112, 231, 22);
 		tab3.add(authorText);
 		
+		lblInStock = new JLabel("In Stock:");
+		lblInStock.setBounds(12, 375, 56, 16);
+		tab3.add(lblInStock);
+		
 		stockTextArea = new JTextArea();
 		stockTextArea.setEditable(false);
-		stockTextArea.setBounds(116, 292, 56, 22);
+		stockTextArea.setBounds(116, 372, 56, 22);
 		tab3.add(stockTextArea);
 		
 		JLabel lblClickHereTo = new JLabel("CLICK HERE TO VIEW MAP LOCATION");
@@ -210,7 +205,7 @@ public class LendingLibraryGUI extends JFrame{
 				tabbedPane.setSelectedIndex(3); //switches the tab to map
 			}
 		});
-		lblClickHereTo.setBounds(12, 377, 221, 16);
+		lblClickHereTo.setBounds(12, 425, 221, 16);
 		tab3.add(lblClickHereTo);
 		
 		tab4 = new JPanel();
@@ -262,7 +257,7 @@ public class LendingLibraryGUI extends JFrame{
 					for(Component component: inventoryTextPane.getComponents()){
 						inventoryTextPane.remove(component);
 					}
-					if(filterBox.getSelectedItem().toString().equals("Everything")){
+					if(filterBox.getSelectedItem().toString().equals("Everything") && searchBox.getText().equals("")){
 						initializeInventory();
 					}
 					else{
@@ -275,6 +270,27 @@ public class LendingLibraryGUI extends JFrame{
 					}
 					repaint();
 				}
+			}
+		});
+		
+		searchBox.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				for(Component component: inventoryTextPane.getComponents()){
+					inventoryTextPane.remove(component);
+				}
+				if(filterBox.getSelectedItem().toString().equals("Everything") && searchBox.getText().equals("")){
+					initializeInventory();
+				}
+				else{
+					for(Item item: search(filterBox.getSelectedItem().toString() + "," + searchBox.getText())) {
+						JLabel tempLabel = new JLabel(item.getName() + "        ");
+						tempLabel.setAlignmentX(Component.LEFT_ALIGNMENT); 
+						inventoryTextPane.add(tempLabel);
+						addLabelListener(tempLabel, item);
+					}
+				}
+				repaint();
 			}
 		});
 	}
