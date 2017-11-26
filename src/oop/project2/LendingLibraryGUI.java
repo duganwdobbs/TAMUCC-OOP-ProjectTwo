@@ -8,10 +8,12 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.util.LinkedList;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import oop.project2.DataObjects.Item;
 
 
 public class LendingLibraryGUI extends JFrame{
@@ -28,10 +30,18 @@ public class LendingLibraryGUI extends JFrame{
 	private JTextField searchBox;
 	private String[] authors;
         
+        //Associative Objects
+        private DBThread DBs; 
+        private InputBuilder Inp;
+        private EventBuilder Evt;
 	/**
 	 * Create the frame.
 	 */
-	public LendingLibraryGUI() {
+	public LendingLibraryGUI(DBThread DBs, InputBuilder Inp, EventBuilder Evt) {
+            
+            this.DBs = DBs;
+            this.Inp = Inp;
+            this.Evt = Evt;
 		
 		authors = new String[]{"1","2","3","4","5","6","7","8","9","10"};
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -256,5 +266,22 @@ public class LendingLibraryGUI extends JFrame{
         } catch (Exception ex) {
             throw new Exception();
         }
+    }
+        
+    private LinkedList<Item> search(String[] to_search){
+        LinkedList<Item> found = new LinkedList<Item>();
+        for(Item itm: DBs.getItems()){
+            for(String to_s: to_search){
+                if(itm.toCSVFormat().trim().contains(to_s.trim())){
+                    found.add(itm);
+                    break;
+                }
+            }
+        }
+        return found;
+    }
+        
+    private LinkedList<Item> search(String to_search){
+        return search(to_search.split(","));
     }
 }

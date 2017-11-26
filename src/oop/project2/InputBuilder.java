@@ -47,7 +47,7 @@ public class InputBuilder implements LibRunnable{
     }
 
     @Override
-    public void associate(GUIThread GUI, DBThread DBs, InputBuilder Inp, EventBuilder Evt) {
+    public void associate(DBThread DBs, InputBuilder Inp, EventBuilder Evt) {
         
     }
     

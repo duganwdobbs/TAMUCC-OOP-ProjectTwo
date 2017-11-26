@@ -3,7 +3,7 @@ package oop.project2;
 import java.awt.EventQueue;
 
 public class LendingLibraryImpl {
-    GUIThread         GUI;
+    LendingLibraryGUI GUI;
     DBThread          DBs;
     InputBuilder      Inp;
     EventBuilder      Evt;
@@ -18,20 +18,28 @@ public class LendingLibraryImpl {
 	}
         
         public LendingLibraryImpl(){
-            GUI = new GUIThread();
             DBs = new DBThread();
             Inp = new InputBuilder();
             Evt = new EventBuilder();
+            EventQueue.invokeLater(new Runnable() {
+ 			public void run() {
+ 				try {
+ 					GUI = new LendingLibraryGUI(DBs,Inp,Evt);
+ 					GUI.setVisible(true);
+ 				} catch (Exception e) {
+ 					e.printStackTrace();
+ 				}
+ 			}
+ 		});
         }
         
         public void init(){
-            GUI.associate(GUI,DBs,Inp,Evt);
-            DBs.associate(GUI,DBs,Inp,Evt);
-            Evt.associate(GUI,DBs,Inp,Evt);
+            DBs.associate(DBs,Inp,Evt);
+            Evt.associate(DBs,Inp,Evt);
         }
         
         public void start(){
-            EventQueue.invokeLater(GUI);
+            
             EventQueue.invokeLater(DBs);
             EventQueue.invokeLater(Inp);
             EventQueue.invokeLater(Evt);

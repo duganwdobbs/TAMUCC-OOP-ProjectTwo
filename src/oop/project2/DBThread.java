@@ -4,6 +4,7 @@ import oop.project2.libevent.ResultEvent;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import oop.project2.DataObjects.Item;
 import oop.project2.libevent.LibError;
 import oop.project2.libevent.ParseEvent;
 
@@ -17,7 +18,7 @@ public class DBThread implements LibRunnable{
     
     private ArrayBlockingQueue<ResultEvent> db_queue;
     private EventBuilder Evt;
-    private GUIThread GUI;
+    private LendingLibraryGUI GUI;
     
     public DBThread(){
         items = new ItemDB();
@@ -57,12 +58,6 @@ public class DBThread implements LibRunnable{
         if(!"Empty".equals(next_parse.getString())){
             checkout(next_parse);
         }
-        
-        //Check SearchQ
-        //
-        //Preform Search
-        //
-        //Parse result into SearchResultQ?
     }
     
     private void checkout(ParseEvent next_event){
@@ -87,8 +82,14 @@ public class DBThread implements LibRunnable{
     }
 
     @Override
-    public void associate(GUIThread GUI, DBThread DBs, InputBuilder Inp, EventBuilder Evt) {
+    public void associate(DBThread DBs, InputBuilder Inp, EventBuilder Evt) {
         this.GUI = GUI;
         this.Evt = Evt;
     }
+    
+    public Item[] getItems(){
+        return items.getItems();
+    }
+    
+    
 }
