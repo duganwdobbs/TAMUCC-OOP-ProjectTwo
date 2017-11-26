@@ -14,7 +14,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 
-public class LendingLibraryGUI extends JFrame implements LibRunnable{
+public class LendingLibraryGUI extends JFrame{
 
 	/**
 	 * Everyone, if you have any comments on UI design or where 
@@ -28,10 +28,6 @@ public class LendingLibraryGUI extends JFrame implements LibRunnable{
 	private JTextField searchBox;
 	private String[] authors;
         
-        //Associatiave Objects
-        
-        private EventBuilder Evt;
-        private DBThread DBs;
 	/**
 	 * Create the frame.
 	 */
@@ -260,23 +256,5 @@ public class LendingLibraryGUI extends JFrame implements LibRunnable{
         } catch (Exception ex) {
             throw new Exception();
         }
-    }
-
-    @Override
-    public void run() {
-        try {
-                //LendingLibraryImpl frame = new LendingLibraryImpl();
-                //frame.setVisible(true);
-                LendingLibraryGUI testFrame = new LendingLibraryGUI();
-                testFrame.setVisible(true);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-    }
-
-    @Override
-    public void associate(LendingLibraryGUI GUI, DBThread DBs, InputBuilder Inp, EventBuilder Evt) {
-        this.Evt = Evt;
-        this.DBs = DBs;
     }
 }

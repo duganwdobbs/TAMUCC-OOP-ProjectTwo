@@ -3,7 +3,7 @@ package oop.project2;
 import java.awt.EventQueue;
 
 public class LendingLibraryImpl {
-    LendingLibraryGUI GUI;
+    GUIThread         GUI;
     DBThread          DBs;
     InputBuilder      Inp;
     EventBuilder      Evt;
@@ -18,7 +18,7 @@ public class LendingLibraryImpl {
 	}
         
         public LendingLibraryImpl(){
-            GUI = new LendingLibraryGUI();
+            GUI = new GUIThread();
             DBs = new DBThread();
             Inp = new InputBuilder();
             Evt = new EventBuilder();

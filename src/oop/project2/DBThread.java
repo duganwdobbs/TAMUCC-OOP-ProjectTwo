@@ -17,7 +17,7 @@ public class DBThread implements LibRunnable{
     
     private ArrayBlockingQueue<ResultEvent> db_queue;
     private EventBuilder Evt;
-    private LendingLibraryGUI GUI;
+    private GUIThread GUI;
     
     public DBThread(){
         items = new ItemDB();
@@ -87,7 +87,7 @@ public class DBThread implements LibRunnable{
     }
 
     @Override
-    public void associate(LendingLibraryGUI GUI, DBThread DBs, InputBuilder Inp, EventBuilder Evt) {
+    public void associate(GUIThread GUI, DBThread DBs, InputBuilder Inp, EventBuilder Evt) {
         this.GUI = GUI;
         this.Evt = Evt;
     }

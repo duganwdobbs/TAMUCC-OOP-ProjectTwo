@@ -113,7 +113,7 @@ public class EventBuilder implements LibRunnable{
         }
     }
 
-    public void associate(LendingLibraryGUI GUI, DBThread DBs, InputBuilder Inp, EventBuilder Evt) {
+    public void associate(GUIThread GUI, DBThread DBs, InputBuilder Inp, EventBuilder Evt) {
         this.DBs = DBs;
         this.Inp = Inp;
     }
