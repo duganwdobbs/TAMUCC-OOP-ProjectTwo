@@ -74,18 +74,13 @@ public class UserDB extends Database{
         }
     }
     
-    public void exists(String id) throws UserNotFoundError, UserCheckoutError{
-        boolean notFound = true;
+    public boolean exists(String user_id, String item_id) throws UserNotFoundError, UserCheckoutError{
         for(User usr: data){
-            if(usr.getID().equals(id)){
-                notFound = false;
-                usr.tryCheckOut();
-                break;
+            if(usr.getID().equals(user_id)){
+                return usr.tryCheckOut(item_id);
             }
         }
-        if(notFound){
-            throw new UserNotFoundError(id);
-        }
+        throw new UserNotFoundError(user_id);
     }
     
     public static void main(String argsp[]){
@@ -94,8 +89,13 @@ public class UserDB extends Database{
         newdb.toFile();
     }
     
-    public void checkOut(String userID, String itemID){
-        
+    public void checkOut(String user_id, String item_id){
+        for(User usr: data){
+            if(usr.getID().equals(user_id)){
+                usr.checkOut(item_id);
+                break;
+            }
+        }
     }
      
 }

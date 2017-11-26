@@ -1,5 +1,6 @@
 package oop.project2.DataObjects;
 
+import java.util.ArrayList;
 import oop.project2.libevent.UserCheckoutError;
 
 public class User {
@@ -10,11 +11,16 @@ public class User {
     private String id;
     private int checkedOut;
     public final static int MAX_CHECKOUT = 3;
+    private ArrayList<String> checkedBookIDs;
         
     public User(String[] arr){
         this.setName(arr[0]);
         this.setID(arr[1]);
         this.setCheckedOut(Integer.parseInt(arr[2]));
+        this.checkedBookIDs = new ArrayList<String>();
+        for(int x = 0;x<checkedOut;x++){
+            checkedBookIDs.add(arr[x+2]);
+        }
     }
     
     private void setName(String name){
@@ -33,13 +39,8 @@ public class User {
         this.checkedOut = checkedOut;
     }
     
-    private void checkOut(String userID, String itemID) throws UserCheckoutError{
-        if(checkedOut < MAX_CHECKOUT){
-            checkedOut++;
-        }
-        else{
-            throw new UserCheckoutError(this.name);
-        }
+    public void checkOut(String itemID){
+        checkedBookIDs.remove(itemID);
     }
     
     public void display(){
@@ -47,15 +48,20 @@ public class User {
     }
     
     public String toCSVFormat(){
-        return "" + name + "," + id + "," + checkedOut + "\n";
+        String returnVal = name + "," + id + "," + checkedOut;
+        for(String s:checkedBookIDs){
+            returnVal = returnVal + "," + s;
+        }
+        return returnVal + "\n";
     }
     
-    public void tryCheckOut() throws UserCheckoutError{
-        if(checkedOut < MAX_CHECKOUT){
-            checkedOut++;
+    public boolean tryCheckOut(String itemID) throws UserCheckoutError{
+        if(checkedBookIDs.contains(itemID)){
+            return false;
         }
-        else{
-            throw new UserCheckoutError(this.id);
+        else if(checkedOut < MAX_CHECKOUT){
+            return true;
         }
+        throw new UserCheckoutError(this.id);
     }
 }
