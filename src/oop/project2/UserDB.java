@@ -48,7 +48,7 @@ public class UserDB extends Database{
 
     }
     
-    private void display(){
+    public void display(){
         for(User usr: data){
             usr.display();
         }
