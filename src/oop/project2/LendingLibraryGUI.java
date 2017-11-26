@@ -177,24 +177,24 @@ public class LendingLibraryGUI extends JFrame{
 		lblDescription.setBounds(12, 172, 75, 16);
 		tab3.add(lblDescription);
 		
-		titleText = new JTextArea();
-		titleText.setEditable(false);
-		titleText.setBounds(116, 169, 231, 86);
-		tab3.add(titleText);
+		descriptionText = new JTextArea();
+		descriptionText.setEditable(false);
+		descriptionText.setBounds(116, 169, 231, 86);
+		tab3.add(descriptionText);
 		
 		lblInStock = new JLabel("In Stock:");
 		lblInStock.setBounds(12, 295, 56, 16);
 		tab3.add(lblInStock);
 		
+		titleText = new JTextArea();
+		titleText.setEditable(false);
+		titleText.setBounds(116, 57, 231, 22);
+		tab3.add(titleText);
+		
 		authorText = new JTextArea();
 		authorText.setEditable(false);
-		authorText.setBounds(116, 57, 231, 22);
+		authorText.setBounds(116, 112, 231, 22);
 		tab3.add(authorText);
-		
-		descriptionText = new JTextArea();
-		descriptionText.setEditable(false);
-		descriptionText.setBounds(116, 112, 231, 22);
-		tab3.add(descriptionText);
 		
 		stockTextArea = new JTextArea();
 		stockTextArea.setEditable(false);
@@ -259,11 +259,10 @@ public class LendingLibraryGUI extends JFrame{
 		filterBox.addItemListener(new ItemListener (){
 			public void itemStateChanged(ItemEvent e){
 				if(e.getStateChange() == 1){ //this if statement is to get the selected item
-					System.out.println(filterBox.getSelectedItem()); //<-- prints the selected item to prove it works
 					for(Component component: inventoryTextPane.getComponents()){
 						inventoryTextPane.remove(component);
 					}
-					for(Item item: search(filterBox.getSelectedItem().toString())){
+					for(Item item: search(filterBox.getSelectedItem().toString() + "," + searchBox.getText())){
 						JLabel tempLabel = new JLabel(item + "        ");
 						tempLabel.setAlignmentX(Component.LEFT_ALIGNMENT); 
 						inventoryTextPane.add(tempLabel);
@@ -312,8 +311,7 @@ public class LendingLibraryGUI extends JFrame{
         return search(to_search.split(","));
     }
     
-    private void initializeInventory(){
-    	
+    private void initializeInventory(){	
 	    for(Item item: DBs.getItems()){
 	    	if(item != null){
 				JLabel tempLabel = new JLabel(item.getName() + "        ");
