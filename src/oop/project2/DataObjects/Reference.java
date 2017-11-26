@@ -2,6 +2,9 @@ package oop.project2.DataObjects;
 
 //TODO: implement ReferenceCheckoutError
 
+import oop.project2.libevent.ReferenceCheckoutError;
+
+
 /**
  * @since 10/20/2017
  * @author jeremy
@@ -18,7 +21,7 @@ public class Reference extends Item{
     				 String name,
     				 String description,
     				 int quantity,
-    				 int id,
+    				 String id,
     				 int x,
     				 int y){
 
@@ -50,4 +53,9 @@ public class Reference extends Item{
     
     // Getters and Setters ***************************************************
     // none
+    
+    @Override
+    public void tryCheckOut() throws ReferenceCheckoutError{
+        throw new ReferenceCheckoutError(this.getID());
+    }
 }

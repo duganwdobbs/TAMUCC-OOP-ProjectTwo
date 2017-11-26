@@ -34,21 +34,20 @@ public class EventBuilder implements LibRunnable{
     @Override
     public void run() {
         while(true){
-            step();
+            try {
+                step();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(EventBuilder.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
     
-    private void step(){
+    private void step() throws InterruptedException{
         //Threshold for stream timeout.
         if(System.currentTimeMillis() - lastTime > 5000){
             destroyStream();
         }
-        InputEvent next = new InputEvent("Empty");
-        try {
-            next = Inp.getNext();
-        } catch (InterruptedException ex) {
-            Logger.getLogger(EventBuilder.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        InputEvent next = Inp.getNext();
         
         if(!"Empty".equals(next.getString())){
             addEvent(next);

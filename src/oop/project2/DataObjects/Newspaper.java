@@ -18,7 +18,7 @@ public class Newspaper extends Periodical{
 					 String name,
 					 String description,
 					 int quantity,
-					 int id,
+					 String id,
 					 int x,
 					 int y,
 					 String subject,

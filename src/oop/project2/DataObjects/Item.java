@@ -2,6 +2,10 @@ package oop.project2.DataObjects;
 
 //TODO: implement ItemNotInStockError
 
+import oop.project2.libevent.ReferenceCheckoutError;
+
+
+
 /**
  * @since 10/20/2017
  * @author Jeremy
@@ -29,7 +33,7 @@ public class Item{
     private String name;
     private String description;
     private int quantity;
-    private int id;
+    private String id;
     private int x;
     private int y;
     
@@ -41,7 +45,7 @@ public class Item{
                 String name,
                 String description,
                 int quantity,
-                int id,
+                String id,
                 int x,
                 int y){
         
@@ -63,7 +67,7 @@ public class Item{
         this.setName(newItem[1]);
         this.setDescription(newItem[2]);
         this.setQuantity(Integer.parseInt(newItem[3]));
-        this.setId(Integer.parseInt(newItem[4]));
+        this.setId(newItem[4]);
         this.setX(Integer.parseInt(newItem[5]));
         this.setY(Integer.parseInt(newItem[6]));
     }
@@ -174,14 +178,14 @@ public class Item{
 	/**
 	 * @return the id
 	 */
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -215,5 +219,15 @@ public class Item{
 
     void display() {
         //Nothing here.
+    }
+    
+    public String getID(){
+        return this.id;
+    }
+    
+    public void tryCheckOut() throws ReferenceCheckoutError{
+        if(this.quantity < 1){
+            throw new ReferenceCheckoutError(this.getID());
+        }
     }
 }

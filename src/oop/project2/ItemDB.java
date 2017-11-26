@@ -6,6 +6,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.FileWriter;
 import java.util.LinkedList;
+import oop.project2.libevent.ItemNotFoundError;
+import oop.project2.libevent.ItemStockError;
+import oop.project2.libevent.ReferenceCheckoutError;
 
 /**
  * ItemDB class is for reading/saving/managing ItemDB.dat 
@@ -95,10 +98,23 @@ public class ItemDB extends Database {
      public LinkedList<Item> ofCategory(String catSearch){
          LinkedList<Item> newList = new LinkedList<Item>();
          for(int x=0;x<super.size;x++){
-             if(data[x].getCategory().equals(catSearch)){ //YOU CANNOT USE == OPERATOR WITH STRINGS
+             if(data[x].getCategory().equals(catSearch)){ 
                  newList.add(data[x]);
              }
          }
          return newList;
      }
+     
+    public void exists(String id) throws ItemNotFoundError, ItemStockError, ReferenceCheckoutError{
+        boolean notFound = true;
+        for(Item itm : data){
+            if(itm.getID().equals(id)){
+                notFound = false;
+                itm.tryCheckOut();
+            }
+        }
+        if(notFound){
+            throw new ItemNotFoundError(id);
+        }
+    }
 }

@@ -18,7 +18,7 @@ public class Periodical extends Item{
     				  String name,
     				  String description,
     				  int quantity,
-    				  int id,
+    				  String id,
     				  int x,
     				  int y,
     				  String subject){

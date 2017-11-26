@@ -21,6 +21,10 @@ public class User {
         this.name = name;
     }
     
+    public String getID(){
+        return this.id;
+    }
+    
     private void setID(String id){
         this.id = id;
     }
@@ -29,7 +33,7 @@ public class User {
         this.checkedOut = checkedOut;
     }
     
-    private void checkOut() throws UserCheckoutError{
+    private void checkOut(String userID, String itemID) throws UserCheckoutError{
         if(checkedOut < MAX_CHECKOUT){
             checkedOut++;
         }
@@ -44,5 +48,14 @@ public class User {
     
     public String toCSVFormat(){
         return "" + name + "," + id + "," + checkedOut + "\n";
+    }
+    
+    public void tryCheckOut() throws UserCheckoutError{
+        if(checkedOut < MAX_CHECKOUT){
+            checkedOut++;
+        }
+        else{
+            throw new UserCheckoutError(this.id);
+        }
     }
 }

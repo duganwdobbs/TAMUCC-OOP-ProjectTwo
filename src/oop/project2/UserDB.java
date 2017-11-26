@@ -5,6 +5,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.FileWriter;
 import oop.project2.DataObjects.User;
+import oop.project2.libevent.UserCheckoutError;
+import oop.project2.libevent.UserNotFoundError;
 
 /**
  * This is our User Database.
@@ -72,10 +74,28 @@ public class UserDB extends Database{
         }
     }
     
+    public void exists(String id) throws UserNotFoundError, UserCheckoutError{
+        boolean notFound = true;
+        for(User usr: data){
+            if(usr.getID().equals(id)){
+                notFound = false;
+                usr.tryCheckOut();
+                break;
+            }
+        }
+        if(notFound){
+            throw new UserNotFoundError(id);
+        }
+    }
+    
     public static void main(String argsp[]){
         UserDB newdb = new UserDB();
         newdb.display();
         newdb.toFile();
+    }
+    
+    public void checkOut(String userID, String itemID){
+        
     }
      
 }
