@@ -136,7 +136,7 @@ public class LendingLibraryGUI extends JFrame{
 		lblFilter.setBounds(12, 16, 56, 16);
 		tab2.add(lblFilter);
 		
-		//this.initializeInventory();
+		this.initializeInventory();
 		searchBox = new JTextField();
 		//get the text as it is being typed so we can remove labels that do not contain the substring
 		searchBox.addKeyListener(new KeyAdapter() {
@@ -313,12 +313,16 @@ public class LendingLibraryGUI extends JFrame{
     }
     
     private void initializeInventory(){
-    	for(Item item: search(filterBox.getSelectedItem().toString())){
-			JLabel tempLabel = new JLabel(item + "        ");
-			tempLabel.setAlignmentX(Component.LEFT_ALIGNMENT); 
-			inventoryTextPane.add(tempLabel);
-			addLabelListener(tempLabel, item);
+    	
+	    for(Item item: DBs.getItems()){
+	    	if(item != null){
+				JLabel tempLabel = new JLabel(item.getName() + "        ");
+				tempLabel.setAlignmentX(Component.LEFT_ALIGNMENT); 
+				inventoryTextPane.add(tempLabel);
+				addLabelListener(tempLabel, item);
+	    	}
 		}
+  
     }
     private void addLabelListener(JLabel itemLabel, Item item){
     	itemLabel.addMouseListener(new MouseAdapter() {
