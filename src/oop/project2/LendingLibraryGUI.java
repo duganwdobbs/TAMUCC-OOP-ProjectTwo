@@ -299,6 +299,9 @@ public class LendingLibraryGUI extends JFrame{
         LinkedList<Item> found = new LinkedList<Item>();
         for(Item itm: DBs.getItems()){
             for(String to_s: to_search){
+                if("".equals(to_s)){
+                    break;
+                }
                 if(itm.toCSVFormat().trim().contains(to_s.trim())){
                     found.add(itm);
                     break;

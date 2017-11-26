@@ -93,7 +93,7 @@ public class DBThread implements LibRunnable{
     
     public void display(){
         items.display();
-//        users.display();
+        users.display();
     }
     
     
