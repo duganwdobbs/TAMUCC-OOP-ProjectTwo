@@ -79,9 +79,9 @@ public class Item{
      */
     public String toCSVFormat(){
         return 
-        	this.getCategory() + "," +
-            this.getName() + "," +
-            this.getDescription() + "," +
+            this.getCategory().replace(",","") + "," +
+            this.getName().replace(",","") + "," +
+            this.getDescription().replace(",","") + "," +
             this.getQuantity() + "," +
             this.getId() + "," +
             this.getX() + "," +
