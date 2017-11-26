@@ -73,7 +73,7 @@ public class ItemDB extends Database {
     
     public void display(){
         for(int x=0;x<size;x++){
-//            data[x].display();
+            data[x].display();
         }
     }
     

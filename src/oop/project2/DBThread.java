@@ -91,5 +91,10 @@ public class DBThread implements LibRunnable{
         return items.getItems();
     }
     
+    public void display(){
+        items.display();
+//        users.display();
+    }
+    
     
 }

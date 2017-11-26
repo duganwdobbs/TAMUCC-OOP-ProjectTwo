@@ -217,8 +217,8 @@ public class Item{
 		this.y = y;
 	}
 
-    void display() {
-        //Nothing here.
+    public void display() {
+        System.out.println(toCSVFormat());
     }
     
     public String getID(){

@@ -34,5 +34,7 @@ public class LendingLibraryImpl {
             for(Thread t: threads){
                 t.start();
             }
+            
+            DBs.display();
 	}
 }
