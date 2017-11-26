@@ -49,7 +49,7 @@ public class EventBuilder implements LibRunnable{
         }
         InputEvent next = Inp.getNext();
         
-        if(!"Empty".equals(next.getString())){
+        if(!"Empty".equals(next.getInfo())){
             addEvent(next);
         }
         

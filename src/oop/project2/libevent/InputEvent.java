@@ -48,9 +48,13 @@ public class InputEvent extends LibEvent{
     private void setTime(long nanoTime){
         this.nanoTime = nanoTime;
     }
-
-    public String getString() {
+    
+    public String getString(){
         return String.format("INPUT EVENT: %c, TIME: %d",this.data,this.nanoTime);
+    }
+
+    public String getInfo() {
+        return super.getInfo();
     }
 
     public char getChar() {
