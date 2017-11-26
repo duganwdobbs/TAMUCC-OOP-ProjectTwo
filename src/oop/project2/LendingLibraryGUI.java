@@ -124,11 +124,11 @@ public class LendingLibraryGUI extends JFrame{
 		
 		filterBox = new JComboBox<String>();
 		filterBox.addItem("Everything");
-		filterBox.addItem("Books");
-		filterBox.addItem("Movies");
-		filterBox.addItem("Periodicals");
+		filterBox.addItem("Book");
+		filterBox.addItem("Movie");
+		filterBox.addItem("Periodical");
 		filterBox.addItem("Audio");
-		filterBox.addItem("Reference Materials");
+		filterBox.addItem("Reference Material");
 		filterBox.setBounds(54, 14, 99, 22);
 		tab2.add(filterBox);
 		
@@ -262,12 +262,18 @@ public class LendingLibraryGUI extends JFrame{
 					for(Component component: inventoryTextPane.getComponents()){
 						inventoryTextPane.remove(component);
 					}
-					for(Item item: search(filterBox.getSelectedItem().toString() + "," + searchBox.getText())){
-						JLabel tempLabel = new JLabel(item + "        ");
-						tempLabel.setAlignmentX(Component.LEFT_ALIGNMENT); 
-						inventoryTextPane.add(tempLabel);
-						addLabelListener(tempLabel, item);
+					if(filterBox.getSelectedItem().toString().equals("Everything")){
+						initializeInventory();
 					}
+					else{
+						for(Item item: search(filterBox.getSelectedItem().toString() + "," + searchBox.getText())){
+							JLabel tempLabel = new JLabel(item.getName() + "        ");
+							tempLabel.setAlignmentX(Component.LEFT_ALIGNMENT); 
+							inventoryTextPane.add(tempLabel);
+							addLabelListener(tempLabel, item);
+						}
+					}
+					repaint();
 				}
 			}
 		});
