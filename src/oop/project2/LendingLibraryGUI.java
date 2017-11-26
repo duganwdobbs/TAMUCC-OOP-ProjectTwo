@@ -210,10 +210,12 @@ public class LendingLibraryGUI extends JFrame{
 		
 		tab4 = new JPanel();
 		tabbedPane.addTab("Map", null, tab4, null);
+		JPanel mapPanel = new JPanel();
+		tab4.add(mapPanel);
 		try {
-			mapA = DisplayImage(tab4, "mapa.png");
-			tab4.add(new JLabel("                                                "));
-			mapB = DisplayImage(tab4, "mapb.png");
+			mapA = DisplayImage(mapPanel, "mapa.png");
+			tab4.add(new JLabel("                                                                     "));
+			mapB = DisplayImage(mapPanel, "mapb.png");
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
