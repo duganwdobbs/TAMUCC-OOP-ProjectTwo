@@ -42,6 +42,10 @@ public class EventBuilder implements LibRunnable{
         }
     }
     
+    public Vector<LibEvent> getEvents(){
+    	return this.event_vector;
+    }
+    
     private void step() throws InterruptedException{
         //Threshold for stream timeout.
         if(System.currentTimeMillis() - lastTime > 5000){
