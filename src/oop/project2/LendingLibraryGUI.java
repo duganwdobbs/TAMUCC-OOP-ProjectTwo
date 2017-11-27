@@ -307,7 +307,7 @@ public class LendingLibraryGUI extends JFrame{
 		tabbedPane.addKeyListener(new KeyAdapter() { //<--use this for input listener
 			@Override
 			public void keyReleased(KeyEvent arg0) {
-				System.out.println("here");
+				Inp.PutEvent(arg0.getKeyChar());
 			}
 		});
 	}
