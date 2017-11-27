@@ -307,7 +307,12 @@ public class LendingLibraryGUI extends JFrame{
 		tabbedPane.addKeyListener(new KeyAdapter() { //<--use this for input listener
 			@Override
 			public void keyReleased(KeyEvent arg0) {
-				System.out.println("here");
+				if(tabbedPane.isFocusOwner()){
+					tabbedPane.setSelectedIndex(0);
+					Inp.PutEvent(arg0.getKeyChar());
+//					System.out.println(arg0.getKeyChar());
+				}
+				//scans barcode, search db for barcode, see if check in or checked out, then check for successful transaction
 			}
 		});
 	}
