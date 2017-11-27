@@ -65,4 +65,9 @@ public class InputEvent extends LibEvent{
     public String getSummary() {
         return String.format("INPUT EVENT: %c, TIME: %d",this.data,this.nanoTime);
     }
+    
+    @Override
+    public String toString() {
+    	return this.getSummary();
+    }
 }
