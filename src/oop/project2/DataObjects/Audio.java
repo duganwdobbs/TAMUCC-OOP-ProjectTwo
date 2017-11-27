@@ -90,7 +90,8 @@ public class Audio extends Item{
 	}
 	
 	@Override
-	public String getMaker() {
-		return this.getNarrator();
+	public String[] getMaker() {
+		String[] return_value = {"Narrator",this.getNarrator()};
+		return return_value;
 	}
 }

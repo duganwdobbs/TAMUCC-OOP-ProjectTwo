@@ -90,7 +90,8 @@ public class LibraryBook extends Item{
 	}
 	
 	@Override
-	public String getMaker() {
-		return this.getAuthor();
+	public String[] getMaker() {
+		String[] return_value = {"Author",this.getAuthor()};
+		return return_value;
 	}
 }

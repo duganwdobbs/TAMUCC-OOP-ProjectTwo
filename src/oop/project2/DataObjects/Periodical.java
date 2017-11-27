@@ -70,7 +70,8 @@ public class Periodical extends Item{
 	}
 	
 	@Override
-	public String getMaker() {
-		return this.getName();
+	public String[] getMaker() {
+		String[] return_value = {"Publisher",this.getName()};
+		return return_value;
 	}
 }

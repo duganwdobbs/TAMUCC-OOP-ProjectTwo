@@ -1,5 +1,5 @@
 package oop.project2;
-import oop.project2.DataObjects.Item;
+import oop.project2.DataObjects.*;
 
 import java.io.FileReader;
 import java.io.BufferedReader;
@@ -39,7 +39,27 @@ public class ItemDB extends Database {
             data = new Item[super.size];
             for (int currIndex = 0; currIndex < super.size && (str = in.readLine())!= null; currIndex++) {
                 String[] newItem=str.split(",");
-                data[currIndex] = new Item(newItem);              
+                if(newItem[0].equals("Audio")) {
+                	data[currIndex] = new Audio(newItem);
+                }
+                else if(newItem[0].equals("Book")) {
+                	data[currIndex] = new LibraryBook(newItem);
+                }
+                else if(newItem[0].equals("Magazine")) {
+                	data[currIndex] = new Magazine(newItem);
+                }
+                else if(newItem[0].equals("Movie")) {
+                	data[currIndex] = new Movie(newItem);
+                }
+                else if(newItem[0].equals("Newspaper")) {
+                	data[currIndex] = new Newspaper(newItem);
+                }
+                else if(newItem[0].equals("Periodical")) {
+                	data[currIndex] = new Periodical(newItem);
+                }
+                else if(newItem[0].equals("Reference")) {
+                	data[currIndex] = new Reference(newItem);
+                }
             }
             
             in.close(); 

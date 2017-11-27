@@ -40,7 +40,8 @@ public class Movie extends Item{
     public Movie(String[] newItem){
         super(newItem);
         this.setGenre(newItem[7]);
-        this.setRating(Integer.parseInt(newItem[8]));
+        this.setDirector(newItem[8]);
+        this.setRating(Integer.parseInt(newItem[9]));
     }
     
     /**
@@ -103,7 +104,8 @@ public class Movie extends Item{
 	}
 	
 	@Override
-	public String getMaker() {
-		return this.getDirector();
+	public String[] getMaker() {
+		String[] return_value = {"Director",this.getDirector()};
+		return return_value;
 	}
 }

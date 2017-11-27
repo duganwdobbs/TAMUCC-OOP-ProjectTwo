@@ -72,7 +72,8 @@ public class Reference extends Item{
     }
     
     @Override
-    public String getMaker() {
-    	return this.getPublisher();
+    public String[] getMaker() {
+		String[] return_value = {"Publisher",this.getPublisher()};
+		return return_value;
     }
 }

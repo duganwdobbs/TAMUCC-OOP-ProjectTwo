@@ -24,7 +24,7 @@ import oop.project2.libevent.ReferenceCheckoutError;
  * │   └──Newspaper (...String leaning)
  * └───Reference Material(...)
  */
-public class Item{
+public abstract class Item{
 
     public static int numVars = 7;
 
@@ -235,7 +235,5 @@ public class Item{
         this.quantity--;
     }
     
-    public String getMaker() {
-    	return "";
-    }
+    public abstract String[] getMaker();
 }
