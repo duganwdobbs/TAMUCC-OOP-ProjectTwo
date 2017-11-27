@@ -13,6 +13,9 @@ import java.util.LinkedList;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
 import oop.project2.DataObjects.Item;
 
 
@@ -76,13 +79,14 @@ public class LendingLibraryGUI extends JFrame{
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.setVisible(true);
 		this.setResizable(false);
+		
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		contentPane.add(tabbedPane, BorderLayout.NORTH);
 		
 		tab1 = new JPanel();
 		tabbedPane.addTab("Scanned Event", null/*insert icon here*/, tab1, null/*insert tooltip here*/);
 		tab1.setLayout(null);
-		
+	
 		itemDescriptBox = new JTextPane();
 		itemDescriptBox.setText("No items have been checked yet!");
 		itemDescriptBox.setEditable(false);
@@ -102,7 +106,7 @@ public class LendingLibraryGUI extends JFrame{
 		lblEventStatus = new JLabel("Event Status:");
 		lblEventStatus.setBounds(32, 261, 87, 16);
 		tab1.add(lblEventStatus);
-		
+		tab1.setFocusable(true);
 		JLabel exitSessionLabel = new JLabel("CLICK HERE TO EXIT SESSION");
 		exitSessionLabel.addMouseListener(new MouseAdapter() { //All this does is reset to the default GUI
 			@Override
@@ -295,6 +299,17 @@ public class LendingLibraryGUI extends JFrame{
 				repaint();
 			}
 		});
+		tabbedPane.addChangeListener(new ChangeListener() {
+	        public void stateChanged(ChangeEvent e) {
+	            tabbedPane.requestFocus();
+	        }
+	    });
+		tabbedPane.addKeyListener(new KeyAdapter() { //<--use this for input listener
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				System.out.println("here");
+			}
+		});
 	}
 	private void autoResizeComponents(JPanel panel) { //need to figure out a clever way to do this
 		for(Component components: panel.getComponents()){
@@ -355,9 +370,10 @@ public class LendingLibraryGUI extends JFrame{
 			//This mousePressed event should display the item details of the label that was clicked
 			public void mousePressed(MouseEvent arg0) {
 			//	System.out.println(((JLabel)tempLabel).getText()); // <--can use this for a switch case to fill in details
+				lblAuthor.setText(item.getMaker()[0] + ":");
 				tabbedPane.setSelectedIndex(2);					
 				titleText.setText(item.getName());
-				authorText.setText(item.getId());
+				authorText.setText(item.getMaker()[1]);
 				descriptionText.setText(item.getDescription());
 				stockTextArea.setText("" + item.getQuantity() + "");
 			}
