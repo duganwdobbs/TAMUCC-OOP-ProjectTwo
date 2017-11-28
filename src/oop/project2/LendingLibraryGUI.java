@@ -338,6 +338,7 @@ public class LendingLibraryGUI extends JFrame{
 							itemDescriptBox.setText(itemDescriptBox.getText() + item.getName() + "\n");
 						}
 					}
+                                        eventStatusBox.setText("");
 					for(LibEvent evt : Evt.getEvents()){
 						eventStatusBox.setText(eventStatusBox.getText() + evt.toString() + "\n");
 					}
