@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 6
 Book,Surreal Numbers,Shows how a young couple turned on to pure mathematics and found total happiness. This title is intended for those who might enjoy an engaging dialogue on abstract mathematical ideas and those who might wish to experience how new mathematics is created.,2,0000000000000,1152,386,Donald E. Knuth,4
 Book,The Gulag Archipelago,Drawing on his own experiences before during and after his eleven years of incarceration and exile: on evidence provided by more than 200 fellow prisoners and on Soviet archives Solzhenitsyn reveals with torrential narrative and dramatic power the entire apparatus of Soviet repression the state within the state that once ruled all-powerfully with its creation by Lenin in 1918.,3,0000000000001,260,540,Aleksandr Solzhenitsyn,5
@@ -5,3 +6,14 @@ Book,Brave New World,Aldous Huxley's profoundly important classic of world liter
 Audio,Hitchhiker's Guide to the Galaxy,Don't leave earth without this story of the end of the world and the happy-go-lucky days that follow. Written by Douglas Adams.,2,0000000000005,796,676,Stephen Fry,5
 Movie,Lincoln,An inspiring drama that focuses on Abraham Lincoln's final four months,2,0000000000010,796,676,Drama,Steven Spielberg,4
 Newspaper,The Wall Street Journal,The Wall Street Journal is an American business-focused English-language international daily newspaper based in New York City.,57,0000000000015,518,292,Business,Center
+=======
+8
+Book,Surreal Numbers,Shows how a young couple turned on to pure mathematics and found total happiness. This title is intended for those who might enjoy an engaging dialogue on abstract mathematical ideas and those who might wish to experience how new mathematics is created.,2,997145003993,1023,339,Donald E. Knuth,4
+Book,The Gulag Archipelago,Drawing on his own experiences before during and after his eleven years of incarceration and exile: on evidence provided by more than 200 fellow prisoners and on Soviet archives Solzhenitsyn reveals with torrential narrative and dramatic power the entire apparatus of Soviet repression the state within the state that once ruled all-powerfully with its creation by Lenin in 1918.,3,437145003993,25,50,Aleksandr Solzhenitsyn,5
+Book,Brave New World,Aldous Huxley's profoundly important classic of world literature: Brave New World is a searching vision of an unequal/ technologically-advanced future where humans are genetically bred; socially indoctrinated; and pharmaceutically anesthetized to passively uphold an authoritarian ruling order--all at the cost of our freedom full humanity and perhaps also our souls.,9,337145003993,25,25,Aldous Huxley,4
+Audio,Hitchhiker's Guide to the Galaxy,Don't leave earth without this story of the end of the world and the happy-go-lucky days that follow. Written by Douglas Adams.,2,137145003993,50,25,Stephen Fry,5
+Movie,Citizen Toxie The Toxic Avenger IV,The Toxic Avenger must defend his friends from his own evil alternate universe doppelgänger The Noxious Offender.,2,790357905034,10,10,Drama,Steven Spielberg,4
+Movie,Lincoln,An inspiring drama that focuses on Abraham Lincoln's final four months,2,337144433993,10,10,Drama,Steven Spielberg,4
+Newspaper,The Wall Street Journal,The Wall Street Journal is an American business-focused English-language international daily newspaper based in New York City.,57,337124403993,12,10,Business,Center
+Magazine,Scientific American,American popular science magazine. Many famous scientists including Albert Einstein have contributed articles in the past 170 years. It is the oldest continuously published monthly magazine in the United States,1,467145003993,10,12,Science,783
+>>>>>>> 9bdeb0c6e4b061330895ccb323aa78bd5050eaf5
