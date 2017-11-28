@@ -7,6 +7,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.LinkedList;
 
@@ -17,6 +18,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import oop.project2.DataObjects.Item;
+import oop.project2.libevent.LibEvent;
 
 
 public class LendingLibraryGUI extends JFrame{
@@ -32,7 +34,7 @@ public class LendingLibraryGUI extends JFrame{
 	private JPanel contentPane;
 	private JTextField searchBox;
 	private String[] authors;
-	private JTextPane itemDescriptBox;
+	private JTextArea itemDescriptBox;
 	private JTextPane eventStatusBox;
 	private JLabel checkedItemLbl;
 	private JComboBox<String> filterBox;
@@ -56,12 +58,23 @@ public class LendingLibraryGUI extends JFrame{
     private JPanel tab4;
     private JPanel tab5;
     private JScrollPane scrollPane_1;
-    private JLabel mapA;
-    private JLabel mapB;
+    private BufferedImage mapA;
+    private BufferedImage mapB;
+    private JLabel gif;
         //Associative Objects
-        private DBThread DBs; 
-        private InputBuilder Inp;
-        private EventBuilder Evt;
+    private DBThread DBs; 
+    private InputBuilder Inp;
+    private EventBuilder Evt;
+    private Item currentItem;
+    private JPanel mapPanel;
+    private Image imageHolder;
+    private JLayeredPane layerPane;
+    private Icon icon;
+    private BufferedImage palette;
+    private Graphics g;
+    
+    private JLabel test;
+    private String itemId;
 	/**
 	 * Create the frame.
 	 */
@@ -87,13 +100,14 @@ public class LendingLibraryGUI extends JFrame{
 		tabbedPane.addTab("Scanned Event", null/*insert icon here*/, tab1, null/*insert tooltip here*/);
 		tab1.setLayout(null);
 	
-		itemDescriptBox = new JTextPane();
+		itemDescriptBox = new JTextArea();
 		itemDescriptBox.setText("No items have been checked yet!");
 		itemDescriptBox.setEditable(false);
-		itemDescriptBox.setSize(400, 200);
+		itemDescriptBox.setWrapStyleWord(true);
+		itemDescriptBox.setSize(this.getWidth()/3, this.getHeight()/6);
 		tab1.add(itemDescriptBox);
-		itemDescriptBox.setLocation(32, 33);
 		
+		itemDescriptBox.setLocation(this.getWidth()/2 - itemDescriptBox.getWidth()/2, this.getHeight()/3 - itemDescriptBox.getHeight()/2);
 		checkedItemLbl = new JLabel("Checked Item Description:");
 		checkedItemLbl.setBounds(32, 4, 158, 16);
 		tab1.add(checkedItemLbl);
@@ -116,7 +130,7 @@ public class LendingLibraryGUI extends JFrame{
 		exitSessionLabel.setBounds(32, 382, 184, 16);
 		tab1.add(exitSessionLabel);
 		
-		inventoryTextPane = new JPanel(); //<-- change this to a JPanel instead to use BoxLayout
+		inventoryTextPane = new JPanel(); 
 		inventoryTextPane.setLayout(new BoxLayout(inventoryTextPane, BoxLayout.PAGE_AXIS)); //this stacks the components
 		tab2 = new JPanel();
 		tabbedPane.addTab("Inventory", null, tab2, null);
@@ -130,7 +144,9 @@ public class LendingLibraryGUI extends JFrame{
 		filterBox.addItem("Everything");
 		filterBox.addItem("Book");
 		filterBox.addItem("Movie");
-		filterBox.addItem("Periodical");
+		//filterBox.addItem("Periodical");
+		filterBox.addItem("Newspaper");
+		filterBox.addItem("Magazine");
 		filterBox.addItem("Audio");
 		filterBox.addItem("Reference Material");
 		filterBox.setBounds(54, 14, 99, 22);
@@ -170,7 +186,7 @@ public class LendingLibraryGUI extends JFrame{
 		descriptionText = new JTextArea();
 		descriptionText.setEditable(false);
 		descriptionText.setBounds(116, 169, 350, 175);
-		descriptionText.setLineWrap(true);
+		descriptionText.setWrapStyleWord(true);
 		tab3.add(descriptionText);
 		
 		lblTitle = new JLabel("Title:");
@@ -206,6 +222,17 @@ public class LendingLibraryGUI extends JFrame{
 		lblClickHereTo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				try {
+					g = palette.getGraphics();
+					imageHolder = readImage("dot.gif");
+					imageHolder = resizeImage(imageHolder, 30, 30);
+					g.drawImage(imageHolder, currentItem.getX(), currentItem.getY(), null);	//Jon needs help with this
+					mapPanel.repaint();
+				} catch (IOException e) {
+					e.printStackTrace();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 				tabbedPane.setSelectedIndex(3); //switches the tab to map
 			}
 		});
@@ -214,12 +241,19 @@ public class LendingLibraryGUI extends JFrame{
 		
 		tab4 = new JPanel();
 		tabbedPane.addTab("Map", null, tab4, null);
-		JPanel mapPanel = new JPanel();
+		mapPanel = new JPanel();
 		tab4.add(mapPanel);
 		try {
-			mapA = DisplayImage(mapPanel, "mapa.png");
+			mapA = readImage("mapa.png");
 			tab4.add(new JLabel("                                                                     "));
-			mapB = DisplayImage(mapPanel, "mapb.png");
+			mapB = readImage("mapb.png");
+			palette = new BufferedImage(mapA.getWidth() + mapB.getWidth() + 100, mapA.getHeight() + mapB.getHeight(), BufferedImage.TYPE_INT_ARGB);
+			g = palette.getGraphics();
+			ImageIcon icon = new ImageIcon(palette);
+			test = new JLabel(icon); //rename test to something different
+			mapPanel.add(test);
+			g.drawImage(mapA, 50, 50, null);
+			g.drawImage(mapB, mapA.getWidth() + 100, 50, null);
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -227,26 +261,18 @@ public class LendingLibraryGUI extends JFrame{
 			// TODO Auto-generated catch block
 			System.out.println(e1.getCause());
 		}
-		mapA.addMouseListener(new MouseAdapter() {
+		test.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				tabbedPane.setSelectedIndex(3); //switches the tab to map
 				
-				System.out.println(mapA.getX() + " , " + mapA.getY());
-				System.out.println(mapB.getX() + " , " + mapB.getY());
+				System.out.println(arg0.getX() + " , " + arg0.getY());
+				System.out.println(arg0.getX() + " , " + arg0.getY());
 			}
 		});
 		tab5 = new JPanel();
 		tabbedPane.addTab("Policies", null, tab5, null);	
 		
-		contentPane.addKeyListener(new KeyAdapter(){ //trying to use this for scanner input
-			@Override
-			public void keyPressed(KeyEvent e){
-				if(e.getKeyCode() == KeyEvent.VK_ENTER){
-					tabbedPane.setSelectedIndex(0); //switches the tab to scanned event
-				}
-			}
-		});
 //		this.autoResizeComponents(panel);
 //		this.autoResizeComponents(panel_1);
 //		this.autoResizeComponents(panel_2);
@@ -310,34 +336,46 @@ public class LendingLibraryGUI extends JFrame{
 				if(tabbedPane.isFocusOwner()){
 					tabbedPane.setSelectedIndex(0);
 					Inp.PutEvent(arg0.getKeyChar());
-//					System.out.println(arg0.getKeyChar());
+					itemId += arg0.getKeyChar();
+				}
+				if(arg0.getKeyCode() == arg0.VK_ENTER){
+//					for(Item item: getItems()){ <--I need to be able to get the items
+//						if(item.getID().equals(itemId)){
+//							itemDescriptBox.setText(itemDescriptBox.getText() + item.getName() + "\n");
+//						}
+//					}
+					for(LibEvent evt : Evt.getEvents()){
+						eventStatusBox.setText(eventStatusBox.getText() + evt.toString() + "\n");
+					}
 				}
 				//scans barcode, search db for barcode, see if check in or checked out, then check for successful transaction
 			}
 		});
 	}
-	private void autoResizeComponents(JPanel panel) { //need to figure out a clever way to do this
-		for(Component components: panel.getComponents()){
-			if(!(components instanceof JLabel) && !(components instanceof JComboBox)){
-				components.setSize(components.getWidth() * 2, components.getHeight() * 2);
-			}
-		}
-		
+	private void autoResizeComponents(Component component) { //need to figure out a clever way to do this
+		this.getWidth();
+		this.getHeight();
 	}
-	private JLabel DisplayImage(JPanel jp, String url) throws IOException, Exception {
-        try {
-            Image image=ImageIO.read(this.getClass().getResource(url));
-            ImageIcon imageicon=new ImageIcon(image);
-            JLabel label=new JLabel(imageicon);
-            jp.add(label);
-            return label;
-        } catch (IOException ex) {
-            throw new IOException();
-        } catch (Exception ex) {
-            throw new Exception();
-        }
-    }
-        
+	
+	private Image resizeImage(Image i, int width, int height){
+		return i.getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH);
+	}
+	private BufferedImage readImage(String url) throws IOException, Exception {
+		try{
+			BufferedImage image = ImageIO.read(this.getClass().getResource(url));
+			return image;
+		}catch(IOException e){
+			
+		}catch(Exception e){
+			
+		}
+		return null;
+	}
+	private JLabel getLabel(Image image){
+		ImageIcon imageIcon = new ImageIcon(image);
+		JLabel label = new JLabel(imageIcon);
+		return label;
+	}
     private LinkedList<Item> search(String[] to_search){
         LinkedList<Item> found = new LinkedList<Item>();
         for(Item itm: DBs.getItems()){
@@ -381,7 +419,19 @@ public class LendingLibraryGUI extends JFrame{
 				authorText.setText(item.getMaker()[1]);
 				descriptionText.setText(item.getDescription());
 				stockTextArea.setText("" + item.getQuantity() + "");
+				currentItem = item;
 			}
 		});
     }
+    public Item getCurrentItem(){
+    	return this.currentItem;
+    }
+//    @Override
+//    public void paint(Graphics g)
+//    {
+//    	g.drawImage(img, x, y, observer)
+//    }
+	public Image getImageHolder() {
+		return this.imageHolder;
+	}
 }
