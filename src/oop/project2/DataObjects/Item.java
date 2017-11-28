@@ -2,6 +2,7 @@ package oop.project2.DataObjects;
 
 //TODO: implement ItemNotInStockError
 
+import oop.project2.libevent.ItemStockError;
 import oop.project2.libevent.ReferenceCheckoutError;
 
 
@@ -36,7 +37,7 @@ public abstract class Item{
     private String id;
     private int x;
     private int y;
-    
+
     /**
      * By value constructor
      * @param attributes for initialization
@@ -48,7 +49,7 @@ public abstract class Item{
                 String id,
                 int x,
                 int y){
-        
+
     	this.setCategory(category);
         this.setName(name);
         this.setDescription(description);
@@ -57,7 +58,7 @@ public abstract class Item{
         this.setX(x);
         this.setY(y);
     }
-    
+
     /**
      * Dugan's array constructor
      * @param newItem String array of values from the time.
@@ -78,7 +79,7 @@ public abstract class Item{
      * @return This item in string CSV format
      */
     public String toCSVFormat(){
-        return 
+        return
             this.getCategory().replace(",","") + "," +
             this.getName().replace(",","") + "," +
             this.getDescription().replace(",","") + "," +
@@ -102,7 +103,7 @@ public abstract class Item{
             this.getX() + "," +
             this.getY();
     }
-    
+
     // Getters and Setters ***************************************************
 
 	/**
@@ -220,20 +221,27 @@ public abstract class Item{
     public void display() {
         System.out.println(toCSVFormat());
     }
-    
+
     public String getID(){
         return this.id;
     }
-    
-    public void tryCheckOut() throws ReferenceCheckoutError{
-        if(this.quantity < 1){
-            throw new ReferenceCheckoutError(this.getID());
-        }
+
+    public void tryCheckOut() throws ItemStockError, ReferenceCheckoutError{
+          if(this.getCategory().equals("Reference")){
+               throw new ReferenceCheckoutError(this.getID());
+          }
+          if(this.quantity < 1){
+               throw new ItemStockError(this.getID());
+          }
     }
-    
+
     public void checkOut(){
         this.quantity--;
     }
-    
+
     public abstract String[] getMaker();
+
+    public void checkIn() {
+        this.setQuantity(this.getQuantity() + 1);
+    }
 }

@@ -97,5 +97,14 @@ public class UserDB extends Database{
             }
         }
     }
+
+    public void checkIn(String user_id, String item_id){
+        for(User usr: data){
+            if(usr.getID().equals(user_id)){
+                usr.checkIn(item_id);
+                break;
+            }
+        }
+    }
      
 }

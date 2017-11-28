@@ -40,6 +40,10 @@ public class User {
     }
     
     public void checkOut(String itemID){
+        checkedBookIDs.add(itemID);
+    }
+    
+    public void checkIn(String itemID){
         checkedBookIDs.remove(itemID);
     }
     

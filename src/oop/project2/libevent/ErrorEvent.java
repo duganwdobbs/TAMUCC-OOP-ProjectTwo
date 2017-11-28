@@ -9,6 +9,7 @@ public class ErrorEvent extends LibEvent{
 
     public ErrorEvent(LibError err){
         super(1,err.getSummary());
+        this.error = err;
     }
     
     public int getErrorType(){
@@ -21,6 +22,11 @@ public class ErrorEvent extends LibEvent{
 
     @Override
     public String getSummary() {
+        return error.getSummary();
+    }
+
+    @Override
+    public String toString() {
         return error.getSummary();
     }
 }

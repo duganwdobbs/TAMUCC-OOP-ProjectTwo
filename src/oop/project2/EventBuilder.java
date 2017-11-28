@@ -16,7 +16,7 @@ public class EventBuilder implements LibRunnable{
     private char[] input_stream;
     private int input_size;
     
-    private final int MAX_INPUT_SIZE = 50;
+    private final int MAX_INPUT_SIZE = 24;
     
     private long lastTime;
     
@@ -27,6 +27,9 @@ public class EventBuilder implements LibRunnable{
     public EventBuilder(){
         parse_queue = new ArrayBlockingQueue<ParseEvent>(20);
         event_vector = new Vector<LibEvent>(5); 
+        for(LibEvent vec: event_vector){
+            vec = new ResultEvent("Empty");
+        }
         input_stream = new char[MAX_INPUT_SIZE];
         input_size = 0;
     }
@@ -49,21 +52,27 @@ public class EventBuilder implements LibRunnable{
     private void step() throws InterruptedException{
         //Threshold for stream timeout.
         if(System.currentTimeMillis() - lastTime > 5000){
-            destroyStream();
+            try {
+                destroyStream();
+            } catch (InvalidStreamError ex) {
+                addVecEvent(new ErrorEvent(ex));
+            }
         }
         InputEvent next = Inp.getNext();
         
         if(!"Empty".equals(next.getInfo())){
             addEvent(next);
+        
+            if(checkFormat()){
+                String stream = parseStream();
+                ParseEvent currentStream = new ParseEvent(stream,MAX_INPUT_SIZE);
+                parse_queue.add(currentStream);
+            }
         }
         
         ResultEvent db_next = DBs.getNext();
         if(!"Empty".equals(db_next.getInfo())){
             addVecEvent(db_next);
-        }
-        
-        if(checkFormat()){
-            parse_queue.add(new ParseEvent(parseStream()));
         }
     }
     
@@ -78,34 +87,50 @@ public class EventBuilder implements LibRunnable{
             // TODO: Pattern match Book and User
             mod_str.insert(12,',');
             return_value = mod_str.toString();
-            destroyStream();
+            try {
+                destroyStream();
+            } catch (InvalidStreamError ex) {
+                addVecEvent(new ErrorEvent(ex));
+            }
         }
         return return_value;
     }
     
     private boolean checkFormat(){
         //return if current stream is proper format
-        return this.input_size == 26;
+        return this.input_size == 24;
     }
     
-    private void addVecEvent(ResultEvent db_next){
-        for(int x=0;x<4;x++){
-            event_vector.set(x+1,event_vector.get(x));
+    private void addVecEvent(LibEvent db_next){
+        if(event_vector.size() == event_vector.capacity()){
+            event_vector.remove(0);
         }
-        event_vector.set(4, db_next);
+        event_vector.add(db_next);
+        for(LibEvent evt: event_vector){
+            System.out.println(evt.toString());
+        }
+        System.out.println();
     }
     
     private void addEvent(InputEvent next){
-        input_stream[input_size] = next.getChar();
-        input_size++;
+        if(Character.isDigit(next.getChar())){
+            input_stream[input_size] = next.getChar();
+            input_size++;
+        }
     }
     
-    private void destroyStream(){
-        for(char e : input_stream){
-            e = ' ';
+    private void destroyStream() throws InvalidStreamError{
+        if(this.input_size > 0){
+            for(char e : input_stream){
+                e = ' ';
+            }
+            if(this.input_size != 24){
+                input_size = 0;
+                throw new InvalidStreamError();
+            }
+            input_size = 0;
         }
         lastTime = System.currentTimeMillis();
-        input_size = 0;
     }
     
     public ParseEvent getNext() throws InterruptedException{

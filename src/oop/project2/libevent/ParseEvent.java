@@ -25,6 +25,12 @@ public class ParseEvent extends LibEvent {
         this.setItem(split[1]);
     }
     
+    @Override
+    public String toString(){
+        String ret = "USER: " + userID + " ITEM: " + itemID;
+        return ret;
+    }
+    
     private void setUser(String userID){
         this.userID = userID;
     }

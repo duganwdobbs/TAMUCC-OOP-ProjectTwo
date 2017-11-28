@@ -125,12 +125,15 @@ public class ItemDB extends Database {
          return newList;
      }
      
-    public void exists(String id) throws ItemNotFoundError, ItemStockError, ReferenceCheckoutError{
+    public void exists(String id, boolean checkingout) 
+            throws ItemNotFoundError, ItemStockError, ReferenceCheckoutError{
         boolean notFound = true;
         for(Item itm : data){
             if(itm.getID().equals(id)){
                 notFound = false;
-                itm.tryCheckOut();
+                if(checkingout){
+                    itm.tryCheckOut();
+                }
             }
         }
         if(notFound){
@@ -142,6 +145,14 @@ public class ItemDB extends Database {
         for(Item itm : data){
             if(itm.getID().equals(itemID)){
                 itm.checkOut();
+            }
+        }
+    }
+    
+    public void checkIn(String userID, String itemID){
+        for(Item itm : data){
+            if(itm.getID().equals(itemID)){
+                itm.checkIn();
             }
         }
     }

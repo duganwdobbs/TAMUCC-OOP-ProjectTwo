@@ -7,12 +7,17 @@ package oop.project2.libevent;
 public class InvalidStreamError extends LibError{
 
     public InvalidStreamError() {
-        super(5, "");
+        super(5, "Invalid Stream Error");
     }
 
     @Override
     public String getSummary() {
-        return "Invalid stream error!";
+        return "Invalid stream error.";
+    }
+
+    @Override
+    public String toString() {
+        return "Invalid stream error.";
     }
     
 }
