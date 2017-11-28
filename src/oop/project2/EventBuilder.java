@@ -93,7 +93,7 @@ public class EventBuilder implements LibRunnable{
         return this.input_size == 24;
     }
     
-    private void addVecEvent(ResultEvent db_next){
+    private void addVecEvent(LibEvent db_next){
         if(event_vector.size() == event_vector.capacity()){
             event_vector.remove(0);
         }
@@ -111,11 +111,13 @@ public class EventBuilder implements LibRunnable{
     }
     
     private void destroyStream(){
-        for(char e : input_stream){
-            e = ' ';
+        if(this.input_size > 0){
+            for(char e : input_stream){
+                e = ' ';
+            }
+            input_size = 0;
         }
         lastTime = System.currentTimeMillis();
-        input_size = 0;
     }
     
     public ParseEvent getNext() throws InterruptedException{

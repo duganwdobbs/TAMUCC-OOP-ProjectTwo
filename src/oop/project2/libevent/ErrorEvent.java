@@ -23,4 +23,9 @@ public class ErrorEvent extends LibEvent{
     public String getSummary() {
         return error.getSummary();
     }
+
+    @Override
+    public String toString() {
+        return error.getSummary();
+    }
 }

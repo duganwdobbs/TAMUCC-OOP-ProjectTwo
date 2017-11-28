@@ -12,7 +12,7 @@ public class InvalidStreamError extends LibError{
 
     @Override
     public String getSummary() {
-        return "Invalid stream error!";
+        return "Invalid stream error.";
     }
     
 }
