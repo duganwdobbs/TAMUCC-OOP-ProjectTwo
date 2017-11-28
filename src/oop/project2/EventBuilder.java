@@ -16,7 +16,7 @@ public class EventBuilder implements LibRunnable{
     private char[] input_stream;
     private int input_size;
     
-    private final int MAX_INPUT_SIZE = 50;
+    private final int MAX_INPUT_SIZE = 24;
     
     private long lastTime;
     
@@ -27,8 +27,11 @@ public class EventBuilder implements LibRunnable{
     public EventBuilder(){
         parse_queue = new ArrayBlockingQueue<ParseEvent>(20);
         event_vector = new Vector<LibEvent>(5); 
+        for(LibEvent vec: event_vector){
+            vec = new ResultEvent("Empty");
+        }
         input_stream = new char[MAX_INPUT_SIZE];
-        input_size = 0;
+        input_size = 1;
     }
 
     @Override
@@ -55,15 +58,17 @@ public class EventBuilder implements LibRunnable{
         
         if(!"Empty".equals(next.getInfo())){
             addEvent(next);
+        
+            if(checkFormat()){
+                String stream = parseStream();
+                ParseEvent currentStream = new ParseEvent(stream,MAX_INPUT_SIZE);
+                parse_queue.add(currentStream);
+            }
         }
         
         ResultEvent db_next = DBs.getNext();
         if(!"Empty".equals(db_next.getInfo())){
             addVecEvent(db_next);
-        }
-        
-        if(checkFormat()){
-            parse_queue.add(new ParseEvent(parseStream()));
         }
     }
     
@@ -85,19 +90,24 @@ public class EventBuilder implements LibRunnable{
     
     private boolean checkFormat(){
         //return if current stream is proper format
-        return this.input_size == 26;
+        return this.input_size == 24;
     }
     
     private void addVecEvent(ResultEvent db_next){
-        for(int x=0;x<4;x++){
-            event_vector.set(x+1,event_vector.get(x));
+        if(event_vector.size() == event_vector.capacity()){
+            event_vector.remove(0);
         }
-        event_vector.set(4, db_next);
+        event_vector.add(db_next);
+        for(LibEvent evt: event_vector){
+            System.out.println(evt.toString());
+        }
     }
     
     private void addEvent(InputEvent next){
-        input_stream[input_size] = next.getChar();
-        input_size++;
+        if(Character.isDigit(next.getChar())){
+            input_stream[input_size] = next.getChar();
+            input_size++;
+        }
     }
     
     private void destroyStream(){

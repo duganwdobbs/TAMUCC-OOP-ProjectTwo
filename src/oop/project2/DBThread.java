@@ -63,22 +63,33 @@ public class DBThread implements LibRunnable{
     private void checkout(ParseEvent next_event){
         try{
             //Tests if we're going to check out, and if we can check out.
-            if(users.exists(next_event.getUser(),next_event.getItem())){
+            if(!users.exists(next_event.getUser(),next_event.getItem())){
+                items.exists(next_event.getItem(),false);
+                //Checkin
+                db_queue.offer(checkin(next_event.getUser(),next_event.getItem()));
+            }
+            else{
                 //Tests a checkout on the item.
-                items.exists(next_event.getItem());
+                items.exists(next_event.getItem(),true);
+                //Checkout
+                db_queue.offer(checkout(next_event.getUser(),next_event.getItem()));
             }
             
-            //Checkout
-            db_queue.offer(checkout(next_event.getUser(),next_event.getItem()));
         } catch (LibError e){
             db_queue.offer(new ResultEvent(e, next_event));
         }
     }
     
+    private ResultEvent checkin(String userID, String itemID){
+        items.checkIn(userID, itemID);
+        users.checkIn(userID, itemID);
+        return new ResultEvent("Checkin",userID,itemID);
+    }
+    
     private ResultEvent checkout(String userID, String itemID){
         items.checkOut(userID, itemID);
         users.checkOut(userID, itemID);
-        return new ResultEvent("Success",userID,itemID);
+        return new ResultEvent("Checkout",userID,itemID);
     }
 
     @Override

@@ -20,11 +20,11 @@ public abstract class LibEvent implements LibParsable{
         this.setInfo(info);
     }
     
-    private void setType(int type){
+    protected void setType(int type){
         this.type = (type >= 0 && type <= 7) ? type : -1;
     }
     
-    private void setInfo(String info){
+    protected void setInfo(String info){
         this.info = info;
     }
     
