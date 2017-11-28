@@ -9,6 +9,7 @@ public class ErrorEvent extends LibEvent{
 
     public ErrorEvent(LibError err){
         super(1,err.getSummary());
+        this.error = err;
     }
     
     public int getErrorType(){

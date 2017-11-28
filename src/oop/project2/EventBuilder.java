@@ -31,7 +31,7 @@ public class EventBuilder implements LibRunnable{
             vec = new ResultEvent("Empty");
         }
         input_stream = new char[MAX_INPUT_SIZE];
-        input_size = 1;
+        input_size = 0;
     }
 
     @Override
@@ -52,7 +52,11 @@ public class EventBuilder implements LibRunnable{
     private void step() throws InterruptedException{
         //Threshold for stream timeout.
         if(System.currentTimeMillis() - lastTime > 5000){
-            destroyStream();
+            try {
+                destroyStream();
+            } catch (InvalidStreamError ex) {
+                addVecEvent(new ErrorEvent(ex));
+            }
         }
         InputEvent next = Inp.getNext();
         
@@ -83,7 +87,11 @@ public class EventBuilder implements LibRunnable{
             // TODO: Pattern match Book and User
             mod_str.insert(12,',');
             return_value = mod_str.toString();
-            destroyStream();
+            try {
+                destroyStream();
+            } catch (InvalidStreamError ex) {
+                addVecEvent(new ErrorEvent(ex));
+            }
         }
         return return_value;
     }
@@ -101,6 +109,7 @@ public class EventBuilder implements LibRunnable{
         for(LibEvent evt: event_vector){
             System.out.println(evt.toString());
         }
+        System.out.println();
     }
     
     private void addEvent(InputEvent next){
@@ -110,10 +119,14 @@ public class EventBuilder implements LibRunnable{
         }
     }
     
-    private void destroyStream(){
+    private void destroyStream() throws InvalidStreamError{
         if(this.input_size > 0){
             for(char e : input_stream){
                 e = ' ';
+            }
+            if(this.input_size != 24){
+                input_size = 0;
+                throw new InvalidStreamError();
             }
             input_size = 0;
         }
