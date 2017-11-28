@@ -107,7 +107,8 @@ public class LendingLibraryGUI extends JFrame{
 		itemDescriptBox.setSize(this.getWidth()/3, this.getHeight()/6);
 		tab1.add(itemDescriptBox);
 		
-		itemDescriptBox.setLocation(this.getWidth()/2 - itemDescriptBox.getWidth()/2, this.getHeight()/3 - itemDescriptBox.getHeight()/2);
+		itemDescriptBox.setBounds(32, 45, 400, 200);
+		//itemDescriptBox.setLocation(this.getWidth()/2 - itemDescriptBox.getWidth()/2, this.getHeight()/3 - itemDescriptBox.getHeight()/2);
 		checkedItemLbl = new JLabel("Checked Item Description:");
 		checkedItemLbl.setBounds(32, 4, 158, 16);
 		tab1.add(checkedItemLbl);
