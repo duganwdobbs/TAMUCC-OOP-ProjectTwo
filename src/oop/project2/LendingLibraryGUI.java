@@ -67,13 +67,13 @@ public class LendingLibraryGUI extends JFrame{
     private EventBuilder Evt;
     private Item currentItem;
     private JPanel mapPanel;
-    private Image imageHolder;
+    private Image dotImage;
     private JLayeredPane layerPane;
     private Icon icon;
     private BufferedImage palette;
     private Graphics g;
     
-    private JLabel test;
+    private Pallette test;
     private String itemId;
 	/**
 	 * Create the frame.
@@ -92,7 +92,7 @@ public class LendingLibraryGUI extends JFrame{
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.setVisible(true);
 		this.setResizable(false);
-		
+	
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		contentPane.add(tabbedPane, BorderLayout.NORTH);
 		
@@ -223,17 +223,9 @@ public class LendingLibraryGUI extends JFrame{
 		lblClickHereTo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				try {
-					g = palette.getGraphics();
-					imageHolder = readImage("dot.gif");
-					imageHolder = resizeImage(imageHolder, 30, 30);
-					g.drawImage(imageHolder, currentItem.getX(), currentItem.getY(), null);	//Jon needs help with this
-					mapPanel.repaint();
-				} catch (IOException e) {
-					e.printStackTrace();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+			//	g = palette.getGraphics(); //leave this here just in case the Graphic g gets changed
+				test.setDotProperties(dotImage, currentItem, g);
+				test.repaint();
 				tabbedPane.setSelectedIndex(3); //switches the tab to map
 			}
 		});
@@ -246,12 +238,13 @@ public class LendingLibraryGUI extends JFrame{
 		tab4.add(mapPanel);
 		try {
 			mapA = readImage("mapa.png");
-			tab4.add(new JLabel("                                                                     "));
 			mapB = readImage("mapb.png");
+			dotImage = readImage("dot.gif");
+			dotImage = resizeImage(dotImage, 30, 30);
 			palette = new BufferedImage(mapA.getWidth() + mapB.getWidth() + 100, mapA.getHeight() + mapB.getHeight(), BufferedImage.TYPE_INT_ARGB);
 			g = palette.getGraphics();
 			ImageIcon icon = new ImageIcon(palette);
-			test = new JLabel(icon); //rename test to something different
+			test = new Pallette(icon); //rename test to something different
 			mapPanel.add(test);
 			g.drawImage(mapA, 50, 50, null);
 			g.drawImage(mapB, mapA.getWidth() + 100, 50, null);
@@ -427,12 +420,4 @@ public class LendingLibraryGUI extends JFrame{
     public Item getCurrentItem(){
     	return this.currentItem;
     }
-//    @Override
-//    public void paint(Graphics g)
-//    {
-//    	g.drawImage(img, x, y, observer)
-//    }
-	public Image getImageHolder() {
-		return this.imageHolder;
-	}
 }
