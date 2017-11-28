@@ -339,11 +339,11 @@ public class LendingLibraryGUI extends JFrame{
 					itemId += arg0.getKeyChar();
 				}
 				if(arg0.getKeyCode() == arg0.VK_ENTER){
-//					for(Item item: getItems()){ <--I need to be able to get the items
-//						if(item.getID().equals(itemId)){
-//							itemDescriptBox.setText(itemDescriptBox.getText() + item.getName() + "\n");
-//						}
-//					}
+					for(Item item: DBs.getItems()){ 
+						if(item.getID().equals(itemId)){
+							itemDescriptBox.setText(itemDescriptBox.getText() + item.getName() + "\n");
+						}
+					}
 					for(LibEvent evt : Evt.getEvents()){
 						eventStatusBox.setText(eventStatusBox.getText() + evt.toString() + "\n");
 					}
