@@ -37,7 +37,7 @@ public class Reference extends Item{
      */
     public Reference(String[] newItem){
         super(newItem);
-        publisher = newItem[7];
+        publisher = "Not implemented yet";
     }
     
     /**

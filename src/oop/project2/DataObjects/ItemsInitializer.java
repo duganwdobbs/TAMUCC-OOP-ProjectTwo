@@ -177,14 +177,14 @@ public class ItemsInitializer {
 
         // Reference s *******************************************************
         //Almanacs, Atlases, Bibliographies, Biographical Resources, Dictionaries, Encyclopedias - General and by Subject, Handbooks, Indexes, Statistics, and Citation Guides
-        inventory[15] = new Reference("Reference",
+        inventory[9] = new Reference("Reference",
                           				 "Encyclopedia Britannica",
                           				 "general knowledge English-language encyclopaedia",
                           				 2,
                           				 "0000000000025",
                           				 64,
                           				 70,
-                          				 "Encyclopedia Britanica Inc.")
+                          				 "Encyclopedia Britanica Inc.");
 
         System.out.printf(inventory[0].toCSVFormat());
 
@@ -195,10 +195,11 @@ public class ItemsInitializer {
 
     public static void toFile(){
         try {
+            int c_size = 15;
             FileWriter out = new FileWriter("./src/ItemDB.dat");
-            out.write(Integer.toString(30));
+            out.write(Integer.toString(c_size));
             out.write("\n");
-            for(int x=0;x<9;x++)
+            for(int x=0;x<c_size;x++)
             {
                 out.write(inventory[x].toCSVFormat());
                 out.write("\n");
