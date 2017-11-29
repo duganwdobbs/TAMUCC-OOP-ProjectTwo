@@ -6,30 +6,27 @@ import java.io.IOException;
 /**
  * @since 10/20/2017
  * @author Jeremy
- * 
- * 5 of each category
- * 
  * Item (String category,
- * │     String name,
- * │     String description,
- * │     int quantity,
- * │     int id,
- * │     int x,
- * │     int y)
- * ├───LibraryBook (...String author, int rating)
- * ├───Movie (...String genre, int rating)
- * ├───Audio (...String narrator, int rating)
- * ├───Periodical (...String subject)
- * │   ├──Magazine (...int issue)
- * │   └──Newspaper (...String leaning)
- * └───Reference Material(...)
+ *      String name,
+ *      String description,
+ *      int quantity,
+ *      int id,
+ *      int x,
+ *      int y)
+ *     LibraryBook (...String author, int rating)
+ *     Movie (...String genre, String director, int rating)
+ *     Audio (...String narrator, int rating)
+ *     Periodical (...String subject)
+ *         Magazine (...int issue)
+ *         Newspaper (...String leaning)
+ *     Reference Material(...)
  */
 public class ItemsInitializer {
     public static Item[] inventory;
 
     public static void main(String[] args){
         inventory = new Item[30];
-        
+
         // LibraryBook s *****************************************************
         inventory[0] = new LibraryBook("Book",
                                 "Surreal Numbers",
@@ -67,9 +64,9 @@ public class ItemsInitializer {
                                 676,
                                 "Aldous Huxley",
                                 4);
-        
+
         // Audio s ***********************************************************
-        
+
         inventory[3] = new Audio("Audio",
                                 "Hitchhiker's Guide to the Galaxy",
                                 "Don't leave earth without this story of the end of the world and the happy-go-lucky days that follow. Written by Douglas Adams.",
@@ -80,8 +77,18 @@ public class ItemsInitializer {
                                 "Stephen Fry",
                                 5);
 
+        inventory[10] = new Audio("Audio",
+                                "How to Make Friends & Influence People",
+                        				"For more than sixty years the rock-solid: time-tested advice by Dale Carnegie in this book has carried thousands of now famous people up the ladder of success in their business and personal lives.",
+                        				5,
+                        				"0000000000006",
+                        				40,
+                                35,
+                                "Andrew MacMillan",
+                                5);
+
         // Movie s ***********************************************************
-        
+
         inventory[4] = new Movie("Movie",
                                 "Lincoln",
                                 "An inspiring drama that focuses on Abraham Lincoln's final four months",
@@ -102,10 +109,20 @@ public class ItemsInitializer {
                                 "Drama",
                                 "Lloyd Kauffman",
                                 4);
-        
+        inventory[11] = new Movie("Movie",
+                                "March of the Penguins",
+                        				"A documentary about a colony of emperor penguins. Narrated by Morgan Freeman.",
+                        				2,
+                        				"0000000000011",
+                        				55,
+                                95,
+                                "Documentary",
+                                "Luc Jaquet",
+                                4);
+
         // Newspaper s *******************************************************
         //https://www.allsides.com/unbiased-balanced-news
-        
+
         inventory[6] = new Newspaper("Newspaper",
                                     "The Wall Street Journal",
                                     "The Wall Street Journal is an American business-focused, English-language international daily newspaper based in New York City.",
@@ -115,9 +132,29 @@ public class ItemsInitializer {
                                     292,
                                     "Business",
                                     "Center");
-        
+
+        inventory[12] = new Newspaper("Newspaper",
+                                    "Los Angeles Times",
+                            				"The Los Angeles Times is a daily newspaper published in Los Angeles California.",
+                            				20,
+                            				"0000000000016",
+                            				12,
+                                    15,
+                                    "News",
+                                    "Left");
+
+        inventory[13] = new Newspaper("Newspaper",
+                                    "Washington Times",
+                            				"The Washington Times founded in 1982 with headquarters in Washington D.C. is a daily newspaper.",
+                            				13,
+                            				"0000000000017",
+                            				12,
+                                    18,
+                                    "American Politics",
+                                    "Right");
+
         // Magazine s ********************************************************
-        
+
         inventory[7] = new Magazine("Magazine",
                                     "Scientific American",
                                     "American popular science magazine. Many famous scientists, including Albert Einstein, have contributed articles in the past 170 years. It is the oldest continuously published monthly magazine in the United States",
@@ -127,18 +164,35 @@ public class ItemsInitializer {
                                     292,
                                     "Science",
                                     783);
-        
+
+        inventory[14] = new Magazine("Magazine",
+                                    "National Geographic",
+                            				"It primarily contains articles about science geography history and world culture. The magazine is known for its thick square-bound glossy format with a yellow rectangular border and its extensive use of dramatic photographs.",
+                            				1,
+                            				"0000000000021",
+                            				10,
+                                    82,
+                                    "Nature",
+                                    783);
+
         // Reference s *******************************************************
         //Almanacs, Atlases, Bibliographies, Biographical Resources, Dictionaries, Encyclopedias - General and by Subject, Handbooks, Indexes, Statistics, and Citation Guides
-        
-        
+        inventory[15] = new Reference("Reference",
+                          				 "Encyclopedia Britannica",
+                          				 "general knowledge English-language encyclopaedia",
+                          				 2,
+                          				 "0000000000025",
+                          				 64,
+                          				 70,
+                          				 "Encyclopedia Britanica Inc.")
+
         System.out.printf(inventory[0].toCSVFormat());
-        
+
         toFile();
-     
+
 
     }
-    
+
     public static void toFile(){
         try {
             FileWriter out = new FileWriter("./src/ItemDB.dat");
