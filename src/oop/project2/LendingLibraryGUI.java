@@ -35,7 +35,9 @@ public class LendingLibraryGUI extends JFrame{
 	private JTextField searchBox;
 	private String[] authors;
 	private JTextArea itemDescriptBox;
-	private JTextPane eventStatusBox;
+	private JScrollPane itemDescriptPane;
+	private JScrollPane eventScroll;
+	private JTextArea eventStatusBox;
 	private JLabel checkedItemLbl;
 	private JComboBox<String> filterBox;
 	private JLabel lblFilter;
@@ -94,6 +96,7 @@ public class LendingLibraryGUI extends JFrame{
 		this.setResizable(false);
 	
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.requestFocus();
 		contentPane.add(tabbedPane, BorderLayout.NORTH);
 		
 		tab1 = new JPanel();
@@ -104,31 +107,46 @@ public class LendingLibraryGUI extends JFrame{
 		itemDescriptBox.setText("No items have been checked yet!");
 		itemDescriptBox.setEditable(false);
 		itemDescriptBox.setWrapStyleWord(true);
-		itemDescriptBox.setSize(this.getWidth()/3, this.getHeight()/6);
-		tab1.add(itemDescriptBox);
-		
+		//itemDescriptBox.setSize(this.getWidth()/3, this.getHeight()/6);
+		itemDescriptPane = new JScrollPane(itemDescriptBox);
+		itemDescriptPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		itemDescriptBox.setBounds(32, 45, 400, 200);
-		//itemDescriptBox.setLocation(this.getWidth()/2 - itemDescriptBox.getWidth()/2, this.getHeight()/3 - itemDescriptBox.getHeight()/2);
+		itemDescriptBox.setLocation(this.getWidth()/2 - itemDescriptBox.getWidth()/2, this.getHeight()/7 - itemDescriptBox.getHeight()/2+10);
+		itemDescriptPane.setBounds(itemDescriptBox.getBounds());
+		tab1.add(itemDescriptPane);
+		
 		checkedItemLbl = new JLabel("Checked Item Description:");
-		checkedItemLbl.setBounds(32, 4, 158, 16);
+		checkedItemLbl.setBounds(32, 4, itemDescriptBox.getWidth(), 16);
+		checkedItemLbl.setLocation(this.getWidth()/2 - itemDescriptBox.getWidth()/2, this.getHeight()/8-itemDescriptBox.getHeight()/2-20);
+		checkedItemLbl.setFont(new Font(checkedItemLbl.getName(), Font.BOLD, 14));
 		tab1.add(checkedItemLbl);
 		
-		eventStatusBox = new JTextPane();
+		eventStatusBox = new JTextArea();
 		eventStatusBox.setEditable(false);
-		eventStatusBox.setBounds(32, 290, 400, 68);
-		tab1.add(eventStatusBox);
+		eventStatusBox.setBounds(32, 290, 400, 200);
+		eventStatusBox.setLocation(this.getWidth()/2 - itemDescriptBox.getWidth()/2, this.getHeight()/2-eventStatusBox.getHeight()/2-30);
+		eventScroll = new JScrollPane(eventStatusBox);
+		eventScroll.setVerticalScrollBarPolicy (ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS );
+		eventScroll.setBounds(eventStatusBox.getBounds());
+		tab1.add(eventScroll);
 		
 		lblEventStatus = new JLabel("Event Status:");
-		lblEventStatus.setBounds(32, 261, 87, 16);
+		lblEventStatus.setBounds(32, 261, eventStatusBox.getWidth(), 16);
+		lblEventStatus.setLocation(this.getWidth()/2 - itemDescriptBox.getWidth()/2, this.getHeight()/3);
+		lblEventStatus.setFont(new Font(lblEventStatus.getName(), Font.BOLD, 14));
 		tab1.add(lblEventStatus);
 		tab1.setFocusable(true);
 		JLabel exitSessionLabel = new JLabel("CLICK HERE TO EXIT SESSION");
 		exitSessionLabel.addMouseListener(new MouseAdapter() { //All this does is reset to the default GUI
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				itemDescriptBox.setText("No items have been checked yet!");
+				eventStatusBox.setText("");
 			}
 		});
-		exitSessionLabel.setBounds(32, 382, 184, 16);
+		exitSessionLabel.setBounds(this.getWidth()/2 - itemDescriptBox.getWidth()/2, this.getHeight()/2 + eventStatusBox.getHeight(), 
+								eventStatusBox.getWidth(), 16);
+		exitSessionLabel.setFont(new Font(exitSessionLabel.getName(), Font.BOLD, 14));
 		tab1.add(exitSessionLabel);
 		
 		inventoryTextPane = new JPanel(); 
@@ -182,21 +200,24 @@ public class LendingLibraryGUI extends JFrame{
 		
 		lblDescription = new JLabel("Description:");
 		lblDescription.setBounds(12, 172, 75, 16);
+		lblDescription.setFont(new Font(lblDescription.getName(), Font.BOLD, 14));
 		tab3.add(lblDescription);
 		
 		descriptionText = new JTextArea();
 		descriptionText.setEditable(false);
-		descriptionText.setBounds(116, 169, 350, 175);
+		descriptionText.setBounds(140, 169, 400, 200);
 		descriptionText.setWrapStyleWord(true);
+		descriptionText.setLineWrap(true);
 		tab3.add(descriptionText);
 		
 		lblTitle = new JLabel("Title:");
 		lblTitle.setBounds(12, 60, 56, 16);
+		lblTitle.setFont(new Font(lblTitle.getName(), Font.BOLD, 14));
 		tab3.add(lblTitle);
 		
 		titleText = new JTextArea();
 		titleText.setEditable(false);
-		titleText.setBounds(116, 57, 231, 22);
+		titleText.setBounds(140, 57, descriptionText.getWidth(), 22);
 		tab3.add(titleText);
 		
 		lblAuthor = new JLabel("Author:");
@@ -205,16 +226,16 @@ public class LendingLibraryGUI extends JFrame{
 		
 		authorText = new JTextArea();
 		authorText.setEditable(false);
-		authorText.setBounds(116, 112, 231, 22);
+		authorText.setBounds(140, 112, descriptionText.getWidth(), 22);
 		tab3.add(authorText);
 		
 		lblInStock = new JLabel("In Stock:");
-		lblInStock.setBounds(12, 375, 56, 16);
+		lblInStock.setBounds(12, 400, 56, 16);
 		tab3.add(lblInStock);
 		
 		stockTextArea = new JTextArea();
 		stockTextArea.setEditable(false);
-		stockTextArea.setBounds(116, 372, 56, 22);
+		stockTextArea.setBounds(140, 400, 56, 22);
 		tab3.add(stockTextArea);
 		
 		JLabel lblClickHereTo = new JLabel("CLICK HERE TO VIEW MAP LOCATION");
@@ -223,13 +244,12 @@ public class LendingLibraryGUI extends JFrame{
 		lblClickHereTo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-			//	g = palette.getGraphics(); //leave this here just in case the Graphic g gets changed
 				test.setDotProperties(dotImage, currentItem, g);
 				test.repaint();
 				tabbedPane.setSelectedIndex(3); //switches the tab to map
 			}
 		});
-		lblClickHereTo.setBounds(12, 425, 221, 16);
+		lblClickHereTo.setBounds(12, 460, 221, 16);
 		tab3.add(lblClickHereTo);
 		
 		tab4 = new JPanel();
@@ -333,15 +353,19 @@ public class LendingLibraryGUI extends JFrame{
 					itemId += arg0.getKeyChar();
 				}
 				if(arg0.getKeyCode() == arg0.VK_ENTER){
+					if(itemDescriptBox.getText().equals("No items have been checked yet!")){
+						itemDescriptBox.setText("");
+					}
 					for(Item item: DBs.getItems()){ 
 						if(item.getID().equals(itemId)){
 							itemDescriptBox.setText(itemDescriptBox.getText() + item.getName() + "\n");
 						}
 					}
-                                        eventStatusBox.setText("");
+                                      //  eventStatusBox.setText("");
 					for(LibEvent evt : Evt.getEvents()){
 						eventStatusBox.setText(eventStatusBox.getText() + evt.toString() + "\n");
 					}
+					itemId = "";
 				}
 				//scans barcode, search db for barcode, see if check in or checked out, then check for successful transaction
 			}
