@@ -6,67 +6,67 @@ package oop.project2.DataObjects;
  */
 public class Newspaper extends Periodical{
 
-	public static int numVars = 9;
-	
-	private String leaning;//(left, right, middle)
+    public static int numVars = 9;
 
-	/**
+    private String leaning;//(left, right, middle)
+
+    /**
      * By value constructor
      * @param attributes for initialization
      */
-	public Newspaper(String category,
-					 String name,
-					 String description,
-					 int quantity,
-					 String id,
-					 int x,
-					 int y,
-					 String subject,
-					 String leaning){
+    public Newspaper(String category,
+            String name,
+            String description,
+            int quantity,
+            String id,
+            int x,
+            int y,
+            String subject,
+            String leaning){
 
         super(category, name, description, quantity, id, x, y, subject);
         this.setLeaning(leaning);
     }
-	
-	/**
+
+    /**
      * Dugan's array constructor
      * @param newItem String array of values from the time.
      */
-	public Newspaper(String[] newItem){
-    	super(newItem);
+    public Newspaper(String[] newItem){
+        super(newItem);
         this.setLeaning(newItem[8]);
     }
-	
-	/**
+
+    /**
      * To CSV format
      * @return This item in string CSV format
      */
-	public String toCSVFormat(){
-    	return super.toCSVFormat() + "," +
+    public String toCSVFormat(){
+        return super.toCSVFormat() + "," +
                 this.getLeaning();
     }
 
     /**
      * Debugging and showing info
      */
-	public String toString(){
+    public String toString(){
         return super.toString() + "," +
-               this.getLeaning();
+                this.getLeaning();
     }
-	
+
     // Getters and Setters ***************************************************
 
-	/**
-	 * @return the leaning
-	 */
-	public String getLeaning() {
-		return leaning;
-	}
+    /**
+     * @return the leaning
+     */
+    public String getLeaning() {
+        return leaning;
+    }
 
-	/**
-	 * @param leaning the leaning to set
-	 */
-	public void setLeaning(String leaning) {
-		this.leaning = leaning;
-	}
+    /**
+     * @param leaning the leaning to set
+     */
+    public void setLeaning(String leaning) {
+        this.leaning = leaning;
+    }
 }

@@ -11,26 +11,26 @@ import oop.project2.libevent.ReferenceCheckoutError;
  */
 public class Reference extends Item{
 
-	public static int numVars = 8;
-	private String publisher;
-	
-	/**
+    public static int numVars = 8;
+    private String publisher;
+
+    /**
      * By value constructor
      * @param attributes for initialization
      */
     public Reference(String category,
-    				 String name,
-    				 String description,
-    				 int quantity,
-    				 String id,
-    				 int x,
-    				 int y,
-    				 String publisher){
+            String name,
+            String description,
+            int quantity,
+            String id,
+            int x,
+            int y,
+            String publisher){
 
-    	super(category, name, description, quantity, id, x, y);
-    	this.setPublisher(publisher);
+        super(category, name, description, quantity, id, x, y);
+        this.setPublisher(publisher);
     }
-    
+
     /**
      * Dugan's array constructor
      * @param newItem String array of values from the time.
@@ -39,7 +39,7 @@ public class Reference extends Item{
         super(newItem);
         publisher = "Not implemented yet";
     }
-    
+
     /**
      * To CSV format
      * @return This item in string CSV format
@@ -54,26 +54,26 @@ public class Reference extends Item{
     public String toString(){
         return super.toString();
     }
-    
+
     public void setPublisher(String publisher) {
-    	this.publisher = publisher;
+        this.publisher = publisher;
     }
-    
+
     public String getPublisher() {
-    	return this.publisher;
+        return this.publisher;
     }
-    
+
     // Getters and Setters ***************************************************
     // none
-    
+
     @Override
     public void tryCheckOut() throws ReferenceCheckoutError{
         throw new ReferenceCheckoutError(this.getID());
     }
-    
+
     @Override
     public String[] getMaker() {
-		String[] return_value = {"Publisher",this.getPublisher()};
-		return return_value;
+        String[] return_value = {"Publisher",this.getPublisher()};
+        return return_value;
     }
 }
