@@ -19,21 +19,27 @@ import javax.swing.event.ChangeListener;
 
 import oop.project2.DataObjects.Item;
 import oop.project2.libevent.LibEvent;
-
+/**
+ * This is the GUI file that contains all of the front end code
+ * and backend calls. The GUI is composed of 5 tabs, "Scanned Event",
+ * which is responsible for handling scanner events such as checking in
+ * or checking out a book, "Inventory", which is responsible for searching
+ * and displaying items in the library's inventory, "Item Details", which is
+ * responsible for displaying the selected item's details, "Map", which is responsible
+ * for showing the location of the selected item, and the "Policy" tab which displays
+ * the library's policy. 
+ * @author jshaak
+ *
+ */
 
 public class LendingLibraryGUI extends JFrame{
 
 	/**
-	 * Everyone, if you have any comments on UI design or where 
-	 * things(listeners) should be included. Please text me
-	 * or leave comments where things should be. Thanks
-	 * 
-	 * Jon
+	 * declaring the attributes of the GUI
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField searchBox;
-	private String[] authors;
 	private JTextArea itemDescriptBox;
 	private JScrollPane itemDescriptPane;
 	private JScrollPane eventScroll;
@@ -62,23 +68,25 @@ public class LendingLibraryGUI extends JFrame{
     private JScrollPane scrollPane_1;
     private BufferedImage mapA;
     private BufferedImage mapB;
-    private JLabel gif;
-        //Associative Objects
+
     private DBThread DBs; 
     private InputBuilder Inp;
     private EventBuilder Evt;
     private Item currentItem;
     private JPanel mapPanel;
     private Image dotImage;
-    private JLayeredPane layerPane;
-    private Icon icon;
-    private BufferedImage palette;
+    private BufferedImage canvas;
     private Graphics g;
     
-    private Pallette test;
+    private Pallette palette;
     private String itemId;
+    private JScrollPane policyScrollPane;
+    private JTextArea policyTextArea;
 	/**
-	 * Create the frame.
+	 * LendingLibraryGUI(DBThread DBs, InputBuilder Inp, EventBuilder Evt)
+	 * 
+	 * This constructor initializes the components of the UI. It also sets
+	 * listeners on some of the components. 
 	 */
 	public LendingLibraryGUI(DBThread DBs, InputBuilder Inp, EventBuilder Evt) {
             
@@ -107,7 +115,6 @@ public class LendingLibraryGUI extends JFrame{
 		itemDescriptBox.setText("No items have been checked yet!");
 		itemDescriptBox.setEditable(false);
 		itemDescriptBox.setWrapStyleWord(true);
-		//itemDescriptBox.setSize(this.getWidth()/3, this.getHeight()/6);
 		itemDescriptPane = new JScrollPane(itemDescriptBox);
 		itemDescriptPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		itemDescriptBox.setBounds(32, 45, 400, 200);
@@ -175,7 +182,7 @@ public class LendingLibraryGUI extends JFrame{
 		lblFilter.setBounds(12, 16, 56, 16);
 		tab2.add(lblFilter);
 		
-		this.initializeInventory();
+		this.initializeInventory(); //initialize the labels in the inventoryTextPane
 		searchBox = new JTextField();
 		//get the text as it is being typed so we can remove labels that do not contain the substring
 		searchBox.setBounds(339, 14, 116, 22);
@@ -244,8 +251,8 @@ public class LendingLibraryGUI extends JFrame{
 		lblClickHereTo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				test.setDotProperties(dotImage, currentItem, g);
-				test.repaint();
+				palette.setPaintProperties(dotImage, currentItem, g); //palette now knows what and where to paint 
+				palette.repaint(); //palette draws the image on the canvas
 				tabbedPane.setSelectedIndex(3); //switches the tab to map
 			}
 		});
@@ -256,26 +263,32 @@ public class LendingLibraryGUI extends JFrame{
 		tabbedPane.addTab("Map", null, tab4, null);
 		mapPanel = new JPanel();
 		tab4.add(mapPanel);
+		/**
+		 * The code in this try block loads the images that will be
+		 * placed in the "Map" tab. It also draws the maps on the canvas.
+		 */
 		try {
 			mapA = readImage("mapa.png");
 			mapB = readImage("mapb.png");
 			dotImage = readImage("dot.gif");
 			dotImage = resizeImage(dotImage, 30, 30);
-			palette = new BufferedImage(mapA.getWidth() + mapB.getWidth() + 100, mapA.getHeight() + mapB.getHeight(), BufferedImage.TYPE_INT_ARGB);
-			g = palette.getGraphics();
-			ImageIcon icon = new ImageIcon(palette);
-			test = new Pallette(icon); //rename test to something different
-			mapPanel.add(test);
-			g.drawImage(mapA, 50, 50, null);
-			g.drawImage(mapB, mapA.getWidth() + 100, 50, null);
+			
+			canvas = new BufferedImage(mapA.getWidth() + mapB.getWidth() + 100, mapA.getHeight() + mapB.getHeight(), BufferedImage.TYPE_INT_ARGB);
+			g = canvas.getGraphics(); //uses the canvas graphic to paint on
+			
+			ImageIcon icon = new ImageIcon(canvas); //convert the canvas to something usable by a JLabel
+			palette = new Pallette(icon); //creates the Pallette and it now knows what to paint on
+			mapPanel.add(palette); //add the palette to the Panel so it can paint
+			
+			g.drawImage(mapA, 50, 50, null); //draws mapA on the canvas
+			g.drawImage(mapB, mapA.getWidth() + 100, 50, null); //draws mapB on the canvas
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} catch (Exception e1) {
-			// TODO Auto-generated catch block
 			System.out.println(e1.getCause());
 		}
-		test.addMouseListener(new MouseAdapter() {
+		//TODO: REMOVE AT THE END
+		palette.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				tabbedPane.setSelectedIndex(3); //switches the tab to map
@@ -284,15 +297,24 @@ public class LendingLibraryGUI extends JFrame{
 				System.out.println(arg0.getX() + " , " + arg0.getY());
 			}
 		});
-		tab5 = new JPanel();
-		tabbedPane.addTab("Policies", null, tab5, null);	
+		tab5 = new JPanel(); //create the policy tab
+		tab5.setLayout(null);
+		tabbedPane.addTab("Policy", null, tab5, null);	
+	
+		//creating the textArea and scrollPane for the library policy
+		policyTextArea = new JTextArea();
+		policyTextArea.setText(/*load policy as a string here*/"");
+		policyTextArea.setEditable(false);
+		policyTextArea.setWrapStyleWord(true);
+		policyScrollPane = new JScrollPane(policyTextArea);
+		policyScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		policyTextArea.setBounds(32, 45, this.getWidth()/2, this.getHeight()-200);
+		policyTextArea.setLocation(this.getWidth()/2 - policyTextArea.getWidth()/2, 
+									this.getHeight()/2 - policyTextArea.getHeight()/2); //centers the textBox
+		policyScrollPane.setBounds(policyTextArea.getBounds());
+		tab5.add(policyScrollPane);
 		
-//		this.autoResizeComponents(panel);
-//		this.autoResizeComponents(panel_1);
-//		this.autoResizeComponents(panel_2);
-//		this.autoResizeComponents(panel_3);
-//		this.autoResizeComponents(panel_4);
-		/*
+		/**
 		 * This item listener should filter the components based on their category. Components(JLabels) should
 		 * be created based on the items. The strategy might be to remove the JLabels from the panel, then readd the
 		 * filtered JLabels based on the item's category. 
@@ -300,25 +322,28 @@ public class LendingLibraryGUI extends JFrame{
 		filterBox.addItemListener(new ItemListener (){
 			public void itemStateChanged(ItemEvent e){
 				if(e.getStateChange() == 1){ //this if statement is to get the selected item
-					for(Component component: inventoryTextPane.getComponents()){
+					for(Component component: inventoryTextPane.getComponents()){ //removes the current labels
 						inventoryTextPane.remove(component);
 					}
-					if(filterBox.getSelectedItem().toString().equals("Everything") && searchBox.getText().equals("")){
+					if(filterBox.getSelectedItem().toString().equals("Everything") && searchBox.getText().equals("")){ //special case
 						initializeInventory();
 					}
-					else{
+					else{ //searches items based on search box input and filter box selection and turns them into JLabels
 						for(Item item: search(filterBox.getSelectedItem().toString() + "," + searchBox.getText())){
 							JLabel tempLabel = new JLabel(item.getName() + "        ");
 							tempLabel.setAlignmentX(Component.LEFT_ALIGNMENT); 
 							inventoryTextPane.add(tempLabel);
-							addLabelListener(tempLabel, item);
+							addItemLabelListener(tempLabel, item);
 						}
 					}
-					repaint();
+					repaint(); //redraws the newly searched JLabels
 				}
 			}
 		});
-		
+		/**
+		 * This listener works the same as above. This event
+		 * fires when the user types a character into the search box.
+		 */
 		searchBox.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent arg0) {
@@ -333,17 +358,37 @@ public class LendingLibraryGUI extends JFrame{
 						JLabel tempLabel = new JLabel(item.getName() + "        ");
 						tempLabel.setAlignmentX(Component.LEFT_ALIGNMENT); 
 						inventoryTextPane.add(tempLabel);
-						addLabelListener(tempLabel, item);
+						addItemLabelListener(tempLabel, item);
 					}
 				}
 				repaint();
 			}
 		});
+		/**
+		 * This listener ensures that when the tab is changed, the focus
+		 * will focus on the newly opened tab. There is a special case that if
+		 * the user clicks the item, and changes tabs instead of clicking
+		 * the click here to view map location button. 
+		 */
 		tabbedPane.addChangeListener(new ChangeListener() {
 	        public void stateChanged(ChangeEvent e) {
 	            tabbedPane.requestFocus();
+	            if(tabbedPane.getSelectedIndex() == 3){
+	            	palette.setPaintProperties(dotImage, currentItem, g); //palette now knows what and where to paint 
+					palette.repaint(); //palette draws the image on the canvas
+	            }
 	        }
 	    });
+		/**
+		 * This listener is designed to fire when
+		 * an item is scanned. When it fires, the
+		 * item that was just scanned will be displayed
+		 * starting a list of strings in the text area.
+		 * It will also retrieve the event that occurred 
+		 * from the scan letting the user know if the item
+		 * was checked in or checked out.
+		 */
+		
 		tabbedPane.addKeyListener(new KeyAdapter() { //<--use this for input listener
 			@Override
 			public void keyReleased(KeyEvent arg0) {
@@ -352,33 +397,45 @@ public class LendingLibraryGUI extends JFrame{
 					Inp.PutEvent(arg0.getKeyChar());
 					itemId += arg0.getKeyChar();
 				}
-				if(arg0.getKeyCode() == arg0.VK_ENTER){
+				if(arg0.getKeyCode() == KeyEvent.VK_ENTER){
 					if(itemDescriptBox.getText().equals("No items have been checked yet!")){
 						itemDescriptBox.setText("");
 					}
-					for(Item item: DBs.getItems()){ 
+					for(Item item: DBs.getItems()){ //searches each item in the database for their id
 						if(item.getID().equals(itemId)){
 							itemDescriptBox.setText(itemDescriptBox.getText() + item.getName() + "\n");
 						}
-					}
-                                      //  eventStatusBox.setText("");
+					}                        
 					for(LibEvent evt : Evt.getEvents()){
 						eventStatusBox.setText(eventStatusBox.getText() + evt.toString() + "\n");
 					}
-					itemId = "";
+					itemId = ""; //reset itemId to an empty string
 				}
-				//scans barcode, search db for barcode, see if check in or checked out, then check for successful transaction
 			}
 		});
 	}
-	private void autoResizeComponents(Component component) { //need to figure out a clever way to do this
-		this.getWidth();
-		this.getHeight();
-	}
-	
+	/**
+	 * Image resizeImage(Image i, int width, int height)
+	 * 
+	 * This method is designed to return a scaled image based on the given width and height to scale with.
+	 * @param i
+	 * @param width
+	 * @param height
+	 * @return Image
+	 */
 	private Image resizeImage(Image i, int width, int height){
 		return i.getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH);
 	}
+	/**
+	 * BufferedImage readImage(String url)
+	 * This method reads in and returns an image. It takes in the image path
+	 * as a parameter. 
+	 * 
+	 * @param url
+	 * @return BufferedImage 
+	 * @throws IOException
+	 * @throws Exception
+	 */
 	private BufferedImage readImage(String url) throws IOException, Exception {
 		try{
 			BufferedImage image = ImageIO.read(this.getClass().getResource(url));
@@ -388,13 +445,17 @@ public class LendingLibraryGUI extends JFrame{
 		}catch(Exception e){
 			
 		}
-		return null;
+		return null; //if no image was read
 	}
-	private JLabel getLabel(Image image){
-		ImageIcon imageIcon = new ImageIcon(image);
-		JLabel label = new JLabel(imageIcon);
-		return label;
-	}
+	/**
+	 * LinkedList<Item> search(String[] to_search)
+	 * 
+	 * This method is designed to search through the database given a string array
+	 * trims the string and searches the database with each string in the to_search array. This
+	 * search also returns items with any string that contains the searched word.
+	 * @param to_search
+	 * @return LinkedList<Item> 
+	 */
     private LinkedList<Item> search(String[] to_search){
         LinkedList<Item> found = new LinkedList<Item>();
         for(Item itm: DBs.getItems()){
@@ -410,28 +471,55 @@ public class LendingLibraryGUI extends JFrame{
         }
         return found;
     }
-        
+    /**
+     * LinkedList<Item> search(String to_search)
+     * 
+     * This method parses a string into an array of strings and passes
+     * that array to the overloaded search(Search[] to_search) method
+     * 
+     * @param String to_search
+     * @return LinkedList<Item>
+     */
     private LinkedList<Item> search(String to_search){
         return search(to_search.split(","));
     }
     
+    /**
+     * initializeInventory()
+     * 
+     * This method is designed to initialize
+     * the inventoryTextPane with all items
+     * in the database.
+     */
     private void initializeInventory(){	
 	    for(Item item: DBs.getItems()){
 	    	if(item != null){
 				JLabel tempLabel = new JLabel(item.getName() + "        ");
 				tempLabel.setAlignmentX(Component.LEFT_ALIGNMENT); 
 				inventoryTextPane.add(tempLabel);
-				addLabelListener(tempLabel, item);
+				addItemLabelListener(tempLabel, item);
 	    	}
 		}
   
     }
-    private void addLabelListener(JLabel itemLabel, Item item){
-    	itemLabel.addMouseListener(new MouseAdapter() {
-			@Override
-			//This mousePressed event should display the item details of the label that was clicked
+    /**
+     * addLabelListener(JLabel itemLabel, Item item)
+     * 
+     * This item adds a listener to the itemLabel passed into the method.
+     * @param itemLabel
+     * @param item
+     */
+    private void addItemLabelListener(JLabel itemLabel, Item item){
+    	itemLabel.addMouseListener(new MouseAdapter(){ 
+			/**
+			 * This event fires when the itemLabel is clicked.
+			 * It is designed to display the details of the item
+			 * that was clicked. It sets the currentItem as well
+			 * so that the Pallette knows whose item coordinates
+			 * it needs to draw the dot. 
+			 */
+    		@Override
 			public void mousePressed(MouseEvent arg0) {
-			//	System.out.println(((JLabel)tempLabel).getText()); // <--can use this for a switch case to fill in details
 				lblAuthor.setText(item.getMaker()[0] + ":");
 				tabbedPane.setSelectedIndex(2);					
 				titleText.setText(item.getName());
@@ -441,8 +529,5 @@ public class LendingLibraryGUI extends JFrame{
 				currentItem = item;
 			}
 		});
-    }
-    public Item getCurrentItem(){
-    	return this.currentItem;
     }
 }

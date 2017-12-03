@@ -2,11 +2,12 @@ package oop.project2;
 
 import java.awt.EventQueue;
 
+/**
+ * This class launches the GUI and runs
+ * the threads listening for input. 
+ */ 
 public class LendingLibraryImpl {
 
-	/**
-	 * Launch the application.
-	 */ 
 	public static void main(String[] args) { 
             DBThread          DBs = new DBThread();
             // This is a comment
