@@ -43,14 +43,14 @@ public abstract class Item{
      * @param attributes for initialization
      */
     public Item(String category,
-                String name,
-                String description,
-                int quantity,
-                String id,
-                int x,
-                int y){
+            String name,
+            String description,
+            int quantity,
+            String id,
+            int x,
+            int y){
 
-    	this.setCategory(category);
+        this.setCategory(category);
         this.setName(name);
         this.setDescription(description);
         this.setQuantity(quantity);
@@ -80,13 +80,13 @@ public abstract class Item{
      */
     public String toCSVFormat(){
         return
-            this.getCategory().replace(",","") + "," +
-            this.getName().replace(",","") + "," +
-            this.getDescription().replace(",","") + "," +
-            this.getQuantity() + "," +
-            this.getId() + "," +
-            this.getX() + "," +
-            this.getY();
+                this.getCategory().replace(",","") + "," +
+                this.getName().replace(",","") + "," +
+                this.getDescription().replace(",","") + "," +
+                this.getQuantity() + "," +
+                this.getId() + "," +
+                this.getX() + "," +
+                this.getY();
     }
 
     /**
@@ -95,128 +95,128 @@ public abstract class Item{
      */
     public String toString(){
         return
-            this.getCategory().replace(",","") + "," +
-            this.getName().replace(",","") + "," +
-            this.getDescription().replace(",","") + "," +
-            this.getQuantity() + "," +
-            this.getId() + "," +
-            this.getX() + "," +
-            this.getY();
+                this.getCategory().replace(",","") + "," +
+                this.getName().replace(",","") + "," +
+                this.getDescription().replace(",","") + "," +
+                this.getQuantity() + "," +
+                this.getId() + "," +
+                this.getX() + "," +
+                this.getY();
     }
 
     // Getters and Setters ***************************************************
 
-	/**
-	 * @return the numVars
-	 */
-	public static int getNumVars() {
-		return numVars;
-	}
+    /**
+     * @return the numVars
+     */
+    public static int getNumVars() {
+        return numVars;
+    }
 
-	/**
-	 * @param numVars the numVars to set
-	 */
-	public static void setNumVars(int numVars) {
-		Item.numVars = numVars;
-	}
+    /**
+     * @param numVars the numVars to set
+     */
+    public static void setNumVars(int numVars) {
+        Item.numVars = numVars;
+    }
 
-	/**
-	 * @return the category
-	 */
-	public String getCategory() {
-		return category;
-	}
+    /**
+     * @return the category
+     */
+    public String getCategory() {
+        return category;
+    }
 
-	/**
-	 * @param category the category to set
-	 */
-	public void setCategory(String category) {
-		this.category = category;
-	}
+    /**
+     * @param category the category to set
+     */
+    public void setCategory(String category) {
+        this.category = category;
+    }
 
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
 
-	/**
-	 * @param name the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	/**
-	 * @return the description
-	 */
-	public String getDescription() {
-		return description;
-	}
+    /**
+     * @return the description
+     */
+    public String getDescription() {
+        return description;
+    }
 
-	/**
-	 * @param description the description to set
-	 */
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    /**
+     * @param description the description to set
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	/**
-	 * @return the quantity
-	 */
-	public int getQuantity() {
-		return quantity;
-	}
+    /**
+     * @return the quantity
+     */
+    public int getQuantity() {
+        return quantity;
+    }
 
-	/**
-	 * @param quantity the quantity to set
-	 */
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
+    /**
+     * @param quantity the quantity to set
+     */
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 
-	/**
-	 * @return the id
-	 */
-	public String getId() {
-		return id;
-	}
+    /**
+     * @return the id
+     */
+    public String getId() {
+        return id;
+    }
 
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(String id) {
-		this.id = id;
-	}
+    /**
+     * @param id the id to set
+     */
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	/**
-	 * @return the x
-	 */
-	public int getX() {
-		return x;
-	}
+    /**
+     * @return the x
+     */
+    public int getX() {
+        return x;
+    }
 
-	/**
-	 * @param x the x to set
-	 */
-	public void setX(int x) {
-		this.x = x;
-	}
+    /**
+     * @param x the x to set
+     */
+    public void setX(int x) {
+        this.x = x;
+    }
 
-	/**
-	 * @return the y
-	 */
-	public int getY() {
-		return y;
-	}
+    /**
+     * @return the y
+     */
+    public int getY() {
+        return y;
+    }
 
-	/**
-	 * @param y the y to set
-	 */
-	public void setY(int y) {
-		this.y = y;
-	}
+    /**
+     * @param y the y to set
+     */
+    public void setY(int y) {
+        this.y = y;
+    }
 
     public void display() {
         System.out.println(toCSVFormat());
@@ -227,12 +227,12 @@ public abstract class Item{
     }
 
     public void tryCheckOut() throws ItemStockError, ReferenceCheckoutError{
-          if(this.getCategory().equals("Reference")){
-               throw new ReferenceCheckoutError(this.getID());
-          }
-          if(this.quantity < 1){
-               throw new ItemStockError(this.getID());
-          }
+        if(this.getCategory().equals("Reference")){
+            throw new ReferenceCheckoutError(this.getID());
+        }
+        if(this.quantity < 1){
+            throw new ItemStockError(this.getID());
+        }
     }
 
     public void checkOut(){

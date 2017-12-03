@@ -5,9 +5,9 @@ package oop.project2.DataObjects;
  * @author jeremy
  */
 public class LibraryBook extends Item{
-	
-	public static int numVars = 9;
-	
+
+    public static int numVars = 9;
+
     private String author;
     private int rating;
 
@@ -16,20 +16,20 @@ public class LibraryBook extends Item{
      * @param attributes for initialization
      */
     public LibraryBook(String category,
-    				   String name,
-    				   String description,
-    				   int quantity,
-    				   String id,
-    				   int x,
-    				   int y,
-    				   String author,
-    				   int rating){
+            String name,
+            String description,
+            int quantity,
+            String id,
+            int x,
+            int y,
+            String author,
+            int rating){
 
         super(category, name, description, quantity, id, x, y);
         this.setAuthor(author);
         this.setRating(rating);
     }
-    
+
     /**
      * Dugan's array constructor
      * @param newItem String array of values from the time.
@@ -39,15 +39,15 @@ public class LibraryBook extends Item{
         this.setAuthor(newItem[7]);
         this.setRating(Integer.parseInt(newItem[8]));
     }
-    
+
     /**
      * To CSV format
      * @return This item in string CSV format
      */
     public String toCSVFormat(){
         return super.toCSVFormat() + "," +
-               this.getAuthor() + "," +
-               this.getRating();
+                this.getAuthor() + "," +
+                this.getRating();
     }
 
     /**
@@ -55,43 +55,43 @@ public class LibraryBook extends Item{
      */
     public String toString(){
         return super.toString() + "," +
-               this.getAuthor() + "," +
-               this.getRating();
+                this.getAuthor() + "," +
+                this.getRating();
     }
-    
+
     // Getters and Setters ***************************************************
 
-	/**
-	 * @return the author
-	 */
-	public String getAuthor() {
-		return author;
-	}
+    /**
+     * @return the author
+     */
+    public String getAuthor() {
+        return author;
+    }
 
-	/**
-	 * @param author the author to set
-	 */
-	public void setAuthor(String author) {
-		this.author = author;
-	}
+    /**
+     * @param author the author to set
+     */
+    public void setAuthor(String author) {
+        this.author = author;
+    }
 
-	/**
-	 * @return the rating
-	 */
-	public int getRating() {
-		return rating;
-	}
+    /**
+     * @return the rating
+     */
+    public int getRating() {
+        return rating;
+    }
 
-	/**
-	 * @param rating the rating to set
-	 */
-	public void setRating(int rating) {
-		this.rating = rating;
-	}
-	
-	@Override
-	public String[] getMaker() {
-		String[] return_value = {"Author",this.getAuthor()};
-		return return_value;
-	}
+    /**
+     * @param rating the rating to set
+     */
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
+    @Override
+    public String[] getMaker() {
+        String[] return_value = {"Author",this.getAuthor()};
+        return return_value;
+    }
 }
