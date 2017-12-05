@@ -1,15 +1,25 @@
 package oop.project2.libevent;
 
 /**
- *
+ * This is the event that the DBThread builds and sends back to the EventBuilder
  * @author ddobbs
  */
 public class ResultEvent extends LibEvent{
 
+    /**
+     * Builds the super event with the status it is sent
+     * @param status 
+     */
     public ResultEvent(String status) {
         super(3, status);
     }
 
+    /**
+     * Builds the super event with the userId and itemID
+     * @param success
+     * @param userID
+     * @param itemID 
+     */
     public ResultEvent(String success, String userID, String itemID) {
         super(3,success);
         if(success.equals("Checkin")){
@@ -20,6 +30,11 @@ public class ResultEvent extends LibEvent{
         }
     }
 
+    /**
+     * Builds the super event fom an error
+     * @param e
+     * @param next_event 
+     */
     public ResultEvent(LibError e, ParseEvent next_event) {
         super(3,"Error checking out item " + next_event.getItem() + " with user " + next_event.getUser());
         switch (e.getType()){
@@ -39,11 +54,19 @@ public class ResultEvent extends LibEvent{
         }
     }
 
+    /**
+     * Returns the summary of the super
+     * @return 
+     */
     @Override
     public String getSummary() {
         return super.getInfo();
     }
 
+    /**
+     * Returns the summary of the super
+     * @return 
+     */
     @Override
     public String toString() {
         return super.getInfo();
