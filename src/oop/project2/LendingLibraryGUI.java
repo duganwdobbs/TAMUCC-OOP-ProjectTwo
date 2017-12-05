@@ -149,6 +149,9 @@ public class LendingLibraryGUI extends JFrame{
 			public void mouseClicked(MouseEvent e) {
 				itemDescriptBox.setText("No items have been checked yet!");
 				eventStatusBox.setText("");
+				filterBox.setSelectedIndex(0);
+				initializeInventory();
+				currentItem = null;
 			}
 		});
 		exitSessionLabel.setBounds(this.getWidth()/2 - itemDescriptBox.getWidth()/2, this.getHeight()/2 + eventStatusBox.getHeight(), 
@@ -206,13 +209,13 @@ public class LendingLibraryGUI extends JFrame{
 		tab3.setLayout(null);
 		
 		lblDescription = new JLabel("Description:");
-		lblDescription.setBounds(12, 172, 75, 16);
+		lblDescription.setBounds(12, 172, 150, 16);
 		lblDescription.setFont(new Font(lblDescription.getName(), Font.BOLD, 14));
 		tab3.add(lblDescription);
 		
 		descriptionText = new JTextArea();
 		descriptionText.setEditable(false);
-		descriptionText.setBounds(140, 169, 400, 200);
+		descriptionText.setBounds(220, 169, 400, 200);
 		descriptionText.setWrapStyleWord(true);
 		descriptionText.setLineWrap(true);
 		tab3.add(descriptionText);
@@ -224,25 +227,27 @@ public class LendingLibraryGUI extends JFrame{
 		
 		titleText = new JTextArea();
 		titleText.setEditable(false);
-		titleText.setBounds(140, 57, descriptionText.getWidth(), 22);
+		titleText.setBounds(220, 57, descriptionText.getWidth(), 22);
 		tab3.add(titleText);
 		
 		lblAuthor = new JLabel("Author:");
-		lblAuthor.setBounds(12, 115, 56, 16);
+		lblAuthor.setBounds(12, 115, 150, 16);
+		lblAuthor.setFont(new Font(lblAuthor.getName(), Font.BOLD, 14));
 		tab3.add(lblAuthor);
 		
 		authorText = new JTextArea();
 		authorText.setEditable(false);
-		authorText.setBounds(140, 112, descriptionText.getWidth(), 22);
+		authorText.setBounds(220, 112, descriptionText.getWidth(), 22);
 		tab3.add(authorText);
 		
 		lblInStock = new JLabel("In Stock:");
-		lblInStock.setBounds(12, 400, 56, 16);
+		lblInStock.setBounds(12, 400, 150, 16);
+		lblInStock.setFont(new Font(lblInStock.getName(), Font.BOLD, 14));
 		tab3.add(lblInStock);
 		
 		stockTextArea = new JTextArea();
 		stockTextArea.setEditable(false);
-		stockTextArea.setBounds(140, 400, 56, 22);
+		stockTextArea.setBounds(220, 400, 56, 22);
 		tab3.add(stockTextArea);
 		
 		JLabel lblClickHereTo = new JLabel("CLICK HERE TO VIEW MAP LOCATION");
