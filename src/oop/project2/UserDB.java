@@ -83,12 +83,6 @@ public class UserDB extends Database{
         throw new UserNotFoundError(user_id);
     }
     
-    public static void main(String argsp[]){
-        UserDB newdb = new UserDB();
-        newdb.display();
-        newdb.toFile();
-    }
-    
     public void checkOut(String user_id, String item_id){
         for(User usr: data){
             if(usr.getID().equals(user_id)){
