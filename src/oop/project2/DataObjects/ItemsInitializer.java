@@ -66,7 +66,7 @@ public class ItemsInitializer {
                 4);
         inventory[4] = new LibraryBook("Book",
                 "War and Peace",
-                "War and Peace broadly focuses on Napoleon’s invasion of Russia in 1812 and follows three of the most well-known characters in literature.",
+                "War and Peace broadly focuses on Napoleonï¿½s invasion of Russia in 1812 and follows three of the most well-known characters in literature.",
                 3,
                 "037145003993",//TODO: UPDATE
                 260,
@@ -284,7 +284,7 @@ public class ItemsInitializer {
                 "0000000000025",
                 64,
                 70,
-                "Encyclopedia Britanica Inc.",
+                //"Encyclopedia Britanica Inc.",
                 "Encyclopedia Britanica Inc.");
         inventory[26] = new Reference("Reference",
                 "Atlas of the World 24th Edition",
@@ -293,7 +293,7 @@ public class ItemsInitializer {
                 "0000000000025",//TODO: UPDATE
                 64,
                 70,
-                "Octopus Publishing Group Limited",
+                //"Octopus Publishing Group Limited",
                 "Octopus Publishing Group Limited");
         inventory[27] = new Reference("Reference",
                 "Webster's Encyclopedic Unabridged Dictionary of the English Language",
@@ -302,16 +302,16 @@ public class ItemsInitializer {
                 "0000000000025",//TODO: UPDATE
                 64,
                 70,
-                "Oxford",
+                //"Oxford",
                 "Rh Value Publishing");
         inventory[28] = new Reference("Reference",
                 "The Old Farmer's Almanac 2018",
-                "It’s another new year celebrating everything under the Sun including the Moon with The Old Farmer’s Almanac America’s oldest continuously published periodical! Always timely topical and distinctively “useful with a pleasant degree of humor” the Almanac has been beloved for centuries by people from all walks of life.",
+                "Itï¿½s another new year celebrating everything under the Sun including the Moon with The Old Farmerï¿½s Almanac Americaï¿½s oldest continuously published periodical! Always timely topical and distinctively ï¿½useful with a pleasant degree of humorï¿½ the Almanac has been beloved for centuries by people from all walks of life.",
                 2,
                 "0000000000025",//TODO: UPDATE
                 64,
                 70,
-                "Old Farmer's Almanac",
+                //"Old Farmer's Almanac",
                 "Houghton Mifflin Harcourt");
         inventory[29] = new Reference("Reference",
                 "Stock Trader's Almanac 2018 (Almanac Investor Series)",
@@ -320,7 +320,7 @@ public class ItemsInitializer {
                 "0000000000025",//TODO: UPDATE
                 64,
                 70,
-                "Jeffrey A. Hirsch",
+                //"Jeffrey A. Hirsch",
                 "Wiley");
 
         System.out.printf(inventory[0].toCSVFormat());
