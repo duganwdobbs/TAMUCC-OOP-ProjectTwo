@@ -125,6 +125,16 @@ public class ItemDB extends Database {
          return newList;
      }
      
+    /**
+     * Checks if an item exists and if we're checking out. 
+     * @param id Item to look for
+     * @param checkingout boolean value if we're checking out
+     * @throws ItemNotFoundError If the item isn't found
+     * @throws ItemStockError If we're trying to check out and the item is out
+     * of stock
+     * @throws ReferenceCheckoutError If we're trying to checkout and the item 
+     * is a reference.
+     */
     public void exists(String id, boolean checkingout) 
             throws ItemNotFoundError, ItemStockError, ReferenceCheckoutError{
         boolean notFound = true;
@@ -141,6 +151,11 @@ public class ItemDB extends Database {
         }
     }
     
+    /**
+     * Checking out an item for a user
+     * @param userID
+     * @param itemID 
+     */
     public void checkOut(String userID, String itemID){
         for(Item itm : data){
             if(itm.getID().equals(itemID)){
@@ -149,6 +164,11 @@ public class ItemDB extends Database {
         }
     }
     
+    /**
+     * Checking in an item for a user
+     * @param userID
+     * @param itemID 
+     */
     public void checkIn(String userID, String itemID){
         for(Item itm : data){
             if(itm.getID().equals(itemID)){

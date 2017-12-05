@@ -48,6 +48,9 @@ public class UserDB extends Database{
 
     }
     
+    /**
+     * Debug display function, not used.
+     */
     public void display(){
         for(User usr: data){
             usr.display();
@@ -74,6 +77,15 @@ public class UserDB extends Database{
         }
     }
     
+    /**
+     * Checks if a user exists and if the user can check in or out a book. 
+     * Returns boolean true if they can check in.
+     * @param user_id The user ID to use
+     * @param item_id The item ID to use
+     * @return Boolean value if the user can check in that book.
+     * @throws UserNotFoundError If user not found
+     * @throws UserCheckoutError If user has reached max checkout.
+     */
     public boolean exists(String user_id, String item_id) throws UserNotFoundError, UserCheckoutError{
         for(User usr: data){
             if(usr.getID().equals(user_id)){
@@ -83,6 +95,11 @@ public class UserDB extends Database{
         throw new UserNotFoundError(user_id);
     }
     
+    /**
+     * Checks out given item for the user.
+     * @param user_id
+     * @param item_id 
+     */
     public void checkOut(String user_id, String item_id){
         for(User usr: data){
             if(usr.getID().equals(user_id)){
@@ -92,6 +109,11 @@ public class UserDB extends Database{
         }
     }
 
+    /**
+     * Checks in given item for the user.
+     * @param user_id
+     * @param item_id 
+     */
     public void checkIn(String user_id, String item_id){
         for(User usr: data){
             if(usr.getID().equals(user_id)){
