@@ -3,22 +3,27 @@ package oop.project2;
 import java.awt.EventQueue;
 
 /**
+ * 
  * This class launches the GUI and runs
- * the threads listening for input. 
+ * the threads listening for input.
+ * @authors ddobbs jshaak
  */ 
 public class LendingLibraryImpl {
 
 	public static void main(String[] args) { 
+            // Initialize runnable objects
             DBThread          DBs = new DBThread();
-            // This is a comment
             InputBuilder      Inp = new InputBuilder();
             EventBuilder      Evt = new EventBuilder();
             
+            // Thread the runnable objects
             Thread DB = new Thread(DBs);
             Thread In = new Thread(Inp);
             Thread Ev = new Thread(Evt);
+            // Put them in an array
             Thread[] threads = {DB,In,Ev};
             
+            // Invoke the GUI
             EventQueue.invokeLater(new Runnable() {
  			public void run() {
  				try {
@@ -30,13 +35,18 @@ public class LendingLibraryImpl {
  			}
  		});
             
+            // Associate the objects
             DBs.associate(DBs,Inp,Evt);
             Evt.associate(DBs,Inp,Evt);
             
+            // Start the threads
             for(Thread t: threads){
                 t.start();
             }
             
+            // Show the GUI
             DBs.display();
+            
+            //Wait for everything to close.
 	}
 }
