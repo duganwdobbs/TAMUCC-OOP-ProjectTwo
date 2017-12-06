@@ -12,7 +12,7 @@ Todo list:
 Dugan : Build the event builder to send things to the Database, start thinking of errors to handle.
 Jeremy: Database?
 Jon   : UI
-James :
+James : Diagram, Design Documents
 
 Databases:
 Super: Database
