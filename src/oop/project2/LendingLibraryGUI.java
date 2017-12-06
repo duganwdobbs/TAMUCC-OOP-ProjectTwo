@@ -308,8 +308,9 @@ public class LendingLibraryGUI extends JFrame{
 	
 		//creating the textArea and scrollPane for the library policy
 		policyTextArea = new JTextArea();
-		policyTextArea.setText(/*load policy as a string here*/"");
+		policyTextArea.setText(this.getPolicy());
 		policyTextArea.setEditable(false);
+		policyTextArea.setLineWrap(true);
 		policyTextArea.setWrapStyleWord(true);
 		policyScrollPane = new JScrollPane(policyTextArea);
 		policyScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -534,5 +535,70 @@ public class LendingLibraryGUI extends JFrame{
 				currentItem = item;
 			}
 		});
+    }
+   
+    private String getPolicy(){
+    	return "Popular Reading Policy The Mary and Jeff Bell Library Popular Reading Collection contains contemporary fiction, "
+    			+ "popular non-fiction and best sellers. The Popular reading collections aim is to provide the TAMUCC campus community "
+    			+ "with a leisure reading outlet that helps to supplement our academic collections.\n" 
+    			+ "\nThe collection is available on the first floor of the Mary and Jeff Bell Library across from the circulation desk and adjacent to the New Books Collection."
+
+    			+ "\n\nCirculation Policy:\n"
+    			+ "Limit of two items per patron\n"
+    			+ "Loan period = 2 weeks\n"
+    			+ "One renewal"
+    			+ "Books can only be checked out by TAMUCC faculty, staff, and students\n\n"
+    	
+    			+ "Group Study Rooms\n"
+    			+ "The Mary and Jeff Bell Library provides 15 study rooms of various size for single student, small group, and "
+    			+ "large group usage. Keys to these rooms may be checked out from the Circulation desk for a period of three hours.\n\n"
+
+    			+ "Food and Drinks are not allowed in any study room with electronic equipment.\n\n" 
+
+    			+ "Study room keys are library use only and may not be taken out of the Library for any time period.\n\n" 
+
+    			+ "Checked out study room keys will not be held at any service desk.\n" 
+
+    			+ "Anyone not actively using a checked out study room must return the key to the Circulation desk. \n" 
+
+    			+ "If a key to a study room is lost any and all students who checked out the room will be required to pay for the rekeying of the "
+    			+ "group study room, and will lose all study room privileges for the remainder of the semester.\n" 
+
+    			+ "\nNo study rooms will be checked out after Midnight as this will not allow for the full three hour checkout period.\n" 
+
+    			+ "\nRooms will be available for a maximum of three hours and are only renewable if no one is waiting to check out the room. \n"
+
+    			+ "\nThe Mary and Jeff Bell Library provides six individual study rooms for check out by a single student with a valid Sanddollar ID card. "
+    			+ "No food or drinks are allowed in the individual study rooms."
+    			+ "Any damage to the room or electronic equipment provided in the room will be charged to the student who checked out the room."
+    			+ "The Mary and Jeff Bell Library provides six study rooms intended for small groups of up to four students."
+    			+ "At least 2 members of the group must be present at the service desk to checkout a key."
+    			+ "Any damage to the room or electronic equipment provided in the room will be charged to both students who checked out the room."
+    			+ "The Mary and Jeff Bell Library provides two study rooms intended for large groups of up to eight students."
+    			+ "At least 3 members of the group must be present with valid Sanddollar ID’s at the Circulation desk to checkout a key."
+    			+ "Accessories for the use of the Smartboards inside the large group study rooms are also available for checkout at the Circulation desk. The accessories will be treated as reserve items and are therefore subject to their own late fees."
+    			+ "Keys and room accessories that are returned late are subject to a $3.00 per hour fine. All fines may be paid at the Library's main Circulation Desk on the first floor or at the Business office located in the Student Services Center. Students accruing $15.00 or more in library fines are unable to borrow additional materials until fines are paid."
+    			+ "Study rooms may only be checked out and used by current TAMUCC students or by Faculty members holding study sessions with groups of students. These rooms are not meant to be used as faculty or staff conference rooms or offices."
+    			+ "Study rooms are available on a walk-in basis. The Mary and Jeff Bell Library does not routinely allow advance room reservations"
+    			+ "Study room users must vacate the room when the key is due."
+    			+ "Study room users must maintain a moderate noise level - rooms are not soundproof, and loud talking disturbs other users in adjoining rooms and outside the rooms."
+    			+ "Users of the study rooms must clean up after themselves, and leave the room in good condition for the next users, including erasing the white board."
+    			+ "If a patron notices significant damage to the room upon entering the study room they are obligated to let the circulation staff know the condition of the room. Failure to do so may result in the patron being liable for any and all damages."
+    			+ "Patrons groups exceeding the maximum capacity of each room will be required to cut down the number of individuals in the room until maximum capacity is met."
+    			+ "In addition, users of the group study rooms, as with all Library resources, must comply with the rules of use and conduct listed in the Mary and Jeff Bell Library Building Use policies."
+  
+    			+ "\n\nNOTICE: failure to follow these policies, or other applicable library policies, may result in a temporary or permanent suspension of access to these group study rooms."
+
+    			+ "The goal of the Mary and Jeff Bell Library staff is that these rooms will be a clean and pleasant place to study. If you find that a room was left in poor condition by the previous occupants, report this immediately to the service desk.\n"
+
+    			+ "\nSpecial Status\n"
+    			+ "Special Activities - Community members with a driver's license or state identification card may check out government documents with a Special Activities card. The loan period is 3 weeks with no renewals.\n" 
+    			+ "Community Users may purchase a Community User's Card, valid for one year, for $20 dollars. Community Users may check out 3 items, for 3 weeks with no renewals. Community users do not receive computer lab, media, or Interlibrary Loan privileges.\n"
+    			+ "TexShare Cards - Currently enrolled students and currently employed faculty and staff may obtain a TexShare card, valid for a semester. TexShare cards may be obtained from the Circulation Desk. You may take your TexShare card and a photo ID to another TexShare Library and receive borrowing privileges at that library. Patrons are responsible for returning items borrowed from other libraries.\n"
+
+    			+ "\nLocation\n" 
+    			+ "All circulating materials, other than media items, can be checked out at the Circulation Desk on the 1st floor near the entrance. The telephone number is (361) 825-2340, and the Circulation Supervisor is Robert Rios at Robert.Rios@tamucc.edu. The Media Center is located on the 2nd floor, and the Media contact is Abel Cantu at Abel.Cantu@tamucc.edu (361) 825-2348.\n"
+
+    			+ "\nBooks and other materials located at the South Texas Institute for the Arts do not circulate, but patrons may use them at that location. A&M-CC patrons may borrow materials (except periodicals and reference items) from the library at the Driscoll Children's Hospital or may request them through InterLibrary Loan.";
     }
 }
