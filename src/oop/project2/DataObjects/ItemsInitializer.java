@@ -89,7 +89,7 @@ public class ItemsInitializer {
                 "How to Make Friends & Influence People",
                 "For more than sixty years the rock-solid: time-tested advice by Dale Carnegie in this book has carried thousands of now famous people up the ladder of success in their business and personal lives.",
                 5,
-                "0000000000006",//TODO: UPDATE
+                "0013200000006",//TODO: UPDATE
                 40,
                 35,
                 "Andrew MacMillan",
@@ -98,7 +98,7 @@ public class ItemsInitializer {
                 "Harry Potter and the Sorcerer's Stone",
                 "Harry Potter has no idea how famous he is. That's because he's being raised by his miserable aunt and uncle who are terrified Harry will learn that he's really a wizard.By J K Rowling.",
                 5,
-                "0000000000006",//TODO: UPDATE
+                "0043330000006",//TODO: UPDATE
                 40,
                 35,
                 "Jim Dale",
@@ -107,7 +107,7 @@ public class ItemsInitializer {
                 "A Clash of Kings: A Song of Ice and Fire",
                 "A comet the color of blood and flame cuts across the sky. Chaos reigns from the ancient citadel of Dragonstone to the forbidding shores of Winterfell. By George R R Martin.",
                 5,
-                "0000000000006",//TODO: UPDATE
+                "0023456600006",//TODO: UPDATE
                 40,
                 35,
                 "Roy Dotrice",
@@ -116,7 +116,7 @@ public class ItemsInitializer {
                 "Flash Boys",
                 "Michael Lewis returns to the financial world to give listeners a ringside seat as the biggest news story in years prepares to hit Wall Street",
                 5,
-                "0000000000006",//TODO: UPDATE
+                "0012334400006",//TODO: UPDATE
                 40,
                 35,
                 "Dylan Baker",
@@ -148,7 +148,7 @@ public class ItemsInitializer {
                 "March of the Penguins",
                 "A documentary about a colony of emperor penguins. Narrated by Morgan Freeman.",
                 2,
-                "0000000000011",
+                "5555550000011",
                 55,
                 95,
                 "Documentary",
@@ -158,7 +158,7 @@ public class ItemsInitializer {
                 "Being John Malkovich",
                 "In this quirky cult-favorite comedy unemployed New York City puppeteer Craig Schwartz (John Cusack) reluctantly takes a temp job as a filing clerk for the eccentric Dr. Lester (Orson Bean). While at work Craig discovers a portal that leads into the mind of renowned actor John Malkovich",
                 2,
-                "0000000000011",//TODO: UPDATE
+                "6666660000011",//TODO: UPDATE
                 55,
                 95,
                 "Comedy",
@@ -168,7 +168,7 @@ public class ItemsInitializer {
                 "300",
                 "King Leonidas of Sparta and a force of 300 men fight the Persians at Thermopylae in 480 B.C.",
                 2,
-                "0000000000011",//TODO: UPDATE
+                "7777770000011",//TODO: UPDATE
                 55,
                 95,
                 "Action",
@@ -192,7 +192,7 @@ public class ItemsInitializer {
                 "Los Angeles Times",
                 "The Los Angeles Times is a daily newspaper published in Los Angeles California.",
                 20,
-                "0000000000016",
+                "1111110000016",
                 12,
                 15,
                 "News",
@@ -202,7 +202,7 @@ public class ItemsInitializer {
                 "Washington Times",
                 "The Washington Times founded in 1982 with headquarters in Washington D.C. is a daily newspaper.",
                 13,
-                "0000000000017",
+                "9876540000017",
                 12,
                 18,
                 "American Politics",
@@ -211,7 +211,7 @@ public class ItemsInitializer {
                 "New York Times",
                 "The Washington Times founded in 1982 with headquarters in Washington D.C. is a daily newspaper.",
                 13,
-                "0000000000017",//TODO: UPDATE
+                "8765430000017",//TODO: UPDATE
                 12,
                 18,
                 "American Politics",
@@ -220,7 +220,7 @@ public class ItemsInitializer {
                 "Politico",
                 "Politico is a political journal that focuses on United States and international politics and policy. It was founded recently in January of 2007.",
                 13,
-                "0000000000017",//TODO: UPDATE
+                "7654320000017",//TODO: UPDATE
                 12,
                 18,
                 "Politics and Policy",
@@ -242,7 +242,7 @@ public class ItemsInitializer {
                 "National Geographic",
                 "It primarily contains articles about science geography history and world culture. The magazine is known for its thick square-bound glossy format with a yellow rectangular border and its extensive use of dramatic photographs.",
                 1,
-                "0000000000021",
+                "6543210000021",
                 10,
                 82,
                 "Nature",
@@ -251,7 +251,7 @@ public class ItemsInitializer {
                 "Consumer Reports",
                 "Consumer Reports is an American magazine published since 1936 by Consumers Union- a nonprofit organization dedicated to unbiased product testing consumer-oriented research public education and advocacy.",
                 1,
-                "0000000000021",//TODO: UPDATE
+                "0987600000021",//TODO: UPDATE
                 10,
                 82,
                 "public reviews",
@@ -260,7 +260,7 @@ public class ItemsInitializer {
                 "Rolling Stone",
                 "Rolling Stone is an American biweekly magazine that focuses on popular culture.",
                 1,
-                "0000000000021",//TODO: UPDATE
+                "9876500000021",//TODO: UPDATE
                 10,
                 82,
                 "American Pop Culture",
@@ -269,7 +269,7 @@ public class ItemsInitializer {
                 "Reader's Digest",
                 "Reader's Digest is an American general-interest family magazine, published ten times a year.",
                 1,
-                "0000000000021",//TODO: UPDATE
+                "8765400000021",//TODO: UPDATE
                 10,
                 82,
                 "General Interest",
@@ -281,7 +281,7 @@ public class ItemsInitializer {
                 "Encyclopedia Britannica",
                 "general knowledge English-language encyclopaedia",
                 2,
-                "0000000000025",
+                "7654300000025",
                 64,
                 70,
                 //"Encyclopedia Britanica Inc.",
@@ -290,7 +290,7 @@ public class ItemsInitializer {
                 "Atlas of the World 24th Edition",
                 "World Atlas",
                 2,
-                "0000000000025",//TODO: UPDATE
+                "6543200000025",//TODO: UPDATE
                 64,
                 70,
                 //"Octopus Publishing Group Limited",
@@ -299,7 +299,7 @@ public class ItemsInitializer {
                 "Webster's Encyclopedic Unabridged Dictionary of the English Language",
                 "English Dictionary (Unabridged)",
                 2,
-                "0000000000025",//TODO: UPDATE
+                "5432100000025",//TODO: UPDATE
                 64,
                 70,
                 //"Oxford",
@@ -308,7 +308,7 @@ public class ItemsInitializer {
                 "The Old Farmer's Almanac 2018",
                 "It�s another new year celebrating everything under the Sun including the Moon with The Old Farmer�s Almanac America�s oldest continuously published periodical! Always timely topical and distinctively �useful with a pleasant degree of humor� the Almanac has been beloved for centuries by people from all walks of life.",
                 2,
-                "0000000000025",//TODO: UPDATE
+                "0987000000025",//TODO: UPDATE
                 64,
                 70,
                 //"Old Farmer's Almanac",
@@ -317,7 +317,7 @@ public class ItemsInitializer {
                 "Stock Trader's Almanac 2018 (Almanac Investor Series)",
                 "provides the cleanest historical data in the business to give traders and investors an advantage in the market.",
                 2,
-                "0000000000025",//TODO: UPDATE
+                "9876000000025",//TODO: UPDATE
                 64,
                 70,
                 //"Jeffrey A. Hirsch",
