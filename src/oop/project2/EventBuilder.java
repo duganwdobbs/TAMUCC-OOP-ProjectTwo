@@ -16,6 +16,10 @@ import java.util.logging.Logger;
  * @author ddobbs
  */
 public class EventBuilder implements LibRunnable{
+    //Adjust this variable in order to have longer time period to input items by
+    //keyboard if necessary. This is provided as a convenience, the argubaly
+    //should be hard coded in.
+    private final long TIMEOUT_PERIOD = 5000;
     /**
      * @var1 ArrayBockingQueue<ParseEvent> This is the events parsed from the 
      * InputBuilder
@@ -91,7 +95,7 @@ public class EventBuilder implements LibRunnable{
      */
     private void step() throws InterruptedException{
         //Threshold for stream timeout.
-        if(System.currentTimeMillis() - lastTime > 5000){
+        if(System.currentTimeMillis() - lastTime > TIMEOUT_PERIOD){
             try {
                 destroyStream();
             } catch (InvalidStreamError ex) {
