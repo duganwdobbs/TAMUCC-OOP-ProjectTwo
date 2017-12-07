@@ -1,6 +1,3 @@
-
-*.xml
-
 *.mf
 
 *.properties
@@ -9,3 +6,11 @@
 /bin/
 
 *.classpath
+
+build.xml
+
+nbproject/build-impl.xml
+
+nbproject/project.xml
+
+nbproject/private/private.xml
