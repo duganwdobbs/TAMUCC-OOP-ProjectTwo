@@ -5,11 +5,6 @@
 
 *.properties
 
-*.xml
-
-UML.xml
-
-UML.xml
 /build/
 /bin/
 
